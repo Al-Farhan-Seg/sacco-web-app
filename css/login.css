@@ -1,0 +1,24 @@
+body{
+    justify-content: center;
+    align-items: center;
+    background-color: #adeec5;
+}
+
+h1,h2{
+    color: #3f6e50;
+}
+
+
+p{
+    color: darkred;
+}
+
+#main-div{
+    text-align: center;
+}
+
+#login-btn{
+    color: #6e493f;
+    padding: 5px;
+    margin: 20px;
+}
