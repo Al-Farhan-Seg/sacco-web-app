@@ -5,7 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Loan Management">
     <title>Loans | SACCO Management System</title>
+    <link rel="stylesheet" href="./css/loan.css">
   </head>
   <body>
+    <header>
+      <nav>
+        <a href="./index.html">Home</a>
+        <a href="./login.html">Login</a>
+        <a href="./account.html">Account</a>
+        <a href="./member.html">Member</a>
+        <a href="./saving.html">Saving</a>
+        <a href="./staff.html">Staff</a>
+        <a href="./withdrawal.html">Withdrawal</a>
+        <a href="./loan-payment.html">Loan Payment</a>
+        <a href="./loan.html">Loan</a>
+      </nav>
+    </header>
+
+    <p id="instruction">Fill the loan form below</p>
+
+
+    <div class="loan-container">
+      <h2>LOAN APPLICATION</h2>
+      <form action="">
+        <label for="loan-id">Loan ID:</label>
+        <input type="text" name="loan_id" id="loan-id" required>
+
+        <label for="member-id">Member ID:</label>
+        <input type="text" name="member_id" id="member-id" required>
+
+        <label for="staff-id">Staff ID:</label>
+        <input type="text" name="staff_id" id="staff-id" required>
+
+        <label for="loan-amount">Loan Amount:</label>
+        <input type="number" name="loan_amount" id="loan-amount" min="1" required>
+
+        <label for="payment-period">Payment Period:</label>
+        <input type="text" name="payment_period" id="payment-period" maxlength="100" required>
+
+        <label for="payment-amount">Payment Amount:</label>
+        <input type="number" name="payment_amount" id="payment-amount" min="1" required>
+
+        <input type="submit" value="Submit" id="submit-btn">
+
+      </form>
+    </div>
+    
+    <footer>
+    </footer>
+
+
   </body>
 </html>
