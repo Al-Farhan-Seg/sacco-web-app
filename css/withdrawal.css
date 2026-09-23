@@ -1,0 +1,113 @@
+:root {
+    --primary-color: #3F6E50;
+    --secondary-color: #ADEEC5 ;
+    --accent-color : #6E493F;
+
+    /* 
+    Primary (P): #3F6E50 (Deep Sage Green) — Main structural elements & headers.
+    Secondary (S): #ADEEC5 (Mint Pastel) — Backgrounds & large supporting blocks.
+    Accent: #6E493F (Earthy Terracotta) — Buttons, highlights & call-to-actions.
+    **/
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+
+}
+header {
+    margin: 0 0 2rem 0;
+}
+nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 16px;
+    padding: 0.5rem;
+
+    & a {
+        flex: 1 1;
+        border: 1px solid black;
+        text-align: center;
+        padding: 10px;
+        border-radius: 10px;
+        text-decoration: none;
+        color: white;
+        background-color: black;
+        
+
+    }
+}
+#instruction {
+    font-size: medium;
+    text-align: center;
+}
+
+.withdrawal-container {
+    border: 1px solid black;
+    min-width: 0;
+    width: 95vw;
+    margin: auto;
+    max-width: 99vw;
+    border-radius: 10px;
+    padding: 0.3rem;
+
+    & h2 {
+        font-weight: 700;
+        text-align: center;
+        margin: 0.5rem;
+    }
+
+    & form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0.5rem;
+        gap: 0.3rem;
+    }
+
+    & label {
+        font-size: 1.2rem;
+    }
+
+    & input:not([type="submit"]) {
+        padding: 0.4rem;
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 10px;
+    }
+
+   & #submit-btn {
+        align-self: center;
+        padding: 0.5rem;
+        border-radius: 15px;
+        border: 1px solid black;
+        background-color: black;
+        color: white;
+   }
+   
+    
+}
+
+
+@media (min-width: 768px) {
+  .withdrawal-container {
+    width: 70vw;
+  }
+}
+
+
+@media (min-width: 1024px) {
+  .withdrawal-container {
+    width: 55vw;
+  }
+  #withdraw-date {
+    align-self: flex-start;
+  }
+}
+
+
+@media (min-width: 1280px) {
+  
+}

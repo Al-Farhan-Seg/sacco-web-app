@@ -5,7 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Loan Payment Management">
     <title>Loan Payments | SACCO Management System</title>
+    <link rel="stylesheet" href="./css/loan-payment.css">
   </head>
   <body>
+    <header>
+      <nav>
+        <a href="./index.html">Home</a>
+        <a href="./login.html">Login</a>
+        <a href="./account.html">Account</a>
+        <a href="./member.html">Member</a>
+        <a href="./saving.html">Saving</a>
+        <a href="./staff.html">Staff</a>
+        <a href="./withdrawal.html">Withdrawal</a>
+        <a href="./loan-payment.html">Loan Payment</a>
+        <a href="./loan.html">Loan</a>
+      </nav>
+    </header>
+
+    <div class="loan-container">
+      <h2>LOAN PAYMENT FORM</h2>
+      <form action="">
+        <label for="payment-id">Payment ID:</label>
+        <input type="text" name="payment_id" id="payment-id" min="1" required>
+
+        <label for="loan-id">Loan ID:</label>
+        <input type="text" name="loan_id" id="loan-id" min="1" required>
+
+        <label for="amount">Amount:</label>
+        <input type="number" name="amount" id="amount" min="1" required>
+
+        <label for="payment-date">Date:</label>
+        <input type="date" name="date" id="payment-date" required>
+
+        <input type="submit" value="Submit" id="submit-btn">
+      </form>
   </body>
 </html>
