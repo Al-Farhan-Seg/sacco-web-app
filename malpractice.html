@@ -6,353 +6,353 @@
     <title>Document</title>
 </head>
 <body>
-    <code>
+    <pre>
         package com.example.salesmgtapp
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.selection.selectable
-import androidx.compose.material3.Button
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.salesmgtapp.ui.theme.SalesMgtAppTheme
+        import android.os.Bundle
+        import androidx.activity.ComponentActivity
+        import androidx.activity.compose.setContent
+        import androidx.activity.enableEdgeToEdge
+        import androidx.compose.foundation.background
+        import androidx.compose.foundation.layout.Arrangement
+        import androidx.compose.foundation.layout.Column
+        import androidx.compose.foundation.layout.Row
+        import androidx.compose.foundation.layout.fillMaxSize
+        import androidx.compose.foundation.layout.fillMaxWidth
+        import androidx.compose.foundation.layout.padding
+        import androidx.compose.foundation.layout.width
+        import androidx.compose.foundation.selection.selectable
+        import androidx.compose.material3.Button
+        import androidx.compose.material3.Scaffold
+        import androidx.compose.material3.Text
+        import androidx.compose.material3.TextField
+        import androidx.compose.runtime.Composable
+        import androidx.compose.runtime.getValue
+        import androidx.compose.runtime.mutableStateOf
+        import androidx.compose.runtime.remember
+        import androidx.compose.runtime.setValue
+        import androidx.compose.ui.Alignment
+        import androidx.compose.ui.Modifier
+        import androidx.compose.ui.graphics.Color
+        import androidx.compose.ui.text.font.Font
+        import androidx.compose.ui.text.font.FontWeight
+        import androidx.compose.ui.tooling.preview.Preview
+        import androidx.compose.ui.unit.dp
+        import androidx.compose.ui.unit.sp
+        import com.example.salesmgtapp.ui.theme.SalesMgtAppTheme
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
+        class MainActivity : ComponentActivity() {
+            override fun onCreate(savedInstanceState: Bundle?) {
+                super.onCreate(savedInstanceState)
+                enableEdgeToEdge()
+                setContent {
+                    SalesMgtAppTheme {
+                        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                            Sales(
+                                modifier = Modifier.padding(innerPadding)
+                            )
+                        }
+                    }
+                }
+            }
+        }
+
+        @Composable
+        fun Sales(modifier: Modifier = Modifier) {
+            var product by remember { mutableStateOf(value = "") }
+            var price by remember { mutableStateOf(value = "") }
+            var quantity by remember { mutableStateOf(value = "") }
+            var cost by remember { mutableStateOf(value = "") }
+            var discount by remember { mutableStateOf(value = "") }
+            var tax by remember { mutableStateOf(value = "") }
+            var grossCost by remember { mutableStateOf(value = "") }
+            var netCost by remember { mutableStateOf(value = "") }
+
+            Column(
+                verticalArrangement = Arrangement.SpaceAround,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.LightGray)
+                    .padding(10.dp)
+            ) {
+                Text(
+                    text = "SALES MANAGEMENT",
+                    fontSize = 30.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black
+
+                )
+                Row(
+                    horizontalArrangement = Arrangement.SpaceAround,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxWidth()
+
+                ) {
+                    Text(
+                        text = "Product",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 30.sp,
+                        color = Color.Black
+                    )
+                    TextField(
+                        value = "Product",
+                        onValueChange = {product = it},
+                        label = {
+                        Text(
+                            text = "Enter Product",
+                            fontSize = 20.sp,
+                        )
+                        },
+                        modifier = Modifier
+                            .width(200.dp)
+                    )
+                }
+                Row(
+                    horizontalArrangement = Arrangement.SpaceAround,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxWidth()
+
+                ) {
+                    Text(
+                        text = "Price",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 30.sp,
+                        color = Color.Black
+                    )
+                    TextField(
+                        value = "Price",
+                        onValueChange = {price = it},
+                        label = {
+                            Text(
+                                text = "Enter Price",
+                                fontSize = 20.sp,
+                            )
+                        },
+                        modifier = Modifier
+                            .width(200.dp)
+                    )
+                }
+                Row(
+                    horizontalArrangement = Arrangement.SpaceAround,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxWidth()
+
+                ) {
+                    Text(
+                        text = "Quantity",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 30.sp,
+                        color = Color.Black
+                    )
+                    TextField(
+                        value = "Quantity",
+                        onValueChange = {quantity = it},
+                        label = {
+                            Text(
+                                text = "Enter Quantity",
+                                fontSize = 20.sp,
+                            )
+                        },
+                        modifier = Modifier
+                            .width(200.dp)
+                    )
+                }
+                Row(
+                    horizontalArrangement = Arrangement.SpaceAround,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxWidth()
+
+                ) {
+                    Text(
+                        text = "Cost",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 30.sp,
+                        color = Color.Black
+                    )
+                    TextField(
+                        value = "Cost",
+                        onValueChange = {cost = it},
+                        label = {
+                            Text(
+                                text = "Enter Cost",
+                                fontSize = 20.sp,
+                            )
+                        },
+                        modifier = Modifier
+                            .width(200.dp)
+                    )
+                }
+                Row(
+                    horizontalArrangement = Arrangement.SpaceAround,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxWidth()
+
+                ) {
+                    Text(
+                        text = "Discount",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 30.sp,
+                        color = Color.Black
+                    )
+                    TextField(
+                        value = "Discount",
+                        onValueChange = {discount = it},
+                        label = {
+                            Text(
+                                text = "Enter Discount",
+                                fontSize = 20.sp,
+                            )
+                        },
+                        modifier = Modifier
+                            .width(200.dp)
+                    )
+                }
+                Row(
+                    horizontalArrangement = Arrangement.SpaceAround,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxWidth()
+
+                ) {
+                    Text(
+                        text = "Tax",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 30.sp,
+                        color = Color.Black
+                    )
+                    TextField(
+                        value = "Tax",
+                        onValueChange = {tax = it},
+                        label = {
+                            Text(
+                                text = "Enter Tax",
+                                fontSize = 20.sp,
+                            )
+                        },
+                        modifier = Modifier
+                            .width(200.dp)
+                    )
+                }
+                Row(
+                    horizontalArrangement = Arrangement.SpaceAround,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxWidth()
+
+                ) {
+                    Text(
+                        text = "Gross Cost",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 30.sp,
+                        color = Color.Black
+                    )
+                    TextField(
+                        value = "Gross Cost",
+                        onValueChange = {grossCost = it},
+                        label = {
+                            Text(
+                                text = "Enter Gross Cost",
+                                fontSize = 20.sp,
+                            )
+                        },
+                        modifier = Modifier
+                            .width(200.dp)
+                    )
+                }
+                Row(
+                    horizontalArrangement = Arrangement.SpaceAround,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxWidth()
+
+                ) {
+                    Text(
+                        text = "Net Cost",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 30.sp,
+                        color = Color.Black
+                    )
+                    TextField(
+                        value = "Net Cost",
+                        onValueChange = {netCost = it},
+                        label = {
+                            Text(
+                                text = "Enter Net Cost",
+                                fontSize = 20.sp,
+                            )
+                        },
+                        modifier = Modifier
+                            .width(200.dp)
+                    )
+                }
+                Row(
+                    horizontalArrangement = Arrangement.SpaceAround,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxWidth()
+
+                ){
+                    Button(onClick = {
+                        val priceDouble = price.toDoubleOrNull()
+                        val quantityDouble = quantity.toDoubleOrNull()
+                        if(priceDouble!=null&&quantityDouble!=null)
+                        {
+                            val costDouble = (priceDouble*quantityDouble)
+                            val discountDouble = (0.1*costDouble)
+                            val taxDouble = (0.18*costDouble)
+                            val grossCostDouble = costDouble+taxDouble
+                            val netCostDouble = grossCostDouble - discountDouble
+
+                            cost = costDouble.toString()
+                            discount = discountDouble.toString()
+                            tax = taxDouble.toString()
+                            grossCost = grossCostDouble.toString()
+                            netCost = netCostDouble.toString()
+                        }
+                        else {
+                            price = "Enter Valid Price"
+                            quantity = "Enter Valid Quantity"
+
+                        }
+
+                    }) {
+                        Text(
+                            text = "COMPUTE",
+                            fontSize = 20.sp
+                        )
+                    }
+                    Button(onClick = {}) {
+                        Text(
+                            text = "RESET",
+                            fontSize = 20.sp,
+                        )
+                    }
+                    Button(onClick = {}) {
+                        Text(
+                            text = "CLOSE",
+                            fontSize = 20.sp,
+                        )
+                    }
+                }
+            }
+
+
+
+        }
+
+        @Preview(showBackground = true)
+        @Composable
+        fun GreetingPreview() {
             SalesMgtAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Sales(
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                Sales(modifier = Modifier)
             }
         }
-    }
-}
-
-@Composable
-fun Sales(modifier: Modifier = Modifier) {
-    var product by remember { mutableStateOf(value = "") }
-    var price by remember { mutableStateOf(value = "") }
-    var quantity by remember { mutableStateOf(value = "") }
-    var cost by remember { mutableStateOf(value = "") }
-    var discount by remember { mutableStateOf(value = "") }
-    var tax by remember { mutableStateOf(value = "") }
-    var grossCost by remember { mutableStateOf(value = "") }
-    var netCost by remember { mutableStateOf(value = "") }
-
-    Column(
-        verticalArrangement = Arrangement.SpaceAround,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.LightGray)
-            .padding(10.dp)
-    ) {
-        Text(
-            text = "SALES MANAGEMENT",
-            fontSize = 30.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.Black
-
-        )
-        Row(
-            horizontalArrangement = Arrangement.SpaceAround,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .fillMaxWidth()
-
-        ) {
-            Text(
-                text = "Product",
-                fontWeight = FontWeight.Bold,
-                fontSize = 30.sp,
-                color = Color.Black
-            )
-            TextField(
-                value = "Product",
-                onValueChange = {product = it},
-                label = {
-                Text(
-                    text = "Enter Product",
-                    fontSize = 20.sp,
-                )
-                },
-                modifier = Modifier
-                    .width(200.dp)
-            )
-        }
-        Row(
-            horizontalArrangement = Arrangement.SpaceAround,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .fillMaxWidth()
-
-        ) {
-            Text(
-                text = "Price",
-                fontWeight = FontWeight.Bold,
-                fontSize = 30.sp,
-                color = Color.Black
-            )
-            TextField(
-                value = "Price",
-                onValueChange = {price = it},
-                label = {
-                    Text(
-                        text = "Enter Price",
-                        fontSize = 20.sp,
-                    )
-                },
-                modifier = Modifier
-                    .width(200.dp)
-            )
-        }
-        Row(
-            horizontalArrangement = Arrangement.SpaceAround,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .fillMaxWidth()
-
-        ) {
-            Text(
-                text = "Quantity",
-                fontWeight = FontWeight.Bold,
-                fontSize = 30.sp,
-                color = Color.Black
-            )
-            TextField(
-                value = "Quantity",
-                onValueChange = {quantity = it},
-                label = {
-                    Text(
-                        text = "Enter Quantity",
-                        fontSize = 20.sp,
-                    )
-                },
-                modifier = Modifier
-                    .width(200.dp)
-            )
-        }
-        Row(
-            horizontalArrangement = Arrangement.SpaceAround,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .fillMaxWidth()
-
-        ) {
-            Text(
-                text = "Cost",
-                fontWeight = FontWeight.Bold,
-                fontSize = 30.sp,
-                color = Color.Black
-            )
-            TextField(
-                value = "Cost",
-                onValueChange = {cost = it},
-                label = {
-                    Text(
-                        text = "Enter Cost",
-                        fontSize = 20.sp,
-                    )
-                },
-                modifier = Modifier
-                    .width(200.dp)
-            )
-        }
-        Row(
-            horizontalArrangement = Arrangement.SpaceAround,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .fillMaxWidth()
-
-        ) {
-            Text(
-                text = "Discount",
-                fontWeight = FontWeight.Bold,
-                fontSize = 30.sp,
-                color = Color.Black
-            )
-            TextField(
-                value = "Discount",
-                onValueChange = {discount = it},
-                label = {
-                    Text(
-                        text = "Enter Discount",
-                        fontSize = 20.sp,
-                    )
-                },
-                modifier = Modifier
-                    .width(200.dp)
-            )
-        }
-        Row(
-            horizontalArrangement = Arrangement.SpaceAround,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .fillMaxWidth()
-
-        ) {
-            Text(
-                text = "Tax",
-                fontWeight = FontWeight.Bold,
-                fontSize = 30.sp,
-                color = Color.Black
-            )
-            TextField(
-                value = "Tax",
-                onValueChange = {tax = it},
-                label = {
-                    Text(
-                        text = "Enter Tax",
-                        fontSize = 20.sp,
-                    )
-                },
-                modifier = Modifier
-                    .width(200.dp)
-            )
-        }
-        Row(
-            horizontalArrangement = Arrangement.SpaceAround,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .fillMaxWidth()
-
-        ) {
-            Text(
-                text = "Gross Cost",
-                fontWeight = FontWeight.Bold,
-                fontSize = 30.sp,
-                color = Color.Black
-            )
-            TextField(
-                value = "Gross Cost",
-                onValueChange = {grossCost = it},
-                label = {
-                    Text(
-                        text = "Enter Gross Cost",
-                        fontSize = 20.sp,
-                    )
-                },
-                modifier = Modifier
-                    .width(200.dp)
-            )
-        }
-        Row(
-            horizontalArrangement = Arrangement.SpaceAround,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .fillMaxWidth()
-
-        ) {
-            Text(
-                text = "Net Cost",
-                fontWeight = FontWeight.Bold,
-                fontSize = 30.sp,
-                color = Color.Black
-            )
-            TextField(
-                value = "Net Cost",
-                onValueChange = {netCost = it},
-                label = {
-                    Text(
-                        text = "Enter Net Cost",
-                        fontSize = 20.sp,
-                    )
-                },
-                modifier = Modifier
-                    .width(200.dp)
-            )
-        }
-        Row(
-            horizontalArrangement = Arrangement.SpaceAround,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .fillMaxWidth()
-
-        ){
-            Button(onClick = {
-                val priceDouble = price.toDoubleOrNull()
-                val quantityDouble = quantity.toDoubleOrNull()
-                if(priceDouble!=null&&quantityDouble!=null)
-                {
-                    val costDouble = (priceDouble*quantityDouble)
-                    val discountDouble = (0.1*costDouble)
-                    val taxDouble = (0.18*costDouble)
-                    val grossCostDouble = costDouble+taxDouble
-                    val netCostDouble = grossCostDouble - discountDouble
-
-                    cost = costDouble.toString()
-                    discount = discountDouble.toString()
-                    tax = taxDouble.toString()
-                    grossCost = grossCostDouble.toString()
-                    netCost = netCostDouble.toString()
-                }
-                else {
-                    price = "Enter Valid Price"
-                    quantity = "Enter Valid Quantity"
-
-                }
-
-            }) {
-                Text(
-                    text = "COMPUTE",
-                    fontSize = 20.sp
-                )
-            }
-            Button(onClick = {}) {
-                Text(
-                    text = "RESET",
-                    fontSize = 20.sp,
-                )
-            }
-            Button(onClick = {}) {
-                Text(
-                    text = "CLOSE",
-                    fontSize = 20.sp,
-                )
-            }
-        }
-    }
-
-
-
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    SalesMgtAppTheme {
-        Sales(modifier = Modifier)
-    }
-}
-    </code>
+    </pre>
 </body>
 </html>
