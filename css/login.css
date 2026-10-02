@@ -4,6 +4,13 @@ body{
     background-color: #adeec5;
 }
 
+img {
+  width: 65px;
+  height: 65px;
+  object-fit: contain;
+  border-radius: 50%;
+} 
+
 h1,h2{
     color: #3f6e50;
 }
