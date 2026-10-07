@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Account Management">
     <title>Accounts | SACCO Management System</title>
-    <link rel="stylesheet" href="./css/account.css"
+    <link rel="stylesheet" href="./css/account.css">
   </head>
   <body>
     <header>
@@ -24,23 +24,81 @@
 
     </header>
     <main>
-    <form>
-  <label for="Account_id">Account id:</label>
-  <input type="text" id="Account_id" name="Account_id">
+      <form>
+        <label for="Account_id">Account id:</label>
+        <input type="text" id="Account_id" name="Account_id">
 
-  <label for="Member_id">Member id:</label>
-  <input type="text" id="Member_id" name="Member_id">
+        <label for="Member_id">Member id:</label>
+        <input type="text" id="Member_id" name="Member_id">
 
-  <label for="Account_type">Account type:</label>
-  <input type="text" id="Account_type" name="Account_type">
-  <select id="Account_type" name="Account_type">
-    <option value="Savings_Account">Savings Account</option>
-     <option value="loan_Account">loan Account</option>
-    
+        <label for="Account_type">Account type:</label>
+        <select id="Account_type" name="Account_type">
+          <option value="Savings_Account">Savings Account</option>
+          <option value="Loan_Account">Loan Account</option>
+        </select>
 
-  </select>
-  <button>SUBMIT</button>
-    </form>
+        <button type="submit">SUBMIT</button>
+      </form>
+
+      <section class="account-list" aria-labelledby="account-list-heading">
+        <h2 id="account-list-heading">Registered Accounts</h2>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Account ID</th>
+                <th>Member ID</th>
+                <th>Member Name</th>
+                <th>Account Type</th>
+                <th>Balance</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>ACC-001</td>
+                <td>MEM-001</td>
+                <td>Amina Nansubuga</td>
+                <td>Savings Account</td>
+                <td>UGX 850,000</td>
+                <td><span class="status active">Active</span></td>
+              </tr>
+              <tr>
+                <td>ACC-002</td>
+                <td>MEM-002</td>
+                <td>David Okello</td>
+                <td>Loan Account</td>
+                <td>UGX 1,250,000</td>
+                <td><span class="status active">Active</span></td>
+              </tr>
+              <tr>
+                <td>ACC-003</td>
+                <td>MEM-003</td>
+                <td>Grace Namusoke</td>
+                <td>Savings Account</td>
+                <td>UGX 620,000</td>
+                <td><span class="status active">Active</span></td>
+              </tr>
+              <tr>
+                <td>ACC-004</td>
+                <td>MEM-004</td>
+                <td>Samuel Mugisha</td>
+                <td>Loan Account</td>
+                <td>UGX 2,000,000</td>
+                <td><span class="status inactive">Inactive</span></td>
+              </tr>
+              <tr>
+                <td>ACC-005</td>
+                <td>MEM-005</td>
+                <td>Esther Akello</td>
+                <td>Savings Account</td>
+                <td>UGX 475,000</td>
+                <td><span class="status active">Active</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
     </main>
   </body>
 </html>
