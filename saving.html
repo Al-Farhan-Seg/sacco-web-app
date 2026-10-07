@@ -9,8 +9,8 @@
   </head>
   <body>
     <header>
-       <h2>SAVING REGISTRATION FORM</h2>
-       <nav id="navigation">
+      <h2>SAVING REGISTRATION FORM</h2>
+      <nav id="navigation">
         <a href="./index.html">Home</a>
         <a href="./login.html">Login</a>
         <a href="./account.html">Account</a>
@@ -21,34 +21,101 @@
         <a href="./loan-payment.html">Loan Payment</a>
         <a href="./loan.html">Loan</a>
       </nav></header>
-      <main>
-    <form action="">
-      
-  <label for="Savings_id">Savings id:</label>
-  <input type="text" id="Savings_id" name="Savings_id">
+    <main>
+      <form action="">
+        <label for="Savings_id">Savings id:</label>
+        <input type="text" id="Savings_id" name="Savings_id">
 
-  <label for="Member_id">Member id:</label>
-  <input type="text" id="Member_id" name="Member_id">
+        <label for="Member_id">Member id:</label>
+        <input type="text" id="Member_id" name="Member_id">
 
-  <label for="Account_id">Account id:</label>
-  <input type="text" id="Account_id" name="Account_id">
+        <label for="Account_id">Account id:</label>
+        <input type="text" id="Account_id" name="Account_id">
 
-   <label for="Staff_id">Staff id:</label>
-  <input type="text" id="Staff_id" name="Staff_id">
+        <label for="Staff_id">Staff id:</label>
+        <input type="text" id="Staff_id" name="Staff_id">
 
-  <label for="Payment Method">Payment Method:</label>
-  <input type="text" id="Payment Method" name="Payment Method">.
+        <label for="Payment_method">Payment Method:</label>
+        <select id="Payment_method" name="Payment_method">
+          <option value="Cash">Cash</option>
+          <option value="Mobile_Money">Mobile Money</option>
+          <option value="Bank_Transfer">Bank Transfer</option>
+        </select>
 
+        <label for="Amount">Amount:</label>
+        <input type="number" id="Amount" name="Amount" min="0" step="1000">
 
-   <label for="Amount">Amount:</label>
-  <input type="text" id="Amount" name="Amount">
-   <label for="Date">Date:</label>
-  <input type="date" id="Date" name="Date">
-  <div>
- <button id="button">SUBMIT</button>
-  </div>
+        <label for="Date">Date:</label>
+        <input type="date" id="Date" name="Date">
 
-    </form>
-   </main>
+        <button id="button" type="submit">SUBMIT</button>
+      </form>
+
+      <section class="savings-list" aria-labelledby="savings-list-heading">
+        <h2 id="savings-list-heading">Recent Savings</h2>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Savings ID</th>
+                <th>Member</th>
+                <th>Account ID</th>
+                <th>Payment Method</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Staff ID</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>SAV-001</td>
+                <td>Amina Nansubuga (MEM-001)</td>
+                <td>ACC-001</td>
+                <td>Mobile Money</td>
+                <td>UGX 150,000</td>
+                <td>2 Oct 2026</td>
+                <td>STF-001</td>
+              </tr>
+              <tr>
+                <td>SAV-002</td>
+                <td>David Okello (MEM-002)</td>
+                <td>ACC-002</td>
+                <td>Cash</td>
+                <td>UGX 200,000</td>
+                <td>3 Oct 2026</td>
+                <td>STF-002</td>
+              </tr>
+              <tr>
+                <td>SAV-003</td>
+                <td>Grace Namusoke (MEM-003)</td>
+                <td>ACC-003</td>
+                <td>Bank Transfer</td>
+                <td>UGX 350,000</td>
+                <td>4 Oct 2026</td>
+                <td>STF-001</td>
+              </tr>
+              <tr>
+                <td>SAV-004</td>
+                <td>Samuel Mugisha (MEM-004)</td>
+                <td>ACC-004</td>
+                <td>Mobile Money</td>
+                <td>UGX 100,000</td>
+                <td>5 Oct 2026</td>
+                <td>STF-003</td>
+              </tr>
+              <tr>
+                <td>SAV-005</td>
+                <td>Esther Akello (MEM-005)</td>
+                <td>ACC-005</td>
+                <td>Cash</td>
+                <td>UGX 175,000</td>
+                <td>6 Oct 2026</td>
+                <td>STF-002</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
   </body>
 </html>
