@@ -146,6 +146,21 @@ nav {
 }
 
 
+#form-message {
+    align-self: center;
+    text-align: center;
+    font-weight: 600;
+
+    &.error {
+        color: #b3261e;
+    }
+
+    &.success {
+        color: var(--primary-color);
+    }
+}
+
+
 @media (min-width: 768px) {
   .loan-container {
     width: 70vw;

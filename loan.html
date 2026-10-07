@@ -27,31 +27,33 @@
 
     <div class="loan-container">
       <h2>LOAN APPLICATION</h2>
-      <form action="">
+      <form action="" novalidate>
         <label for="loan-id">Loan ID:</label>
-        <input type="text" name="loan_id" id="loan-id" required>
+        <input type="text" name="loan_id" id="loan-id">
 
         <label for="member-id">Member ID:</label>
-        <input type="text" name="member_id" id="member-id" required>
+        <input type="text" name="member_id" id="member-id">
 
         <label for="staff-id">Staff ID:</label>
-        <input type="text" name="staff_id" id="staff-id" required>
+        <input type="text" name="staff_id" id="staff-id">
 
         <label for="loan-amount">Loan Amount:</label>
-        <input type="number" name="loan_amount" id="loan-amount" min="1" required>
+        <input type="number" name="loan_amount" id="loan-amount" min="1">
 
         <label for="payment-period">Payment Period:</label>
-        <input type="text" name="payment_period" id="payment-period" maxlength="100" required>
+        <input type="text" name="payment_period" id="payment-period" maxlength="100">
 
         <label for="payment-amount">Payment Amount:</label>
-        <input type="number" name="payment_amount" id="payment-amount" min="1" required>
+        <input type="number" name="payment_amount" id="payment-amount" min="1">
 
         <input type="submit" value="Submit" id="submit-btn">
+
+        <p id="form-message"></p>
 
       </form>
     </div>
 
-    <section class="table-section" aria-labelledby="loan-list-heading">
+    <section class="table-section">
       <h2 id="loan-list-heading">Loan Records</h2>
       <div class="table-wrapper">
         <table>
@@ -115,5 +117,74 @@
     </footer>
 
 
+
+    <script>
+      const form = document.querySelector("form");
+      const messageBox = document.getElementById("form-message");
+
+      function getInputFields() {
+        const fields = form.querySelectorAll("input:not([type='submit'])");
+        return fields;
+      }
+
+      function isEmpty(field) {
+        const value = field.value;
+        const trimmedValue = value.trim();
+        return trimmedValue === "";
+      }
+
+      function getFieldName(field) {
+        const selector = "label[for='" + field.id + "']";
+        const label = form.querySelector(selector);
+        const labelText = label.textContent;
+        const nameWithoutColon = labelText.replace(":", "");
+        const name = nameWithoutColon.trim();
+        return name;
+      }
+
+      function findEmptyFields() {
+        const fields = getInputFields();
+        const emptyFields = [];
+
+        for (let i = 0; i < fields.length; i++) {
+          const field = fields[i];
+
+          if (isEmpty(field)) {
+            const name = getFieldName(field);
+            emptyFields.push(name);
+          }
+        }
+
+        return emptyFields;
+      }
+
+      function showError(emptyFields) {
+        const fieldList = emptyFields.join(", ");
+        messageBox.className = "error";
+        messageBox.textContent = "Form not submitted. Please fill in: " + fieldList + ".";
+      }
+
+      function showSuccess() {
+        messageBox.className = "success";
+        messageBox.textContent = "Form submitted successfully.";
+        alert("Form submitted successfully.");
+      }
+
+      function handleSubmit(event) {
+        event.preventDefault();
+
+        const emptyFields = findEmptyFields();
+
+        if (emptyFields.length > 0) {
+          showError(emptyFields);
+          return;
+        }
+
+        showSuccess();
+        form.reset();
+      }
+
+      form.addEventListener("submit", handleSubmit);
+    </script>
   </body>
 </html>
