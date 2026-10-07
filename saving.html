@@ -24,22 +24,23 @@
     <main>
       <form action="">
         <label for="Savings_id">Savings id:</label>
-        <input type="text" id="Savings_id" name="Savings_id">
+        <input type="text" id="Savings_id" name="Savings_id" placeholder="SAV-001">
 
         <label for="Member_id">Member id:</label>
-        <input type="text" id="Member_id" name="Member_id">
+        <input type="text" id="Member_id" name="Member_id" placeholder="MEM-001">
 
         <label for="Account_id">Account id:</label>
-        <input type="text" id="Account_id" name="Account_id">
+        <input type="text" id="Account_id" name="Account_id" placeholder="ACC-001">
 
         <label for="Staff_id">Staff id:</label>
         <input type="text" id="Staff_id" name="Staff_id">
 
         <label for="Payment_method">Payment Method:</label>
-        <select id="Payment_method" name="Payment_method">
+        <select id="Payment_method" name="Payment_method" required>
+          <option value="" selected disabled>Select payment method</option>
           <option value="Cash">Cash</option>
-          <option value="Mobile">Mobile</option>
-          <option value="Bank">Bank</option>
+          <option value="Mobile">Mobile Money</option>
+          <option value="Bank">Bank Transfer</option>
         </select>
 
         <label for="Amount">Amount:</label>
@@ -68,45 +69,45 @@
             </thead>
             <tbody>
               <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
+                <td>SAV-001</td>
+                <td>MEM-001</td>
+                <td>ACC-001</td>
                 <td>Cash</td>
                 <td>UGX 1,000</td>
                 <td>1 Jan 2024</td>
                 <td>STF001</td>
               </tr>
               <tr>
-                <td>2</td>
-                <td>2</td>
-                <td>3</td>
+                <td>SAV-002</td>
+                <td>MEM-002</td>
+                <td>ACC-003</td>
                 <td>Mobile</td>
                 <td>UGX 1,500</td>
                 <td>2 Jan 2024</td>
                 <td>STF002</td>
               </tr>
               <tr>
-                <td>3</td>
-                <td>3</td>
-                <td>5</td>
+                <td>SAV-003</td>
+                <td>MEM-003</td>
+                <td>ACC-005</td>
                 <td>Cash</td>
                 <td>UGX 2,000</td>
                 <td>3 Jan 2024</td>
                 <td>STF003</td>
               </tr>
               <tr>
-                <td>4</td>
-                <td>1</td>
-                <td>2</td>
+                <td>SAV-004</td>
+                <td>MEM-001</td>
+                <td>ACC-002</td>
                 <td>Bank</td>
                 <td>UGX 1,200</td>
                 <td>4 Jan 2024</td>
                 <td>STF004</td>
               </tr>
               <tr>
-                <td>5</td>
-                <td>2</td>
-                <td>4</td>
+                <td>SAV-005</td>
+                <td>MEM-002</td>
+                <td>ACC-004</td>
                 <td>Cash</td>
                 <td>UGX 1,300</td>
                 <td>5 Jan 2024</td>

@@ -27,7 +27,7 @@
     <main>
       <form action="">
         <label for="Member_id">Member id</label>
-        <input type="text" id="Member_id" name="Member_id">
+        <input type="text" id="Member_id" name="Member_id" placeholder="MEM-001">
 
         <label for="First_name">First Name</label>
         <input type="text" id="First_name" name="First_name">
@@ -45,9 +45,10 @@
         <input type="email" id="Email" name="Email">
 
         <label for="Gender">Gender:</label>
-        <select id="Gender" name="Gender">
-          <option value="M">MALE</option>
-          <option value="F">FEMALE</option>
+        <select id="Gender" name="Gender" required>
+          <option value="" selected disabled>Select gender</option>
+          <option value="M">Male</option>
+          <option value="F">Female</option>
         </select>
         <button type="submit">Register Member</button>
       </form>
@@ -69,7 +70,7 @@
             </thead>
             <tbody>
               <tr>
-                <td>1</td>
+                <td>MEM-001</td>
                 <td>MAHAD</td>
                 <td>BUGEMBE</td>
                 <td>0700000001</td>
@@ -78,7 +79,7 @@
                 <td>M</td>
               </tr>
               <tr>
-                <td>2</td>
+                <td>MEM-002</td>
                 <td>Sarah</td>
                 <td>Nam</td>
                 <td>0700000002</td>
@@ -87,7 +88,7 @@
                 <td>F</td>
               </tr>
               <tr>
-                <td>3</td>
+                <td>MEM-003</td>
                 <td>Najib</td>
                 <td>Lwanga</td>
                 <td>0700000003</td>
@@ -96,7 +97,7 @@
                 <td>M</td>
               </tr>
               <tr>
-                <td>4</td>
+                <td>MEM-004</td>
                 <td>FARHAN</td>
                 <td>SEGUJJA</td>
                 <td>0700000004</td>
@@ -105,7 +106,7 @@
                 <td>M</td>
               </tr>
               <tr>
-                <td>5</td>
+                <td>MEM-005</td>
                 <td>David</td>
                 <td>Okello</td>
                 <td>0700000005</td>

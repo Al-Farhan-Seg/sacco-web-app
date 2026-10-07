@@ -26,16 +26,17 @@
     <main>
       <form>
         <label for="Account_id">Account id:</label>
-        <input type="text" id="Account_id" name="Account_id">
+        <input type="text" id="Account_id" name="Account_id" placeholder="ACC-001">
 
         <label for="Member_id">Member id:</label>
-        <input type="text" id="Member_id" name="Member_id">
+        <input type="text" id="Member_id" name="Member_id" placeholder="MEM-001">
 
         <label for="Account_No">Account number:</label>
         <input type="number" id="Account_No" name="Account_No">
 
         <label for="Account_type">Account type:</label>
-        <select id="Account_type" name="Account_type">
+        <select id="Account_type" name="Account_type" required>
+          <option value="" selected disabled>Select account type</option>
           <option value="Savings">Savings</option>
           <option value="Current">Current</option>
         </select>
@@ -61,36 +62,36 @@
             </thead>
             <tbody>
               <tr>
-                <td>1</td>
-                <td>1</td>
+                <td>ACC-001</td>
+                <td>MEM-001</td>
                 <td>10001</td>
                 <td>Savings</td>
                 <td>UGX 5,000</td>
               </tr>
               <tr>
-                <td>2</td>
-                <td>1</td>
+                <td>ACC-002</td>
+                <td>MEM-001</td>
                 <td>10002</td>
                 <td>Current</td>
                 <td>UGX 7,000</td>
               </tr>
               <tr>
-                <td>3</td>
-                <td>2</td>
+                <td>ACC-003</td>
+                <td>MEM-002</td>
                 <td>10003</td>
                 <td>Savings</td>
                 <td>UGX 3,000</td>
               </tr>
               <tr>
-                <td>4</td>
-                <td>2</td>
+                <td>ACC-004</td>
+                <td>MEM-002</td>
                 <td>10004</td>
                 <td>Current</td>
                 <td>UGX 4,000</td>
               </tr>
               <tr>
-                <td>5</td>
-                <td>3</td>
+                <td>ACC-005</td>
+                <td>MEM-003</td>
                 <td>10005</td>
                 <td>Savings</td>
                 <td>UGX 8,000</td>

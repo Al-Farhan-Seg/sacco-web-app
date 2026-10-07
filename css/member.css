@@ -86,6 +86,14 @@ select {
     border-radius: 5px;
 }
 
+select:invalid {
+    color: #6b7280;
+}
+
+select option {
+    color: #111111;
+}
+
 button {
     margin-top: 20px;
     padding: 10px;
