@@ -147,21 +147,3 @@ tbody tr:nth-child(even) {
 tbody tr:hover {
     background-color: #e4efe9;
 }
-
-.status {
-    display: inline-block;
-    padding: 4px 9px;
-    border-radius: 12px;
-    font-size: 0.85rem;
-    font-weight: bold;
-}
-
-.status.active {
-    background-color: #d9f2e5;
-    color: #105136;
-}
-
-.status.inactive {
-    background-color: #fbe0e0;
-    color: #9b1c1c;
-}

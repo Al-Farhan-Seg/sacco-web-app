@@ -31,11 +31,17 @@
         <label for="Member_id">Member id:</label>
         <input type="text" id="Member_id" name="Member_id">
 
+        <label for="Account_No">Account number:</label>
+        <input type="number" id="Account_No" name="Account_No">
+
         <label for="Account_type">Account type:</label>
         <select id="Account_type" name="Account_type">
-          <option value="Savings_Account">Savings Account</option>
-          <option value="Loan_Account">Loan Account</option>
+          <option value="Savings">Savings</option>
+          <option value="Current">Current</option>
         </select>
+
+        <label for="Balance">Opening balance:</label>
+        <input type="number" id="Balance" name="Balance" min="0">
 
         <button type="submit">SUBMIT</button>
       </form>
@@ -48,52 +54,46 @@
               <tr>
                 <th>Account ID</th>
                 <th>Member ID</th>
-                <th>Member Name</th>
+                <th>Account Number</th>
                 <th>Account Type</th>
                 <th>Balance</th>
-                <th>Status</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>ACC-001</td>
-                <td>MEM-001</td>
-                <td>Amina Nansubuga</td>
-                <td>Savings Account</td>
-                <td>UGX 850,000</td>
-                <td><span class="status active">Active</span></td>
+                <td>1</td>
+                <td>1</td>
+                <td>10001</td>
+                <td>Savings</td>
+                <td>UGX 5,000</td>
               </tr>
               <tr>
-                <td>ACC-002</td>
-                <td>MEM-002</td>
-                <td>David Okello</td>
-                <td>Loan Account</td>
-                <td>UGX 1,250,000</td>
-                <td><span class="status active">Active</span></td>
+                <td>2</td>
+                <td>1</td>
+                <td>10002</td>
+                <td>Current</td>
+                <td>UGX 7,000</td>
               </tr>
               <tr>
-                <td>ACC-003</td>
-                <td>MEM-003</td>
-                <td>Grace Namusoke</td>
-                <td>Savings Account</td>
-                <td>UGX 620,000</td>
-                <td><span class="status active">Active</span></td>
+                <td>3</td>
+                <td>2</td>
+                <td>10003</td>
+                <td>Savings</td>
+                <td>UGX 3,000</td>
               </tr>
               <tr>
-                <td>ACC-004</td>
-                <td>MEM-004</td>
-                <td>Samuel Mugisha</td>
-                <td>Loan Account</td>
-                <td>UGX 2,000,000</td>
-                <td><span class="status inactive">Inactive</span></td>
+                <td>4</td>
+                <td>2</td>
+                <td>10004</td>
+                <td>Current</td>
+                <td>UGX 4,000</td>
               </tr>
               <tr>
-                <td>ACC-005</td>
-                <td>MEM-005</td>
-                <td>Esther Akello</td>
-                <td>Savings Account</td>
-                <td>UGX 475,000</td>
-                <td><span class="status active">Active</span></td>
+                <td>5</td>
+                <td>3</td>
+                <td>10005</td>
+                <td>Savings</td>
+                <td>UGX 8,000</td>
               </tr>
             </tbody>
           </table>
