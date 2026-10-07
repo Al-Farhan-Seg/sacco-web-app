@@ -24,33 +24,82 @@
       </nav>
     </header>
 
-    <main></main>
-     
-  
+    <main>
+      <form action="">
+        <label for="Member_id">Member id</label>
+        <input type="text" id="Member_id" name="Member_id">
 
- 
-<form action="">
-  <label for="Member_id">Member id</label>
-  <input type="text" id="Member_id" name="Member_id">
+        <label for="First_name">First Name</label>
+        <input type="text" id="First_name" name="First_name">
 
-  <label for="First_name">First Name</label>
-  <input type="text" id="First_name" name="First_name">
+        <label for="Address">Address:</label>
+        <input type="text" id="Address" name="Address">
 
-  <label for="Address">Address:</label>
-  <input type="text" id="Address" name="Address">
+        <label for="Email">Email:</label>
+        <input type="email" id="Email" name="Email">
 
-  <label for="Email">Email:</label>
-  <input type="email" id="Email" name="Email">
+        <label for="Gender">Gender:</label>
+        <select id="Gender" name="Gender">
+          <option value="male">MALE</option>
+          <option value="female">FEMALE</option>
+        </select>
+        <button type="submit">Register Member</button>
+      </form>
 
-
-  <label for="Gender">Gender:</label>
-  <select id ="Gender" name="Gender">
-    <option value="male">MALE</option>
-    <option value="female">FEMALE</option>
-  </select>
-  <button>Register Member</button>
-
-</form>
+      <section class="member-list" aria-labelledby="member-list-heading">
+        <h2 id="member-list-heading">Registered Members</h2>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Member ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Gender</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>MEM-001</td>
+                <td>Amina Nansubuga</td>
+                <td>Kampala</td>
+                <td>amina.nansubuga@example.com</td>
+                <td>Female</td>
+              </tr>
+              <tr>
+                <td>MEM-002</td>
+                <td>David Okello</td>
+                <td>Gulu</td>
+                <td>david.okello@example.com</td>
+                <td>Male</td>
+              </tr>
+              <tr>
+                <td>MEM-003</td>
+                <td>Grace Namusoke</td>
+                <td>Jinja</td>
+                <td>grace.namusoke@example.com</td>
+                <td>Female</td>
+              </tr>
+              <tr>
+                <td>MEM-004</td>
+                <td>Samuel Mugisha</td>
+                <td>Mbarara</td>
+                <td>samuel.mugisha@example.com</td>
+                <td>Male</td>
+              </tr>
+              <tr>
+                <td>MEM-005</td>
+                <td>Esther Akello</td>
+                <td>Lira</td>
+                <td>esther.akello@example.com</td>
+                <td>Female</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
 
 </body>
 
