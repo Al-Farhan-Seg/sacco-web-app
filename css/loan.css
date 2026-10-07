@@ -90,8 +90,62 @@ nav {
 }
 
 
+.table-section {
+    border: 1px solid black;
+    min-width: 0;
+    width: 95vw;
+    margin: 1.5rem auto;
+    max-width: 99vw;
+    border-radius: 10px;
+    padding: 0.3rem;
+
+    & h2 {
+        font-weight: 700;
+        text-align: center;
+        margin: 0.5rem;
+    }
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+}
+
+.table-section table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    color: black;
+
+    & th,
+    & td {
+        padding: 0.6rem 0.8rem;
+        border: 1px solid black;
+        text-align: left;
+        white-space: nowrap;
+    }
+
+    & th {
+        background-color: black;
+        color: white;
+    }
+
+    & tbody tr:nth-child(even) {
+        background-color: #f0f0f0;
+    }
+
+    & tbody tr:hover {
+        background-color: #dcdcdc;
+    }
+}
+
+
 @media (min-width: 768px) {
   .loan-container {
+    width: 70vw;
+  }
+  .table-section {
     width: 70vw;
   }
 }
@@ -99,6 +153,9 @@ nav {
 
 @media (min-width: 1024px) {
   .loan-container {
+    width: 55vw;
+  }
+  .table-section {
     width: 55vw;
   }
 }
