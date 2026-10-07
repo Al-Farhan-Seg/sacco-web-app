@@ -43,7 +43,7 @@ header nav a:hover {
 }
 
 main {
-  max-width: 600px;
+  max-width: 900px;
   margin: 40px auto;
   padding: 0 20px;
 }
@@ -92,6 +92,37 @@ button {
 button:hover {
   background: #0d4d37;
 }
+
+.table-div {
+  margin-top: 32px;
+  background: #ffffff;
+  border-radius: 10px;
+}
+
+.dummy-data-table {
+  width: 100%;
+  min-width: 650px;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.dummy-data-table th,
+.dummy-data-table td {
+  padding: 14px 16px;
+  text-align: left;
+}
+
+.dummy-data-table th {
+  background: #1e3a5f;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+
+.dummy-data-table tbody tr:hover {
+  background: #beccd5;
+}
+
 
 @media (max-width: 650px) {
   header {
