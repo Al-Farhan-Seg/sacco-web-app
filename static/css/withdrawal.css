@@ -1,0 +1,190 @@
+:root {
+    --primary-color: #3F6E50;
+    --secondary-color: #ADEEC5 ;
+    --accent-color : #6E493F;
+
+    /* 
+    Primary (P): #3F6E50 (Deep Sage Green) — Main structural elements & headers.
+    Secondary (S): #ADEEC5 (Mint Pastel) — Backgrounds & large supporting blocks.
+    Accent: #6E493F (Earthy Terracotta) — Buttons, highlights & call-to-actions.
+    **/
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: var(--secondary-color);
+    color: #1f2f26;
+}
+header {
+    margin: 0 0 2rem 0;
+}
+nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 16px;
+    padding: 0.5rem;
+
+    & a {
+        flex: 1 1;
+        border: 1px solid var(--primary-color);
+        text-align: center;
+        padding: 10px;
+        border-radius: 10px;
+        text-decoration: none;
+        color: white;
+        background-color: var(--primary-color);
+
+        &:hover {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+    }
+}
+#instruction {
+    font-size: medium;
+    text-align: center;
+}
+
+.withdrawal-container {
+    border: 1px solid var(--primary-color);
+    background-color: white;
+    color: #1f2f26;
+    min-width: 0;
+    width: 95vw;
+    margin: auto;
+    max-width: 99vw;
+    border-radius: 10px;
+    padding: 0.3rem;
+
+    & h2 {
+        font-weight: 700;
+        text-align: center;
+        margin: 0.5rem;
+    }
+
+    & form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0.5rem;
+        gap: 0.3rem;
+    }
+
+    & label {
+        font-size: 1.2rem;
+    }
+
+    & input:not([type="submit"]) {
+        padding: 0.4rem;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 10px;
+    }
+
+   & #submit-btn {
+        align-self: center;
+        padding: 0.5rem;
+        border-radius: 15px;
+        border: 1px solid var(--accent-color);
+        background-color: var(--accent-color);
+        color: white;
+        cursor: pointer;
+   }
+   
+    
+}
+
+
+.table-section {
+    border: 1px solid var(--primary-color);
+    background-color: white;
+    color: #1f2f26;
+    min-width: 0;
+    width: 95vw;
+    margin: 1.5rem auto;
+    max-width: 99vw;
+    border-radius: 10px;
+    padding: 0.3rem;
+
+    & h2 {
+        font-weight: 700;
+        text-align: center;
+        margin: 0.5rem;
+    }
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+}
+
+.table-section table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    color: #1f2f26;
+
+    & th,
+    & td {
+        padding: 0.6rem 0.8rem;
+        border: 1px solid var(--primary-color);
+        text-align: left;
+        white-space: nowrap;
+    }
+
+    & th {
+        background-color: var(--primary-color);
+        color: white;
+    }
+
+    & tbody tr:hover {
+        background-color: var(--secondary-color);
+    }
+}
+
+
+#form-message {
+    align-self: center;
+    text-align: center;
+    font-weight: 600;
+
+    &.error {
+        color: #b3261e;
+    }
+
+    &.success {
+        color: var(--primary-color);
+    }
+}
+
+
+@media (min-width: 768px) {
+  .withdrawal-container {
+    width: 70vw;
+  }
+  .table-section {
+    width: 70vw;
+  }
+}
+
+
+@media (min-width: 1024px) {
+  .withdrawal-container {
+    width: 55vw;
+  }
+  .table-section {
+    width: 55vw;
+  }
+  #withdraw-date {
+    align-self: flex-start;
+  }
+}
+
+
+@media (min-width: 1280px) {
+  
+}
