@@ -10,7 +10,7 @@
   <body{% block body_attrs %}{% endblock %}>
     {% block header %}
     <header>
-      <!-- TODO: each app owner wires up urls.py/views.py for their page and swaps these hrefs for {% url '...' %} -->
+      <!-- TODO: each app owner wires up urls.py/views.py for their page and swaps these hrefs for Django's named-URL tag -->
       <nav id="navigation">
         <a href="./index.html">Home</a>
         <a href="./login.html">Login</a>

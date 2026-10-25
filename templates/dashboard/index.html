@@ -11,7 +11,7 @@
 {% block body_attrs %} id="top"{% endblock %}
 
 {% block header %}
-    <!-- TODO: each app owner wires up urls.py/views.py for their page and swaps these hrefs for {% url '...' %} -->
+    <!-- TODO: each app owner wires up urls.py/views.py for their page and swaps these hrefs for Django's named-URL tag -->
     <header>
       <div class="brand">
         <img src="{% static 'images/images.png' %}" alt="SACCO logo">
@@ -91,7 +91,7 @@
       <section class="quick-links-section">
         <h3>Quick Links</h3>
         <p class="quick-links">
-          <!-- TODO: swap for {% url '...' %} once urls.py is wired -->
+          <!-- TODO: swap for Django's named-URL tag once urls.py is wired -->
           <a href="member.html">Register Member</a>&nbsp;
           <a href="account.html">Create Account</a>&nbsp;
           <a href="loan.html">Register Loan</a>
