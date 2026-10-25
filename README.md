@@ -24,3 +24,4 @@ Each page has its own empty stylesheet in the `css/` folder, ready for page-spec
 - CSS3
 
 No framework, bundler, or build process is required. Open any HTML file directly in a browser to begin development.
+# ruleset retest Sun Oct 25 16:34:25 EAST 2026
