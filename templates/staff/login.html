@@ -1,17 +1,18 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SACCO Management System Login">
-    <title>Login | SACCO Management System</title>
-    <link rel="stylesheet" href="css/login.css">
-  </head>
+{% extends "base.html" %}
+{% load static %}
 
-  <body>
+{% block description %}SACCO Management System Login{% endblock %}
+{% block title %}Login | SACCO Management System{% endblock %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block content %}
     <div id="main-div">
-      <img src="images/images.png" alt="">
+      <img src="{% static 'images/images.png' %}" alt="">
       <div><h1 id="sacco-heading">SACCO MANAGEMENT WEB APP</h1></div>
       <div><H2>LOGIN HERE</H2></div>
       <div id="Login-div">
@@ -25,9 +26,6 @@
       <button id="login-btn">LOGIN</button>
     </form>
       </div>
-    
-    </div>
-    
-  </body>
 
-</html>
+    </div>
+{% endblock %}

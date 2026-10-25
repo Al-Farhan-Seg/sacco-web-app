@@ -1,27 +1,14 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Loan Payment Management">
-    <title>Loan Payments | SACCO Management System</title>
-    <link rel="stylesheet" href="./css/loan-payment.css">
-  </head>
-  <body>
-    <header>
-      <nav>
-        <a href="./index.html">Home</a>
-        <a href="./login.html">Login</a>
-        <a href="./account.html">Account</a>
-        <a href="./member.html">Member</a>
-        <a href="./saving.html">Saving</a>
-        <a href="./staff.html">Staff</a>
-        <a href="./withdrawal.html">Withdrawal</a>
-        <a href="./loan-payment.html">Loan Payment</a>
-        <a href="./loan.html">Loan</a>
-      </nav>
-    </header>
+{% extends "base.html" %}
+{% load static %}
 
+{% block description %}Loan Payment Management{% endblock %}
+{% block title %}Loan Payments | SACCO Management System{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/loan-payment.css' %}">
+{% endblock %}
+
+{% block content %}
     <div class="loan-container">
       <h2>LOAN PAYMENT FORM</h2>
       <form action="" novalidate>
@@ -90,74 +77,8 @@
         </table>
       </div>
     </section>
+{% endblock %}
 
-    <script>
-      const form = document.querySelector("form");
-      const messageBox = document.getElementById("form-message");
-
-      function getInputFields() {
-        const fields = form.querySelectorAll("input:not([type='submit'])");
-        return fields;
-      }
-
-      function isEmpty(field) {
-        const value = field.value;
-        const trimmedValue = value.trim();
-        return trimmedValue === "";
-      }
-
-      function getFieldName(field) {
-        const selector = "label[for='" + field.id + "']";
-        const label = form.querySelector(selector);
-        const labelText = label.textContent;
-        const nameWithoutColon = labelText.replace(":", "");
-        const name = nameWithoutColon.trim();
-        return name;
-      }
-
-      function findEmptyFields() {
-        const fields = getInputFields();
-        const emptyFields = [];
-
-        for (let i = 0; i < fields.length; i++) {
-          const field = fields[i];
-
-          if (isEmpty(field)) {
-            const name = getFieldName(field);
-            emptyFields.push(name);
-          }
-        }
-
-        return emptyFields;
-      }
-
-      function showError(emptyFields) {
-        const fieldList = emptyFields.join(", ");
-        messageBox.className = "error";
-        messageBox.textContent = "Form not submitted. Please fill in: " + fieldList + ".";
-      }
-
-      function showSuccess() {
-        messageBox.className = "success";
-        messageBox.textContent = "Form submitted successfully.";
-        alert("Form submitted successfully.");
-      }
-
-      function handleSubmit(event) {
-        event.preventDefault();
-
-        const emptyFields = findEmptyFields();
-
-        if (emptyFields.length > 0) {
-          showError(emptyFields);
-          return;
-        }
-
-        showSuccess();
-        form.reset();
-      }
-
-      form.addEventListener("submit", handleSubmit);
-    </script>
-  </body>
-</html>
+{% block extra_js %}
+    <script src="{% static 'js/form-validation.js' %}"></script>
+{% endblock %}
