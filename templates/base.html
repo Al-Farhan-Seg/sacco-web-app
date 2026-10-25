@@ -1,0 +1,32 @@
+{% load static %}<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block description %}SACCO Management System{% endblock %}">
+    <title>{% block title %}SACCO Management System{% endblock %}</title>
+    {% block extra_css %}{% endblock %}
+  </head>
+  <body{% block body_attrs %}{% endblock %}>
+    {% block header %}
+    <header>
+      <!-- TODO: each app owner wires up urls.py/views.py for their page and swaps these hrefs for Django's named-URL tag -->
+      <nav id="navigation">
+        <a href="./index.html">Home</a>
+        <a href="./login.html">Login</a>
+        <a href="./account.html">Account</a>
+        <a href="./member.html">Member</a>
+        <a href="./saving.html">Saving</a>
+        <a href="./staff.html">Staff</a>
+        <a href="./withdrawal.html">Withdrawal</a>
+        <a href="./loan-payment.html">Loan Payment</a>
+        <a href="./loan.html">Loan</a>
+      </nav>
+    </header>
+    {% endblock %}
+
+    {% block content %}{% endblock %}
+
+    {% block extra_js %}{% endblock %}
+  </body>
+</html>

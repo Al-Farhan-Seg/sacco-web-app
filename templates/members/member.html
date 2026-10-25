@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block description %}Member Management{% endblock %}
+{% block title %}Members | SACCO Management System{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/member.css' %}">
+{% endblock %}
+
+{% block header %}
+    <!-- TODO: each app owner wires up urls.py/views.py for their page and swaps these hrefs for Django's named-URL tag -->
+    <header>
+      <h2>MEMBER REGISTRATION</h2>
+      <nav id="navigation">
+        <a href="./index.html">Home</a>
+        <a href="./login.html">Login</a>
+        <a href="./account.html">Account</a>
+        <a href="./member.html">Member</a>
+        <a href="./saving.html">Saving</a>
+        <a href="./staff.html">Staff</a>
+        <a href="./withdrawal.html">Withdrawal</a>
+        <a href="./loan-payment.html">Loan Payment</a>
+        <a href="./loan.html">Loan</a>
+      </nav>
+    </header>
+{% endblock %}
+
+{% block content %}
+    <main>
+      <form action="">
+        <label for="Member_id">Member id</label>
+        <input type="text" id="Member_id" name="Member_id" placeholder="MEM-001">
+
+        <label for="First_name">First Name</label>
+        <input type="text" id="First_name" name="First_name">
+
+        <label for="Last_name">Last Name</label>
+        <input type="text" id="Last_name" name="Last_name">
+
+        <label for="Contact">Contact:</label>
+        <input type="tel" id="Contact" name="Contact">
+
+        <label for="Address">Address:</label>
+        <input type="text" id="Address" name="Address">
+
+        <label for="Email">Email:</label>
+        <input type="email" id="Email" name="Email">
+
+        <label for="Gender">Gender:</label>
+        <select id="Gender" name="Gender" required>
+          <option value="" selected disabled>Select gender</option>
+          <option value="M">Male</option>
+          <option value="F">Female</option>
+        </select>
+        <button type="submit">Register Member</button>
+      </form>
+
+      <section class="member-list" aria-labelledby="member-list-heading">
+        <h2 id="member-list-heading">Registered Members</h2>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Member ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Contact</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Gender</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>MEM-001</td>
+                <td>MAHAD</td>
+                <td>BUGEMBE</td>
+                <td>0700000001</td>
+                <td>Kampala</td>
+                <td>mahad@gmail.com</td>
+                <td>M</td>
+              </tr>
+              <tr>
+                <td>MEM-002</td>
+                <td>Sarah</td>
+                <td>Nam</td>
+                <td>0700000002</td>
+                <td>Entebbe</td>
+                <td>sarah@gmail.com</td>
+                <td>F</td>
+              </tr>
+              <tr>
+                <td>MEM-003</td>
+                <td>Najib</td>
+                <td>Lwanga</td>
+                <td>0700000003</td>
+                <td>Jinja</td>
+                <td>najib@gmail.com</td>
+                <td>M</td>
+              </tr>
+              <tr>
+                <td>MEM-004</td>
+                <td>FARHAN</td>
+                <td>SEGUJJA</td>
+                <td>0700000004</td>
+                <td>Mukono</td>
+                <td>farhan@gmail.com</td>
+                <td>M</td>
+              </tr>
+              <tr>
+                <td>MEM-005</td>
+                <td>David</td>
+                <td>Okello</td>
+                <td>0700000005</td>
+                <td>Gulu</td>
+                <td>david@gmail.com</td>
+                <td>M</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+{% endblock %}

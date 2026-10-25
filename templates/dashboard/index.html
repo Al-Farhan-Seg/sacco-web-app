@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block description %}SACCO Management System{% endblock %}
+{% block title %}SACCO HOME PAGE{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block body_attrs %} id="top"{% endblock %}
+
+{% block header %}
+    <!-- TODO: each app owner wires up urls.py/views.py for their page and swaps these hrefs for Django's named-URL tag -->
+    <header>
+      <div class="brand">
+        <img src="{% static 'images/images.png' %}" alt="SACCO logo">
+        <h1>SACCO HOME PAGE</h1>
+      </div>
+      <nav>
+        <a href="staff.html">Staff Page</a>
+        <a href="member.html">Member Page</a>
+        <a href="account.html">Account Page</a>
+        <a href="saving.html">Saving Page</a>
+        <a href="loan.html">Loan Page</a>
+        <a href="loan-payment.html">Payment Page</a>
+        <a href="withdrawal.html">Withdrawal Page</a>
+        <a href="login.html">Login Page</a>
+      </nav>
+    </header>
+{% endblock %}
+
+{% block content %}
+    <main>
+
+      <section class="welcome-card">
+        <h3>Welcome To SACCO </h3>
+        <P>A SACCO brings members together to save money, access affordable loans, make repayments, and support each other financially. Use the menu above to view members, accounts, savings, loans, and staff activities.</P>
+      </section>
+
+      <h2>Sacco Overview.</h2>
+      <div class="overview-container">
+        <ol class="stats-grid">
+          <li>
+            <h3>Total Members</h3>
+            <p>78</p>
+          </li>
+          <li>
+            <h3>Total Savings</h3>
+            <p>UGX 70M</p>
+          </li>
+          <li>
+            <h3>Active Loans</h3>
+            <p>34</p>
+          </li>
+          <li>
+            <h3>Pending payments</h3>
+            <p>23</p>
+          </li>
+        </ol>
+      </div>
+
+      <section class="activity-section">
+        <h3>Recent Activity</h3>
+        <table class="activity-table">
+          <thead>
+            <tr>
+              <th>Member</th><th>Activity</th><th>Amount</th><th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Bugembe Mahad</td><td>Account Deposit</td><td>UGX 1.5M</td><td class="status-completed">Completed</td>
+            </tr>
+            <tr>
+              <td>Lwanga Najib</td><td>Loan Application</td><td>UGX 1.1M</td><td class="status-pending">Pending</td>
+            </tr>
+            <tr>
+              <td>Nagujja Shantal</td><td>Withdraw request</td><td>UGX 10M</td><td class="status-completed">Completed</td>
+            </tr>
+            <tr>
+              <td>Qassim Rayan</td><td>Account Creation</td><td>UGX O</td><td class="status-pending">Pending</td>
+            </tr>
+            <tr>
+              <td>Shifra Julia</td><td>Loan payment</td><td>UGX 700000</td><td class="status-completed">Completed</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="quick-links-section">
+        <h3>Quick Links</h3>
+        <p class="quick-links">
+          <!-- TODO: swap for Django's named-URL tag once urls.py is wired -->
+          <a href="member.html">Register Member</a>&nbsp;
+          <a href="account.html">Create Account</a>&nbsp;
+          <a href="loan.html">Register Loan</a>
+        </p>
+        <a href="#top" class="back-to-top">Back To Top</a>
+      </section>
+
+    </main>
+{% endblock %}

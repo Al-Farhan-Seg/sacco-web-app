@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block description %}Withdrawal Management{% endblock %}
+{% block title %}Withdrawals | SACCO Management System{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/withdrawal.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="withdrawal-container">
+      <h2>Withdrawal Form</h2>
+      <form action="" novalidate>
+        <label for="withdraw-id">Withdraw ID:</label>
+        <input type="text" name="withdraw_id" id="withdraw-id">
+
+        <label for="member-id">Member ID:</label>
+        <input type="text" name="member_id" id="member-id">
+
+        <label for="amount">Amount:</label>
+        <input type="number" name="amount" id="amount" min="1">
+
+        <label for="withdraw-date">Date:</label>
+        <input type="date" name="date" id="withdraw-date">
+
+        <input type="submit" value="Submit" id="submit-btn">
+
+        <p id="form-message"></p>
+      </form>
+    </div>
+
+    <section class="table-section">
+      <h2 id="withdrawal-list-heading">Members Who Have Exited</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Withdraw ID</th>
+              <th>Member ID</th>
+              <th>Amount (Final Balance)</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>WDR-001</td>
+              <td>MEM-001</td>
+              <td>UGX 850,000</td>
+              <td>2026-06-14</td>
+            </tr>
+            <tr>
+              <td>WDR-002</td>
+              <td>MEM-002</td>
+              <td>UGX 1,250,000</td>
+              <td>2026-07-02</td>
+            </tr>
+            <tr>
+              <td>WDR-003</td>
+              <td>MEM-003</td>
+              <td>UGX 620,000</td>
+              <td>2026-07-29</td>
+            </tr>
+            <tr>
+              <td>WDR-004</td>
+              <td>MEM-004</td>
+              <td>UGX 2,000,000</td>
+              <td>2026-08-21</td>
+            </tr>
+            <tr>
+              <td>WDR-005</td>
+              <td>MEM-005</td>
+              <td>UGX 475,000</td>
+              <td>2026-09-30</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/form-validation.js' %}"></script>
+{% endblock %}
