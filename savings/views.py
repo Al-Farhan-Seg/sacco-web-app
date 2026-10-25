@@ -1,3 +1,6 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+# Shows the saving registration page
+def saving(request):
+    return render(request, 'savings/saving.html')

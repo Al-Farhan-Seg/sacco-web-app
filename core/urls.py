@@ -17,6 +17,38 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from accounts import views as accounts_views
+from dashboard import views as dashboard_views
+from loans import views as loans_views
+from members import views as members_views
+from savings import views as savings_views
+from staff import views as staff_views
+from withdrawals import views as withdrawals_views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # Home page, also reachable as index.html to match the nav links
+    path('', dashboard_views.index),
+    path('index.html', dashboard_views.index),
+
+    # Login and staff registration pages
+    path('login.html', staff_views.login_view),
+    path('staff.html', staff_views.staff),
+
+    # Member registration page
+    path('member.html', members_views.member),
+
+    # Account application page
+    path('account.html', accounts_views.account),
+
+    # Saving registration page
+    path('saving.html', savings_views.saving),
+
+    # Loan application and loan payment pages
+    path('loan.html', loans_views.loan),
+    path('loan-payment.html', loans_views.loan_payment),
+
+    # Withdrawal page
+    path('withdrawal.html', withdrawals_views.withdrawal),
 ]

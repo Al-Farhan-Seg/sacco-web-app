@@ -1,3 +1,6 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+# Shows the home page
+def index(request):
+    return render(request, 'dashboard/index.html')

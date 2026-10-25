@@ -1,3 +1,6 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+# Shows the member registration page
+def member(request):
+    return render(request, 'members/member.html')
