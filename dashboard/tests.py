@@ -1,6 +1,11 @@
+import io
+from datetime import timedelta
+
 from django.contrib.auth.models import User
+from django.core.management import call_command
 from django.test import TestCase
 from django.urls import reverse
+from django.utils import timezone
 
 from accounts.models import Account
 from loans.models import Loan, LoanPayment
@@ -220,3 +225,90 @@ class DashboardViewTests(TestCase):
         self.assertContains(response, "No savings yet.")
         self.assertContains(response, "No loans yet.")
         self.assertContains(response, "UGX 0")
+
+
+def run_seed(*args):
+    out = io.StringIO()
+    call_command("seed", *args, stdout=out)
+    return out.getvalue()
+
+
+def row_counts():
+    return {
+        model.__name__: model.objects.count()
+        for model in (Member, Staff, Account, Saving, Loan, LoanPayment, Withdrawal)
+    }
+
+
+class SeedCommandTests(TestCase):
+    def test_seed_creates_expected_counts_ranges(self):
+        run_seed()
+        counts = row_counts()
+        self.assertTrue(55 <= counts["Member"] <= 65, counts)
+        self.assertEqual(counts["Staff"], 8)
+        self.assertEqual(counts["Account"], 90)
+        self.assertTrue(280 <= counts["Saving"] <= 320, counts)
+        self.assertTrue(22 <= counts["Loan"] <= 28, counts)
+        self.assertTrue(60 <= counts["LoanPayment"] <= 80, counts)
+        self.assertEqual(counts["Withdrawal"], 6)
+        self.assertEqual(
+            set(Staff.objects.values_list("role", flat=True)), {"Admin", "User"}
+        )
+        self.assertEqual(
+            set(Saving.objects.values_list("payment_method", flat=True)),
+            {"Cash", "Mobile", "Bank"},
+        )
+
+    def test_seed_is_repeatable_with_reset(self):
+        run_seed()
+        first = row_counts()
+        run_seed("--reset")
+        self.assertEqual(row_counts(), first)
+
+    def test_seed_refuses_without_reset_when_data_exists(self):
+        run_seed()
+        before = row_counts()
+        member_ids = set(Member.objects.values_list("pk", flat=True))
+        message = run_seed()
+        self.assertIn("--reset", message)
+        self.assertEqual(row_counts(), before)
+        self.assertEqual(set(Member.objects.values_list("pk", flat=True)), member_ids)
+
+    def test_seed_invariants(self):
+        run_seed()
+        today = timezone.localdate()
+        earliest = today - timedelta(days=366)
+        for saving in Saving.objects.select_related("account"):
+            self.assertEqual(saving.account.member_id, saving.member_id)
+            self.assertTrue(earliest <= saving.date <= today)
+            self.assertTrue(saving.amount >= 1000 and saving.amount % 1000 == 0)
+        for loan in Loan.objects.all():
+            self.assertTrue(loan.outstanding >= 0)
+            self.assertEqual(loan.loan_amount % 1000, 0)
+        for payment in LoanPayment.objects.all():
+            self.assertTrue(earliest <= payment.date <= today)
+            self.assertTrue(payment.amount >= 1000 and payment.amount % 1000 == 0)
+        for withdrawal in Withdrawal.objects.all():
+            self.assertTrue(earliest <= withdrawal.date <= today)
+            self.assertTrue(withdrawal.amount % 1000 == 0)
+        numbers = list(Account.objects.values_list("account_number", flat=True))
+        self.assertEqual(len(numbers), len(set(numbers)))
+        self.assertEqual(min(numbers), "10001")
+        for member in Member.objects.all():
+            self.assertEqual(len(member.contact), 10)
+            self.assertTrue(member.contact.startswith("07"))
+            self.assertTrue(member.contact.isdigit())
+            self.assertTrue(member.email.endswith("@example.com"))
+            self.assertTrue(1 <= member.account_set.count() <= 3)
+
+    def test_seed_creates_admin_who_can_log_in(self):
+        output = run_seed()
+        user = User.objects.get(username="admin")
+        self.assertTrue(user.is_staff and user.is_superuser)
+        self.assertTrue(self.client.login(username="admin", password="sacco-demo-2026"))
+        self.assertIn("sacco-demo-2026", output)
+
+    def test_seed_leaves_existing_admin_password_untouched(self):
+        User.objects.create_superuser("admin", password="my-own-secret")
+        run_seed()
+        self.assertTrue(self.client.login(username="admin", password="my-own-secret"))
