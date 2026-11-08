@@ -59,7 +59,7 @@ dashboard/stats.py dashboard/views.py dashboard/management/commands/seed.py
 ### Task 1: Core utilities and authentication
 
 **Files:**
-- Create: `core/models.py`, `core/crud.py`, `core/forms.py`, `core/templatetags/__init__.py`, `core/templatetags/sacco.py`, `core/tests.py`, `templates/partials/` (empty dir files come in Task 2)
+- Create: `core/models.py`, `core/crud.py`, `core/forms.py`, `core/templatetags/__init__.py`, `core/templatetags/sacco.py`, `core/tests.py`, `templates/registration/login.html` (a minimal placeholder: a plain `<form method="post">` with `{% csrf_token %}`, `{{ form.as_p }}` and a submit button, so login tests can render; Task 2 replaces it with the real page)
 - Modify: `core/settings.py`, `core/urls.py`, `dashboard/views.py`
 
 **Interfaces:**
@@ -67,9 +67,9 @@ dashboard/stats.py dashboard/views.py dashboard/management/commands/seed.py
   - `core.models.CodedModel` (abstract `models.Model`): class attribute `code_prefix: str`; property `code -> str` returning `f"{code_prefix}-{pk:03d}"`; `__str__` returns `self.code`.
   - `core.forms.DateInput(forms.DateInput)` with `input_type = "date"` and `format = "%Y-%m-%d"`.
   - Template filter `ugx` in library `sacco`: `ugx(value: int | None) -> str` giving `"UGX 850,000"`; `None` gives `"UGX 0"`.
-  - `core.crud.ListPage(LoginRequiredMixin, ListView)`: `paginate_by = 10`, `ordering = ["-id"]`, attributes `page_title: str`, `add_label: str`, `url_name: str` (the `<name>` prefix). Context adds `page_title`, `add_label`, `add_url` (reverse of `<url_name>_add`), `edit_url_name`, `delete_url_name`. An out-of-range `?page=` shows the last page instead of 404.
+  - `core.crud.ListPage(LoginRequiredMixin, ListView)`: `paginate_by = 10`, `ordering = ["-id"]`, attributes `page_title: str`, `add_label: str`, `url_name: str` (the `<name>` prefix). Context adds `page_title`, `add_label`, `add_url` (reverse of `<url_name>_add`). An out-of-range `?page=` shows the last page instead of 404.
   - `core.crud.ModalFormMixin(LoginRequiredMixin)`: `template_name = "partials/modal_form.html"`; context `modal_title` (`"Add <verbose_name>"` or `"Edit <code>"`) ; `form_valid` saves, calls `messages.success(request, f"{code} saved")`, returns `HttpResponse(status=204)`; `form_invalid` renders the template with status 400.
-  - `core.crud.ModalDeleteMixin(LoginRequiredMixin)`: `template_name = "partials/modal_delete.html"`, attribute `delete_note: str = ""`; `form_valid` deletes, `messages.success(request, f"{code} deleted")`, returns 204.
+  - `core.crud.ModalDeleteMixin(LoginRequiredMixin)`: `template_name = "partials/modal_delete.html"`, attribute `delete_note: str = ""`; context adds `delete_note`; `form_valid` deletes, `messages.success(request, f"{code} deleted")`, returns 204.
   - `core.crud.crud_urls(prefix: str, name: str, list_view, create_view, update_view, delete_view) -> list` of `path()` entries named as in Global Constraints.
 - Consumes: nothing.
 
@@ -163,7 +163,7 @@ dashboard/stats.py dashboard/views.py dashboard/management/commands/seed.py
 **Interfaces:**
 - Consumes: Task 3 pattern; `Member`, `Account`, `Staff`.
 - Produces:
-  - `savings.models.Saving(CodedModel)`: `code_prefix = "SAV"`; `member`, `account` (FK, `related_name="savings"`), `staff` (FK); `payment_method` (CharField 10, choices `("Cash","Cash"),("Mobile","Mobile Money"),("Bank","Bank Transfer")`); `amount` (PositiveBigIntegerField, validator `MinValueValidator(1)`); `date` (DateField). `clean()` raises `ValidationError` when `account.member != member`. URL names `saving_*`. Table columns: Savings ID, Member, Account, Method (display), Amount (`ugx`), Date, Staff. Form uses `DateInput` for `date`.
+  - `savings.models.Saving(CodedModel)`: `code_prefix = "SAV"`; `member`, `account` (FK, `related_name="savings"`), `staff` (FK); `payment_method` (CharField 10, choices `("Cash","Cash"),("Mobile","Mobile Money"),("Bank","Bank Transfer")`); `amount` (PositiveBigIntegerField, validator `MinValueValidator(1)`); `date` (DateField). `clean()` raises `ValidationError` when `account.member != member`, and does nothing when `member_id` or `account_id` is missing (the field errors are already reported). URL names `saving_*`. Table columns: Savings ID, Member, Account, Method (display), Amount (`ugx`), Date, Staff. Form uses `DateInput` for `date`.
   - `Account.balance` property added in `accounts/models.py`: `opening_balance` plus the sum of `savings.amount` (0 when none), using one aggregate query. The Accounts table column becomes "Balance" (`balance|ugx`) in `templates/accounts/account_list.html`. Task 5 therefore also modifies `accounts/models.py` and that template.
   - `withdrawals.models.Withdrawal(CodedModel)`: `code_prefix = "WDR"`; `member` FK; `amount` (PositiveBigIntegerField, `MinValueValidator(1)`); `date` (DateField). URL names `withdrawal_*`. Table header for amount is "Amount (final balance)".
 
@@ -186,7 +186,7 @@ dashboard/stats.py dashboard/views.py dashboard/management/commands/seed.py
 - Consumes: Task 3 pattern; `Member`, `Staff`.
 - Produces:
   - `loans.models.Loan(CodedModel)`: `code_prefix = "LN"`; `member`, `staff` FKs; `loan_amount` (PositiveBigIntegerField, min 1); `payment_period` (CharField 100); `payment_amount` (PositiveBigIntegerField, min 1); properties `total_paid -> int` and `outstanding -> int` (loan_amount minus total_paid). `__str__` is `f"{code} · {member.full_name}"`. URL names `loan_*` at `/loans/...`; `LoanDelete.delete_note = "its payments"`.
-  - `loans.models.LoanPayment(CodedModel)`: `code_prefix = "PAY"`; `loan` FK (`related_name="payments"`); `amount` (min 1); `date`. `clean()` raises `ValidationError` when `amount` exceeds the loan's `loan_amount` minus the sum of its other payments (exclude `self.pk`). URL names `payment_list`, `payment_add`, `payment_edit`, `payment_delete` at `/loan-payments/...`. Loan table columns: Loan ID, Member, Staff, Loan amount, Payment period, Payment amount, Still owed (`outstanding|ugx`). Payment table columns: Payment ID, Loan, Amount, Date. Both apps' views live in `loans/views.py`; both URL lists come from `crud_urls` in `loans/urls.py` and are included at the root (`path("", include("loans.urls"))`).
+  - `loans.models.LoanPayment(CodedModel)`: `code_prefix = "PAY"`; `loan` FK (`related_name="payments"`); `amount` (min 1); `date`. `clean()` raises `ValidationError` when `amount` exceeds the loan's `loan_amount` minus the sum of its other payments (exclude `self.pk`), and does nothing when `loan_id` or `amount` is missing. URL names `payment_list`, `payment_add`, `payment_edit`, `payment_delete` at `/loan-payments/...`. Loan table columns: Loan ID, Member, Staff, Loan amount, Payment period, Payment amount, Still owed (`outstanding|ugx`). Payment table columns: Payment ID, Loan, Amount, Date. Both apps' views live in `loans/views.py`; both URL lists come from `crud_urls` in `loans/urls.py` and are included at the root (`path("", include("loans.urls"))`).
 
 - [ ] **Step 1: Write failing tests:** standard set for both models; `test_outstanding_is_loan_minus_payments` (2,000,000 loan, payments 180,000 and 90,000 gives 1,730,000), `test_payment_cannot_exceed_outstanding` (400), `test_editing_payment_ignores_its_own_amount` (editing a payment up to exactly the remaining balance succeeds), `test_loan_amount_zero_rejected`, `test_payment_date_required`, `test_deleting_loan_deletes_payments`, `test_deleting_member_deletes_loans`.
 - [ ] **Step 2: Run** `python manage.py test loans -v 2`. Expected: FAIL.
