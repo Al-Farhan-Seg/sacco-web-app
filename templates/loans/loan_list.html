@@ -18,9 +18,9 @@
             <th scope="col">Member</th>
             <th scope="col">Staff</th>
             <th scope="col" class="num">Loan amount</th>
+            <th scope="col" class="num">Still owed</th>
             <th scope="col">Payment period</th>
             <th scope="col" class="num">Payment amount</th>
-            <th scope="col" class="num">Still owed</th>
             <th scope="col" class="col-actions" aria-label="Actions"></th>
           </tr>
         </thead>
@@ -28,12 +28,12 @@
           {% for loan in object_list %}
             <tr>
               <td class="code">{{ loan.code }}</td>
-              <td>{{ loan.member }}</td>
-              <td>{{ loan.staff }}</td>
+              <td class="wrap">{{ loan.member }}</td>
+              <td class="wrap">{{ loan.staff }}</td>
               <td class="num">{{ loan.loan_amount|ugx }}</td>
+              <td class="num">{{ loan.outstanding|ugx }}</td>
               <td>{{ loan.payment_period }}</td>
               <td class="num">{{ loan.payment_amount|ugx }}</td>
-              <td class="num">{{ loan.outstanding|ugx }}</td>
               <td class="col-actions">{% url 'loan_edit' loan.pk as edit_url %}{% url 'loan_delete' loan.pk as delete_url %}{% include "partials/_row_actions.html" %}</td>
             </tr>
           {% empty %}

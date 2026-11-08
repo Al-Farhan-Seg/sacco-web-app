@@ -397,6 +397,14 @@ textarea {
   }
 }
 
+/* Small laptops: let long names wrap so the money columns stay beside the rail. */
+@media (max-width: 1100px) {
+  .table td.wrap {
+    min-width: 9em;
+    white-space: normal;
+  }
+}
+
 @keyframes scroll-hint {
   0%,
   90% {
