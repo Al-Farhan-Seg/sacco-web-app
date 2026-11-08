@@ -1,0 +1,12 @@
+<nav class="pagination" aria-label="Pages">
+  <p class="pagination-summary">
+    {% if page_obj.paginator.count %}Showing {{ page_obj.start_index }} to {{ page_obj.end_index }} of {{ page_obj.paginator.count }}{% else %}Showing 0 of 0{% endif %}
+  </p>
+  {% if page_obj.has_other_pages %}
+    <ul class="pager">
+      {% for number in page_obj.paginator.page_range %}
+        <li><a class="page-link" href="?page={{ number }}"{% if number == page_obj.number %} aria-current="page"{% endif %}>{{ number }}</a></li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</nav>

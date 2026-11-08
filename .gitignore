@@ -294,7 +294,7 @@ pnpm-debug.log*
 # =========================================================
 
 *.sqlite
-*.sqlite3
+# db.sqlite3 is intentionally NOT ignored: the class demo database is committed to GitHub
 *.db
 
 data/

@@ -1,0 +1,44 @@
+<aside class="sidebar">
+  <a class="brand" href="/">
+    <span class="brand-tile" aria-hidden="true">S</span>
+    <span class="brand-text">SACCO<small>Management</small></span>
+  </a>
+
+  <nav class="nav" aria-label="Main">
+    <a class="nav-link" href="/"{% if request.path == "/" %} aria-current="page"{% endif %}>
+      <i data-lucide="layout-dashboard" aria-hidden="true"></i>Dashboard
+    </a>
+
+    <ul class="nav-list">
+      <li><a class="nav-link" href="/members/"{% if "/members/" in request.path %} aria-current="page"{% endif %}><i data-lucide="users" aria-hidden="true"></i>Members</a></li>
+      <li><a class="nav-link" href="/staff/"{% if "/staff/" in request.path %} aria-current="page"{% endif %}><i data-lucide="briefcase" aria-hidden="true"></i>Staff</a></li>
+      <li><a class="nav-link" href="/accounts/"{% if "/accounts/" in request.path %} aria-current="page"{% endif %}><i data-lucide="wallet" aria-hidden="true"></i>Accounts</a></li>
+      <li><a class="nav-link" href="/savings/"{% if "/savings/" in request.path %} aria-current="page"{% endif %}><i data-lucide="coins" aria-hidden="true"></i>Savings</a></li>
+      <li><a class="nav-link" href="/withdrawals/"{% if "/withdrawals/" in request.path %} aria-current="page"{% endif %}><i data-lucide="arrow-down-to-line" aria-hidden="true"></i>Withdrawals</a></li>
+      <li><a class="nav-link" href="/loans/"{% if "/loans/" in request.path %} aria-current="page"{% endif %}><i data-lucide="banknote" aria-hidden="true"></i>Loans</a></li>
+      <li><a class="nav-link" href="/loan-payments/"{% if "/loan-payments/" in request.path %} aria-current="page"{% endif %}><i data-lucide="credit-card" aria-hidden="true"></i>Loan payments</a></li>
+    </ul>
+
+    <div class="nav-bottom">
+      <a class="nav-link" href="/admin/"><i data-lucide="shield" aria-hidden="true"></i>Django Admin</a>
+    </div>
+  </nav>
+
+  <div class="user">
+    <span class="user-name" title="{{ user.get_username }}">{{ user.get_username }}</span>
+    <form method="post" action="/logout/">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-sidebar"><i data-lucide="log-out" aria-hidden="true"></i>Log out</button>
+    </form>
+  </div>
+  <script>
+    // On phones the nav is one sideways row: start it scrolled so the current page is in view.
+    (function () {
+      var nav = document.querySelector(".sidebar .nav");
+      var current = nav && nav.querySelector("[aria-current=page]");
+      if (current && nav.scrollWidth > nav.clientWidth) {
+        nav.scrollLeft = current.offsetLeft - (nav.clientWidth - current.offsetWidth) / 2;
+      }
+    })();
+  </script>
+</aside>
