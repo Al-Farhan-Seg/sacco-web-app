@@ -4,6 +4,8 @@ from django.test import TestCase
 from django.urls import reverse
 
 from members.models import Member
+from savings.models import Saving
+from staff.models import Staff
 
 from .models import Account
 
@@ -56,6 +58,60 @@ class AccountModelTests(TestCase):
         self.assertFalse(Account.objects.exists())
 
 
+def add_saving(account, amount):
+    staff = Staff.objects.first() or Staff.objects.create(
+        first_name="Grace",
+        last_name="Akello",
+        gender="F",
+        position="Teller",
+        role="User",
+        contact="0772000001",
+        address="Kampala",
+    )
+    return Saving.objects.create(
+        member=account.member,
+        account=account,
+        staff=staff,
+        payment_method="Cash",
+        amount=amount,
+        date="2026-01-15",
+    )
+
+
+class AccountBalanceTests(TestCase):
+    def test_account_balance_equals_opening_when_no_savings(self):
+        account = make_account(opening_balance=5000)
+        self.assertEqual(account.balance, 5000)
+
+    def test_account_balance_adds_savings(self):
+        account = make_account(opening_balance=5000)
+        add_saving(account, 1000)
+        add_saving(account, 2500)
+        self.assertEqual(account.balance, 8500)
+
+    def test_balance_updates_after_saving_edit_and_delete(self):
+        account = make_account(opening_balance=5000)
+        first = add_saving(account, 1000)
+        add_saving(account, 2500)
+        first.amount = 4000
+        first.save()
+        self.assertEqual(account.balance, 11500)
+        first.delete()
+        self.assertEqual(account.balance, 7500)
+
+    def test_balance_uses_one_query(self):
+        account = make_account(opening_balance=5000)
+        add_saving(account, 1000)
+        with self.assertNumQueries(1):
+            account.balance
+
+    def test_balance_only_counts_own_savings(self):
+        account = make_account(opening_balance=5000)
+        other = make_account(account_number="1002", opening_balance=0)
+        add_saving(other, 9000)
+        self.assertEqual(account.balance, 5000)
+
+
 class AccountViewTests(TestCase):
     def setUp(self):
         self.user = User.objects.create_user("clerk", password="s3cret-pass")
@@ -87,6 +143,16 @@ class AccountViewTests(TestCase):
         self.assertContains(response, "MEM-001 · Sarah Nam")
         self.assertContains(response, "UGX 850,000")
         self.assertContains(response, reverse("account_add"))
+
+    def test_list_shows_balance_column_including_savings(self):
+        account = make_account(self.member, opening_balance=5000)
+        add_saving(account, 1000)
+        add_saving(account, 2500)
+        response = self.client.get(reverse("account_list"))
+        self.assertContains(response, '<th scope="col">Balance</th>', html=True)
+        self.assertNotContains(response, "Opening balance</th>")
+        self.assertContains(response, "UGX 8,500")
+        self.assertNotContains(response, "UGX 5,000")
 
     def test_add_get_renders_form_with_member_labels(self):
         response = self.client.get(reverse("account_add"))

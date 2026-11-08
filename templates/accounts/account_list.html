@@ -18,7 +18,7 @@
             <th scope="col">Member</th>
             <th scope="col">Account number</th>
             <th scope="col">Type</th>
-            <th scope="col">Opening balance</th>
+            <th scope="col">Balance</th>
             <th scope="col" aria-label="Actions"></th>
           </tr>
         </thead>
@@ -29,7 +29,7 @@
               <td>{{ account.member }}</td>
               <td>{{ account.account_number }}</td>
               <td>{{ account.account_type }}</td>
-              <td>{{ account.opening_balance|ugx }}</td>
+              <td>{{ account.balance|ugx }}</td>
               <td>{% url 'account_edit' account.pk as edit_url %}{% url 'account_delete' account.pk as delete_url %}{% include "partials/_row_actions.html" %}</td>
             </tr>
           {% empty %}
