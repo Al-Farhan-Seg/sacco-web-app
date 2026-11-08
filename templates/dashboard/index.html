@@ -1,4 +1,145 @@
 {% extends "base.html" %}
+{% load sacco %}
 
 {% block title %}Dashboard{% endblock %}
 {% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+  <section class="stats" aria-label="SACCO at a glance">
+    <article class="card stat">
+      <div class="stat-top">
+        <span class="stat-tile stat-tile-flame"><i data-lucide="users" aria-hidden="true"></i></span>
+        <p class="stat-label">Members</p>
+      </div>
+      <p class="stat-value">{{ members }}</p>
+      <p class="stat-caption">Registered with the SACCO</p>
+    </article>
+
+    <article class="card stat">
+      <div class="stat-top">
+        <span class="stat-tile stat-tile-fantastic"><i data-lucide="briefcase" aria-hidden="true"></i></span>
+        <p class="stat-label">Staff</p>
+      </div>
+      <p class="stat-value">{{ staff }}</p>
+      <p class="stat-caption">Serving the members</p>
+    </article>
+
+    <article class="card stat">
+      <div class="stat-top">
+        <span class="stat-tile stat-tile-truffle"><i data-lucide="wallet" aria-hidden="true"></i></span>
+        <p class="stat-label">Accounts</p>
+      </div>
+      <p class="stat-value">{{ accounts }}</p>
+      <p class="stat-caption">Savings and current accounts</p>
+    </article>
+
+    <article class="card stat stat-feature">
+      <div class="stat-top">
+        <span class="stat-tile stat-tile-flame"><i data-lucide="coins" aria-hidden="true"></i></span>
+        <p class="stat-label">Total savings</p>
+      </div>
+      <p class="stat-value">{{ total_savings|ugx }}</p>
+      <p class="stat-caption">Opening balances plus all savings</p>
+    </article>
+
+    <article class="card stat">
+      <div class="stat-top">
+        <span class="stat-tile stat-tile-fantastic"><i data-lucide="banknote" aria-hidden="true"></i></span>
+        <p class="stat-label">Loans issued</p>
+      </div>
+      <p class="stat-value">{{ loans_count }}</p>
+      <p class="stat-caption">{{ loans_total|ugx }} lent in total</p>
+    </article>
+
+    <article class="card stat">
+      <div class="stat-top">
+        <span class="stat-tile stat-tile-truffle"><i data-lucide="credit-card" aria-hidden="true"></i></span>
+        <p class="stat-label">Loan repayments</p>
+      </div>
+      <p class="stat-value">{{ repayments_total|ugx }}</p>
+      <p class="stat-caption">Paid back on all loans</p>
+    </article>
+
+    <article class="card stat">
+      <div class="stat-top">
+        <span class="stat-tile stat-tile-flame"><i data-lucide="circle-alert" aria-hidden="true"></i></span>
+        <p class="stat-label">Still owed</p>
+      </div>
+      <p class="stat-value">{{ still_owed|ugx }}</p>
+      <p class="stat-caption">Lent minus repaid</p>
+    </article>
+
+    <article class="card stat">
+      <div class="stat-top">
+        <span class="stat-tile stat-tile-fantastic"><i data-lucide="arrow-down-to-line" aria-hidden="true"></i></span>
+        <p class="stat-label">Withdrawals</p>
+      </div>
+      <p class="stat-value">{{ withdrawals_count }}</p>
+      <p class="stat-caption">{{ withdrawals_total|ugx }} paid out</p>
+    </article>
+  </section>
+
+  <div class="recent">
+    <section class="card" aria-labelledby="recent-savings-title">
+      <header class="card-header">
+        <h2 class="card-title" id="recent-savings-title">Recent savings</h2>
+        <a class="card-link" href="{% url 'saving_list' %}">View all<i data-lucide="arrow-right" aria-hidden="true"></i></a>
+      </header>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Savings ID</th>
+              <th scope="col">Member</th>
+              <th scope="col">Method</th>
+              <th scope="col" class="num">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for saving in recent_savings %}
+              <tr>
+                <td class="code">{{ saving.code }}</td>
+                <td>{{ saving.member.full_name }}</td>
+                <td>{{ saving.get_payment_method_display }}</td>
+                <td class="num">{{ saving.amount|ugx }}</td>
+              </tr>
+            {% empty %}
+              <tr><td class="table-empty" colspan="4">No savings yet.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="recent-loans-title">
+      <header class="card-header">
+        <h2 class="card-title" id="recent-loans-title">Recent loans</h2>
+        <a class="card-link" href="{% url 'loan_list' %}">View all<i data-lucide="arrow-right" aria-hidden="true"></i></a>
+      </header>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Loan ID</th>
+              <th scope="col">Member</th>
+              <th scope="col">Period</th>
+              <th scope="col" class="num">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for loan in recent_loans %}
+              <tr>
+                <td class="code">{{ loan.code }}</td>
+                <td>{{ loan.member.full_name }}</td>
+                <td>{{ loan.payment_period }}</td>
+                <td class="num">{{ loan.loan_amount|ugx }}</td>
+              </tr>
+            {% empty %}
+              <tr><td class="table-empty" colspan="4">No loans yet.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+{% endblock %}
