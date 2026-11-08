@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load sacco %}
+
+{% block title %}{{ page_title }}{% endblock %}
+{% block page_title %}{{ page_title }}{% endblock %}
+
+{% block actions %}
+  <button type="button" class="btn btn-primary" data-modal-url="{{ add_url }}"><i data-lucide="plus" aria-hidden="true"></i>{{ add_label }}</button>
+{% endblock %}
+
+{% block content %}
+  <section class="card">
+    <div class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Payment ID</th>
+            <th scope="col">Loan</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Date</th>
+            <th scope="col" aria-label="Actions"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for payment in object_list %}
+            <tr>
+              <td class="code">{{ payment.code }}</td>
+              <td>{{ payment.loan }}</td>
+              <td>{{ payment.amount|ugx }}</td>
+              <td>{{ payment.date }}</td>
+              <td>{% url 'payment_edit' payment.pk as edit_url %}{% url 'payment_delete' payment.pk as delete_url %}{% include "partials/_row_actions.html" %}</td>
+            </tr>
+          {% empty %}
+            <tr><td class="table-empty" colspan="5">No loan payments yet.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% include "partials/_pagination.html" with page_obj=page_obj %}
+  </section>
+{% endblock %}
