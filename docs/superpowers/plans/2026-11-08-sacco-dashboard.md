@@ -68,8 +68,8 @@ dashboard/stats.py dashboard/views.py dashboard/management/commands/seed.py
   - `core.forms.DateInput(forms.DateInput)` with `input_type = "date"` and `format = "%Y-%m-%d"`.
   - Template filter `ugx` in library `sacco`: `ugx(value: int | None) -> str` giving `"UGX 850,000"`; `None` gives `"UGX 0"`.
   - `core.crud.ListPage(LoginRequiredMixin, ListView)`: `paginate_by = 10`, `ordering = ["-id"]`, attributes `page_title: str`, `add_label: str`, `url_name: str` (the `<name>` prefix). Context adds `page_title`, `add_label`, `add_url` (reverse of `<url_name>_add`). An out-of-range `?page=` shows the last page instead of 404.
-  - `core.crud.ModalFormMixin(LoginRequiredMixin)`: `template_name = "partials/modal_form.html"`; context `modal_title` (`"Add <verbose_name>"` or `"Edit <code>"`) ; `form_valid` saves, calls `messages.success(request, f"{code} saved")`, returns `HttpResponse(status=204)`; `form_invalid` renders the template with status 400.
-  - `core.crud.ModalDeleteMixin(LoginRequiredMixin)`: `template_name = "partials/modal_delete.html"`, attribute `delete_note: str = ""`; context adds `delete_note`; `form_valid` deletes, `messages.success(request, f"{code} deleted")`, returns 204.
+  - `core.crud.ModalFormMixin(LoginRequiredMixin)`: `template_name = "partials/_modal_form.html"`; context `modal_title` (`"Add <verbose_name>"` or `"Edit <code>"`) ; `form_valid` saves, calls `messages.success(request, f"{code} saved")`, returns `HttpResponse(status=204)`; `form_invalid` renders the template with status 400.
+  - `core.crud.ModalDeleteMixin(LoginRequiredMixin)`: `template_name = "partials/_modal_delete.html"`, attribute `delete_note: str = ""`; context adds `delete_note`; `form_valid` deletes, `messages.success(request, f"{code} deleted")`, returns 204.
   - `core.crud.crud_urls(prefix: str, name: str, list_view, create_view, update_view, delete_view) -> list` of `path()` entries named as in Global Constraints.
 - Consumes: nothing.
 
