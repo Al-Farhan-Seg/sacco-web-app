@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.test import RequestFactory, TestCase, override_settings
@@ -74,3 +75,50 @@ class ListPageTests(TestCase):
         response = UserListPage.as_view()(request)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context_data["page_obj"].number, 2)
+
+
+STATIC_DIR = settings.BASE_DIR / "static"
+TEMPLATES_DIR = settings.BASE_DIR / "templates"
+PALETTE = [
+    "#EEE9DF", "#FBF9F4", "#C9C1B1", "#1B2632",
+    "#2C3B4D", "#FFB162", "#A35139", "#5B6773",
+]
+OLD_CSS = [
+    "account.css", "index.css", "loan-payment.css", "loan.css", "login.css",
+    "member.css", "saving.css", "staff.css", "withdrawal.css",
+]
+
+
+class ShellTests(TestCase):
+    def test_shell_has_all_nav_links(self):
+        user = User.objects.create_user("clerk", password="s3cret-pass")
+        self.client.force_login(user)
+        response = self.client.get("/")
+        for href in [
+            "/members/", "/staff/", "/accounts/", "/savings/",
+            "/withdrawals/", "/loans/", "/loan-payments/", "/admin/",
+        ]:
+            self.assertContains(response, f'href="{href}"')
+        self.assertContains(response, "Dashboard")
+
+    def test_login_page_has_password_input(self):
+        response = self.client.get("/login/")
+        self.assertContains(response, 'type="password"')
+
+    def test_static_assets_exist(self):
+        for name in ["css/app.css", "js/modal.js", "js/lucide.min.js"]:
+            self.assertTrue((STATIC_DIR / name).is_file(), name)
+        css = (STATIC_DIR / "css/app.css").read_text(encoding="utf-8").upper()
+        for colour in PALETTE:
+            self.assertIn(colour, css)
+
+    def test_no_framework_markup(self):
+        files = [STATIC_DIR / "css/app.css", *TEMPLATES_DIR.rglob("*.html")]
+        for file in files:
+            text = file.read_text(encoding="utf-8").lower()
+            self.assertNotIn("bootstrap", text, file)
+            self.assertNotIn("tailwind", text, file)
+
+    def test_old_css_removed(self):
+        for name in OLD_CSS:
+            self.assertFalse((STATIC_DIR / "css" / name).exists(), name)

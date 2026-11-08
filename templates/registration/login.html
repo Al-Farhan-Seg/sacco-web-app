@@ -1,5 +1,38 @@
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Log in</button>
-</form>
+{% load static %}<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in · SACCO Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+  </head>
+  <body class="auth">
+    <main class="auth-card">
+      <span class="brand-tile" aria-hidden="true">S</span>
+      <h1 class="auth-title">SACCO Management</h1>
+      <p class="auth-sub">Staff sign in</p>
+
+      <form method="post" action="{% url 'login' %}" class="auth-form">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        {% if form.non_field_errors %}
+          <div class="form-errors" role="alert">{{ form.non_field_errors }}</div>
+        {% endif %}
+        <div class="field{% if form.username.errors %} has-error{% endif %}">
+          <label for="{{ form.username.id_for_label }}">Username</label>
+          {{ form.username }}
+          {% if form.username.errors %}<p class="field-error" id="{{ form.username.auto_id }}_error">{{ form.username.errors|join:" " }}</p>{% endif %}
+        </div>
+        <div class="field{% if form.password.errors %} has-error{% endif %}">
+          <label for="{{ form.password.id_for_label }}">Password</label>
+          {{ form.password }}
+          {% if form.password.errors %}<p class="field-error" id="{{ form.password.auto_id }}_error">{{ form.password.errors|join:" " }}</p>{% endif %}
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Log in</button>
+      </form>
+    </main>
+  </body>
+</html>
