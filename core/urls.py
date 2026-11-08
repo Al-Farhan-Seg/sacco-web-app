@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from django.urls import path
+from django.urls import include, path
 
 from dashboard import views as dashboard_views
 
@@ -27,4 +27,5 @@ urlpatterns = [
     path('', dashboard_views.index, name='dashboard'),
 
     # Later tasks add their crud_urls(...) / include(...) entries below.
+    path("", include("members.urls")),
 ]
