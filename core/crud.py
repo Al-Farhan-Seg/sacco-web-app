@@ -35,7 +35,7 @@ class ListPage(LoginRequiredMixin, ListView):
 class ModalFormMixin(LoginRequiredMixin):
     """Create/update views shown in a modal; success answers 204."""
 
-    template_name = "partials/modal_form.html"
+    template_name = "partials/_modal_form.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -60,7 +60,7 @@ class ModalFormMixin(LoginRequiredMixin):
 class ModalDeleteMixin(LoginRequiredMixin):
     """Delete confirmation shown in a modal; success answers 204."""
 
-    template_name = "partials/modal_delete.html"
+    template_name = "partials/_modal_delete.html"
     delete_note = ""
 
     def get_context_data(self, **kwargs):

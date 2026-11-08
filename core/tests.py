@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.test import RequestFactory, TestCase, override_settings
 from django.urls import path
 
-from core.crud import ListPage
+from core.crud import ListPage, ModalDeleteMixin, ModalFormMixin
 from core.models import CodedModel
 from core.templatetags.sacco import ugx
 
@@ -122,3 +122,9 @@ class ShellTests(TestCase):
     def test_old_css_removed(self):
         for name in OLD_CSS:
             self.assertFalse((STATIC_DIR / "css" / name).exists(), name)
+
+    def test_modal_mixin_templates_exist(self):
+        from django.template.loader import get_template
+
+        for mixin in [ModalFormMixin, ModalDeleteMixin]:
+            get_template(mixin.template_name)
