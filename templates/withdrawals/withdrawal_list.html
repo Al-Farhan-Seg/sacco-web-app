@@ -5,7 +5,7 @@
 {% block page_title %}{{ page_title }}{% endblock %}
 
 {% block actions %}
-  <button type="button" class="btn btn-primary" data-modal-url="{{ add_url }}"><i data-lucide="plus" aria-hidden="true"></i>{{ add_label }}</button>
+  <button type="button" class="btn btn-primary btn-lg" data-modal-url="{{ add_url }}"><i data-lucide="plus" aria-hidden="true"></i>{{ add_label }}</button>
 {% endblock %}
 
 {% block content %}
@@ -16,9 +16,9 @@
           <tr>
             <th scope="col">Withdrawal ID</th>
             <th scope="col">Member</th>
-            <th scope="col">Amount (final balance)</th>
+            <th scope="col" class="num">Amount (final balance)</th>
             <th scope="col">Date</th>
-            <th scope="col" aria-label="Actions"></th>
+            <th scope="col" class="col-actions" aria-label="Actions"></th>
           </tr>
         </thead>
         <tbody>
@@ -26,9 +26,9 @@
             <tr>
               <td class="code">{{ withdrawal.code }}</td>
               <td>{{ withdrawal.member }}</td>
-              <td>{{ withdrawal.amount|ugx }}</td>
+              <td class="num">{{ withdrawal.amount|ugx }}</td>
               <td>{{ withdrawal.date|date:"j M Y" }}</td>
-              <td>{% url 'withdrawal_edit' withdrawal.pk as edit_url %}{% url 'withdrawal_delete' withdrawal.pk as delete_url %}{% include "partials/_row_actions.html" %}</td>
+              <td class="col-actions">{% url 'withdrawal_edit' withdrawal.pk as edit_url %}{% url 'withdrawal_delete' withdrawal.pk as delete_url %}{% include "partials/_row_actions.html" %}</td>
             </tr>
           {% empty %}
             <tr><td class="table-empty" colspan="5">No withdrawals yet.</td></tr>

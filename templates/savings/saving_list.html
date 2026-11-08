@@ -5,7 +5,7 @@
 {% block page_title %}{{ page_title }}{% endblock %}
 
 {% block actions %}
-  <button type="button" class="btn btn-primary" data-modal-url="{{ add_url }}"><i data-lucide="plus" aria-hidden="true"></i>{{ add_label }}</button>
+  <button type="button" class="btn btn-primary btn-lg" data-modal-url="{{ add_url }}"><i data-lucide="plus" aria-hidden="true"></i>{{ add_label }}</button>
 {% endblock %}
 
 {% block content %}
@@ -18,10 +18,10 @@
             <th scope="col">Member</th>
             <th scope="col">Account</th>
             <th scope="col">Method</th>
-            <th scope="col">Amount</th>
+            <th scope="col" class="num">Amount</th>
             <th scope="col">Date</th>
             <th scope="col">Staff</th>
-            <th scope="col" aria-label="Actions"></th>
+            <th scope="col" class="col-actions" aria-label="Actions"></th>
           </tr>
         </thead>
         <tbody>
@@ -31,10 +31,10 @@
               <td>{{ saving.member }}</td>
               <td>{{ saving.account }}</td>
               <td>{{ saving.get_payment_method_display }}</td>
-              <td>{{ saving.amount|ugx }}</td>
+              <td class="num">{{ saving.amount|ugx }}</td>
               <td>{{ saving.date|date:"j M Y" }}</td>
               <td>{{ saving.staff }}</td>
-              <td>{% url 'saving_edit' saving.pk as edit_url %}{% url 'saving_delete' saving.pk as delete_url %}{% include "partials/_row_actions.html" %}</td>
+              <td class="col-actions">{% url 'saving_edit' saving.pk as edit_url %}{% url 'saving_delete' saving.pk as delete_url %}{% include "partials/_row_actions.html" %}</td>
             </tr>
           {% empty %}
             <tr><td class="table-empty" colspan="8">No savings yet.</td></tr>

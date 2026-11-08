@@ -5,7 +5,7 @@
 {% block page_title %}{{ page_title }}{% endblock %}
 
 {% block actions %}
-  <button type="button" class="btn btn-primary" data-modal-url="{{ add_url }}"><i data-lucide="plus" aria-hidden="true"></i>{{ add_label }}</button>
+  <button type="button" class="btn btn-primary btn-lg" data-modal-url="{{ add_url }}"><i data-lucide="plus" aria-hidden="true"></i>{{ add_label }}</button>
 {% endblock %}
 
 {% block content %}
@@ -16,9 +16,9 @@
           <tr>
             <th scope="col">Payment ID</th>
             <th scope="col">Loan</th>
-            <th scope="col">Amount</th>
+            <th scope="col" class="num">Amount</th>
             <th scope="col">Date</th>
-            <th scope="col" aria-label="Actions"></th>
+            <th scope="col" class="col-actions" aria-label="Actions"></th>
           </tr>
         </thead>
         <tbody>
@@ -26,9 +26,9 @@
             <tr>
               <td class="code">{{ payment.code }}</td>
               <td>{{ payment.loan }}</td>
-              <td>{{ payment.amount|ugx }}</td>
+              <td class="num">{{ payment.amount|ugx }}</td>
               <td>{{ payment.date|date:"j M Y" }}</td>
-              <td>{% url 'payment_edit' payment.pk as edit_url %}{% url 'payment_delete' payment.pk as delete_url %}{% include "partials/_row_actions.html" %}</td>
+              <td class="col-actions">{% url 'payment_edit' payment.pk as edit_url %}{% url 'payment_delete' payment.pk as delete_url %}{% include "partials/_row_actions.html" %}</td>
             </tr>
           {% empty %}
             <tr><td class="table-empty" colspan="5">No loan payments yet.</td></tr>

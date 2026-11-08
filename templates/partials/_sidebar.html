@@ -9,7 +9,6 @@
       <i data-lucide="layout-dashboard" aria-hidden="true"></i>Dashboard
     </a>
 
-    <p class="nav-label">Manage</p>
     <ul class="nav-list">
       <li><a class="nav-link" href="/members/"{% if "/members/" in request.path %} aria-current="page"{% endif %}><i data-lucide="users" aria-hidden="true"></i>Members</a></li>
       <li><a class="nav-link" href="/staff/"{% if "/staff/" in request.path %} aria-current="page"{% endif %}><i data-lucide="briefcase" aria-hidden="true"></i>Staff</a></li>
@@ -32,4 +31,14 @@
       <button type="submit" class="btn btn-sidebar"><i data-lucide="log-out" aria-hidden="true"></i>Log out</button>
     </form>
   </div>
+  <script>
+    // On phones the nav is one sideways row: start it scrolled so the current page is in view.
+    (function () {
+      var nav = document.querySelector(".sidebar .nav");
+      var current = nav && nav.querySelector("[aria-current=page]");
+      if (current && nav.scrollWidth > nav.clientWidth) {
+        nav.scrollLeft = current.offsetLeft - (nav.clientWidth - current.offsetWidth) / 2;
+      }
+    })();
+  </script>
 </aside>

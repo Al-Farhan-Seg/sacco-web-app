@@ -5,7 +5,7 @@
 {% block page_title %}{{ page_title }}{% endblock %}
 
 {% block actions %}
-  <button type="button" class="btn btn-primary" data-modal-url="{{ add_url }}"><i data-lucide="plus" aria-hidden="true"></i>{{ add_label }}</button>
+  <button type="button" class="btn btn-primary btn-lg" data-modal-url="{{ add_url }}"><i data-lucide="plus" aria-hidden="true"></i>{{ add_label }}</button>
 {% endblock %}
 
 {% block content %}
@@ -17,11 +17,11 @@
             <th scope="col">Loan ID</th>
             <th scope="col">Member</th>
             <th scope="col">Staff</th>
-            <th scope="col">Loan amount</th>
+            <th scope="col" class="num">Loan amount</th>
             <th scope="col">Payment period</th>
-            <th scope="col">Payment amount</th>
-            <th scope="col">Still owed</th>
-            <th scope="col" aria-label="Actions"></th>
+            <th scope="col" class="num">Payment amount</th>
+            <th scope="col" class="num">Still owed</th>
+            <th scope="col" class="col-actions" aria-label="Actions"></th>
           </tr>
         </thead>
         <tbody>
@@ -30,11 +30,11 @@
               <td class="code">{{ loan.code }}</td>
               <td>{{ loan.member }}</td>
               <td>{{ loan.staff }}</td>
-              <td>{{ loan.loan_amount|ugx }}</td>
+              <td class="num">{{ loan.loan_amount|ugx }}</td>
               <td>{{ loan.payment_period }}</td>
-              <td>{{ loan.payment_amount|ugx }}</td>
-              <td>{{ loan.outstanding|ugx }}</td>
-              <td>{% url 'loan_edit' loan.pk as edit_url %}{% url 'loan_delete' loan.pk as delete_url %}{% include "partials/_row_actions.html" %}</td>
+              <td class="num">{{ loan.payment_amount|ugx }}</td>
+              <td class="num">{{ loan.outstanding|ugx }}</td>
+              <td class="col-actions">{% url 'loan_edit' loan.pk as edit_url %}{% url 'loan_delete' loan.pk as delete_url %}{% include "partials/_row_actions.html" %}</td>
             </tr>
           {% empty %}
             <tr><td class="table-empty" colspan="8">No loans yet.</td></tr>

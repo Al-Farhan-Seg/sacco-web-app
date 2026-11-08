@@ -5,7 +5,7 @@
 {% block page_title %}{{ page_title }}{% endblock %}
 
 {% block actions %}
-  <button type="button" class="btn btn-primary" data-modal-url="{{ add_url }}"><i data-lucide="plus" aria-hidden="true"></i>{{ add_label }}</button>
+  <button type="button" class="btn btn-primary btn-lg" data-modal-url="{{ add_url }}"><i data-lucide="plus" aria-hidden="true"></i>{{ add_label }}</button>
 {% endblock %}
 
 {% block content %}
@@ -18,8 +18,8 @@
             <th scope="col">Member</th>
             <th scope="col">Account number</th>
             <th scope="col">Type</th>
-            <th scope="col">Balance</th>
-            <th scope="col" aria-label="Actions"></th>
+            <th scope="col" class="num">Balance</th>
+            <th scope="col" class="col-actions" aria-label="Actions"></th>
           </tr>
         </thead>
         <tbody>
@@ -29,8 +29,8 @@
               <td>{{ account.member }}</td>
               <td>{{ account.account_number }}</td>
               <td>{{ account.account_type }}</td>
-              <td>{{ account.balance|ugx }}</td>
-              <td>{% url 'account_edit' account.pk as edit_url %}{% url 'account_delete' account.pk as delete_url %}{% include "partials/_row_actions.html" %}</td>
+              <td class="num">{{ account.balance|ugx }}</td>
+              <td class="col-actions">{% url 'account_edit' account.pk as edit_url %}{% url 'account_delete' account.pk as delete_url %}{% include "partials/_row_actions.html" %}</td>
             </tr>
           {% empty %}
             <tr><td class="table-empty" colspan="6">No accounts yet.</td></tr>

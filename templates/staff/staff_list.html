@@ -4,7 +4,7 @@
 {% block page_title %}{{ page_title }}{% endblock %}
 
 {% block actions %}
-  <button type="button" class="btn btn-primary" data-modal-url="{{ add_url }}"><i data-lucide="plus" aria-hidden="true"></i>{{ add_label }}</button>
+  <button type="button" class="btn btn-primary btn-lg" data-modal-url="{{ add_url }}"><i data-lucide="plus" aria-hidden="true"></i>{{ add_label }}</button>
 {% endblock %}
 
 {% block content %}
@@ -21,7 +21,7 @@
             <th scope="col">Role</th>
             <th scope="col">Contact</th>
             <th scope="col">Address</th>
-            <th scope="col" aria-label="Actions"></th>
+            <th scope="col" class="col-actions" aria-label="Actions"></th>
           </tr>
         </thead>
         <tbody>
@@ -35,7 +35,7 @@
               <td><span class="tag{% if staff.role == 'Admin' %} tag-accent{% endif %}">{{ staff.role }}</span></td>
               <td>{{ staff.contact }}</td>
               <td>{{ staff.address }}</td>
-              <td>{% url 'staff_edit' staff.pk as edit_url %}{% url 'staff_delete' staff.pk as delete_url %}{% include "partials/_row_actions.html" %}</td>
+              <td class="col-actions">{% url 'staff_edit' staff.pk as edit_url %}{% url 'staff_delete' staff.pk as delete_url %}{% include "partials/_row_actions.html" %}</td>
             </tr>
           {% empty %}
             <tr><td class="table-empty" colspan="9">No staff yet.</td></tr>

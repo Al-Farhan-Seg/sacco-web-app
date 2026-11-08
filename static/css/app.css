@@ -215,18 +215,9 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  margin: 0;
+  margin: 16px 0 0;
   padding: 0;
   list-style: none;
-}
-
-.nav-label {
-  margin: 18px 12px 6px;
-  color: var(--oatmeal);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 .nav-link {
@@ -354,11 +345,67 @@ textarea {
 }
 
 .table tbody tr:hover td {
-  background: rgb(238 233 223 / 0.6);
+  --cell-bg: color-mix(in srgb, var(--palladian) 60%, var(--card));
+  background: var(--cell-bg);
 }
 
 .table .num {
   text-align: right;
+}
+
+/* The edit and delete buttons stay in view while a wide table scrolls sideways. */
+.table .col-actions {
+  position: sticky;
+  right: 0;
+  z-index: 1;
+  background: var(--cell-bg, var(--card));
+  box-shadow: inset 1px 0 0 var(--oatmeal);
+}
+
+/* A soft fade beside the pinned column says there is more to scroll to.
+   It follows the scroll position, so it is gone at the end and when nothing overflows. */
+.table .col-actions::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -28px;
+  width: 28px;
+  background: linear-gradient(to right, transparent, var(--cell-bg, var(--card)));
+  opacity: 0;
+  pointer-events: none;
+}
+
+@supports (animation-timeline: scroll(inline)) {
+  .table .col-actions::before {
+    animation: scroll-hint linear both;
+    animation-timeline: scroll(nearest inline);
+  }
+}
+
+/* Laptop and common desktop widths: tighter cells so more of a wide table fits beside the rail. */
+@media (max-width: 1440px) {
+  .table th,
+  .table td {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .table th:first-child,
+  .table td:first-child {
+    padding-left: 16px;
+  }
+}
+
+@keyframes scroll-hint {
+  0%,
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
 
 .table .code {
@@ -461,6 +508,13 @@ textarea {
 
 .btn-sidebar:hover {
   background: rgb(238 233 223 / 0.08);
+}
+
+/* The page's one primary action, the Add button in the title row. */
+.btn-lg {
+  min-height: 48px;
+  padding: 0 22px;
+  font-size: 15px;
 }
 
 .btn-block {
@@ -806,28 +860,110 @@ textarea {
   margin: 0;
 }
 
-/* Small screens: the sidebar stacks above the content */
+/* Small screens: the rail becomes a compact bar above the content.
+   Brand and log out share the first row; the pages are one sideways-scrolling row. */
 
 @media (max-width: 860px) {
   .shell {
     grid-template-columns: minmax(0, 1fr);
-    gap: 20px;
-    padding: 16px;
+    align-content: start;
+    gap: 18px;
+    padding: 12px;
   }
 
   .sidebar {
     position: static;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "brand user"
+      "nav nav";
+    align-items: center;
+    gap: 10px 12px;
     height: auto;
+    padding: 10px 10px 8px;
     overflow: visible;
   }
 
+  .brand {
+    grid-area: brand;
+    min-width: 0;
+    margin: 0;
+    padding: 0 0 0 4px;
+    border-bottom: 0;
+  }
+
+  .brand-tile {
+    width: 34px;
+    height: 34px;
+    font-size: 17px;
+  }
+
+  .user {
+    grid-area: user;
+    min-width: 0;
+    padding: 0;
+  }
+
+  .user-name {
+    max-width: 12ch;
+    color: var(--oatmeal);
+    font-weight: 400;
+  }
+
+  .btn-sidebar {
+    min-height: 40px;
+  }
+
+  .nav {
+    position: relative;
+    grid-area: nav;
+    flex-direction: row;
+    gap: 4px;
+    margin: 0 -10px;
+    padding: 2px 10px 8px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-padding-inline: 10px;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+
+  .nav::-webkit-scrollbar {
+    display: none;
+  }
+
   .nav-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    flex-direction: row;
+    gap: 4px;
+    margin: 0;
+  }
+
+  .nav-link {
+    flex: none;
+    gap: 8px;
+    min-height: 40px;
+    padding: 8px 12px;
+    white-space: nowrap;
+    scroll-snap-align: start;
+  }
+
+  .nav-link .lucide {
+    width: 16px;
+    height: 16px;
+  }
+
+  .nav-link:focus-visible {
+    outline-offset: -2px;
   }
 
   .nav-bottom {
-    margin-top: 14px;
+    display: flex;
+    flex: none;
+    margin: 0 0 0 4px;
+    padding: 0 0 0 8px;
+    border-top: 0;
+    box-shadow: inset 1px 0 0 var(--on-dark-line);
   }
 
   .main {
@@ -958,11 +1094,6 @@ textarea {
   letter-spacing: -0.01em;
   line-height: 1.15;
   text-align: right;
-}
-
-.stat-feature .stat-label {
-  color: var(--abyssal);
-  font-weight: 500;
 }
 
 .stat-feature .stat-value {

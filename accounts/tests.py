@@ -149,7 +149,7 @@ class AccountViewTests(TestCase):
         add_saving(account, 1000)
         add_saving(account, 2500)
         response = self.client.get(reverse("account_list"))
-        self.assertContains(response, '<th scope="col">Balance</th>', html=True)
+        self.assertContains(response, '<th scope="col" class="num">Balance</th>', html=True)
         self.assertNotContains(response, "Opening balance</th>")
         self.assertContains(response, "UGX 8,500")
         self.assertNotContains(response, "UGX 5,000")
