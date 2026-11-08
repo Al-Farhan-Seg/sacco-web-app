@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load sacco %}
+
+{% block title %}{{ page_title }}{% endblock %}
+{% block page_title %}{{ page_title }}{% endblock %}
+
+{% block actions %}
+  <button type="button" class="btn btn-primary" data-modal-url="{{ add_url }}"><i data-lucide="plus" aria-hidden="true"></i>{{ add_label }}</button>
+{% endblock %}
+
+{% block content %}
+  <section class="card">
+    <div class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Account ID</th>
+            <th scope="col">Member</th>
+            <th scope="col">Account number</th>
+            <th scope="col">Type</th>
+            <th scope="col">Opening balance</th>
+            <th scope="col" aria-label="Actions"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for account in object_list %}
+            <tr>
+              <td class="code">{{ account.code }}</td>
+              <td>{{ account.member }}</td>
+              <td>{{ account.account_number }}</td>
+              <td>{{ account.account_type }}</td>
+              <td>{{ account.opening_balance|ugx }}</td>
+              <td>{% url 'account_edit' account.pk as edit_url %}{% url 'account_delete' account.pk as delete_url %}{% include "partials/_row_actions.html" %}</td>
+            </tr>
+          {% empty %}
+            <tr><td class="table-empty" colspan="6">No accounts yet.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% include "partials/_pagination.html" with page_obj=page_obj %}
+  </section>
+{% endblock %}

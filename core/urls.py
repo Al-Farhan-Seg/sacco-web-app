@@ -28,4 +28,6 @@ urlpatterns = [
 
     # Later tasks add their crud_urls(...) / include(...) entries below.
     path("", include("members.urls")),
+    path("", include("staff.urls")),
+    path("", include("accounts.urls")),
 ]
