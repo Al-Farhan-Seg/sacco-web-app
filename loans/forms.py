@@ -28,3 +28,7 @@ class LoanPaymentForm(forms.ModelForm):
             "date": "Date",
         }
         widgets = {"date": DateInput()}
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["loan"].queryset = Loan.objects.select_related("member")

@@ -269,3 +269,41 @@ class AccountViewTests(TestCase):
             [str(m) for m in get_messages(response.wsgi_request)],
             ["ACC-001 saved"],
         )
+
+
+class AccountMemberChangeTests(TestCase):
+    def setUp(self):
+        self.client.force_login(User.objects.create_user("clerk", password="s3cret-pass"))
+        self.member = make_member()
+        self.other = make_member(email="other@example.com", first_name="Other")
+        self.account = make_account(self.member)
+        self.url = reverse("account_edit", args=[self.account.pk])
+
+    def test_member_cannot_change_once_account_has_savings(self):
+        staff = Staff.objects.create(
+            first_name="Grace", last_name="Akello", gender="F", position="Teller",
+            role="User", contact="0772000001", address="Kampala",
+        )
+        Saving.objects.create(
+            member=self.member, account=self.account, staff=staff,
+            payment_method="Cash", amount=1000, date="2026-01-15",
+        )
+        response = self.client.post(
+            self.url,
+            valid_post(self.other, account_number="1001"),
+        )
+        self.assertContains(
+            response,
+            "This account already has savings; its member cannot be changed.",
+            status_code=400,
+        )
+        self.account.refresh_from_db()
+        self.assertEqual(self.account.member_id, self.member.pk)
+
+    def test_member_can_change_when_account_has_no_savings(self):
+        response = self.client.post(
+            self.url, valid_post(self.other, account_number="1001")
+        )
+        self.assertEqual(response.status_code, 204)
+        self.account.refresh_from_db()
+        self.assertEqual(self.account.member_id, self.other.pk)

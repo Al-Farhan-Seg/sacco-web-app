@@ -212,7 +212,7 @@ class DashboardViewTests(TestCase):
         self.assertContains(response, "UGX 270,000")
         self.assertContains(response, "UGX 1,730,000")
         self.assertContains(response, "UGX 850,000")
-        self.assertContains(response, "UGX 2,000")
+        self.assertContains(response, '<td class="num">UGX 2,000</td>', html=True)
         self.assertContains(response, "SAV-001")
         self.assertContains(response, "LN-001")
         self.assertContains(response, "12 months")
@@ -240,6 +240,32 @@ def row_counts():
     }
 
 
+def fingerprint():
+    """Ordered content of the dated rows; FKs as positions, since ids shift on reset."""
+    member_base = Member.objects.order_by("pk").first().pk
+    loan_base = Loan.objects.order_by("pk").first().pk
+    return (
+        [
+            (m - member_base, amount, d)
+            for m, amount, d in Saving.objects.order_by("pk").values_list(
+                "member_id", "amount", "date"
+            )
+        ],
+        [
+            (loan - loan_base, amount, d)
+            for loan, amount, d in LoanPayment.objects.order_by("pk").values_list(
+                "loan_id", "amount", "date"
+            )
+        ],
+        [
+            (m - member_base, amount, d)
+            for m, amount, d in Withdrawal.objects.order_by("pk").values_list(
+                "member_id", "amount", "date"
+            )
+        ],
+    )
+
+
 class SeedCommandTests(TestCase):
     def test_seed_creates_expected_counts_ranges(self):
         run_seed()
@@ -262,8 +288,17 @@ class SeedCommandTests(TestCase):
     def test_seed_is_repeatable_with_reset(self):
         run_seed()
         first = row_counts()
+        first_print = fingerprint()
         run_seed("--reset")
         self.assertEqual(row_counts(), first)
+        self.assertEqual(fingerprint(), first_print)
+
+    def test_seeded_dates_follow_id_order(self):
+        run_seed()
+        for model in (Saving, LoanPayment, Withdrawal):
+            with self.subTest(model=model.__name__):
+                dates = list(model.objects.order_by("pk").values_list("date", flat=True))
+                self.assertEqual(dates, sorted(dates))
 
     def test_seed_refuses_without_reset_when_data_exists(self):
         run_seed()

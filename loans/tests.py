@@ -426,3 +426,58 @@ class LoanPaymentViewTests(TestCase):
                         fetch_redirect_response=False,
                     )
         self.assertTrue(LoanPayment.objects.exists())
+
+
+class LoanAmountBelowPaidTests(TestCase):
+    def setUp(self):
+        self.client.force_login(User.objects.create_user("clerk", password="s3cret-pass"))
+        self.member = make_member()
+        self.staff = make_staff()
+        self.loan = make_loan(self.member, self.staff, loan_amount=2000000)
+        make_payment(self.loan, amount=180000)
+        make_payment(self.loan, amount=90000)
+        self.url = reverse("loan_edit", args=[self.loan.pk])
+
+    def test_cannot_lower_amount_below_total_paid(self):
+        response = self.client.post(
+            self.url, loan_post(self.member, self.staff, loan_amount=200000)
+        )
+        self.assertContains(
+            response,
+            "UGX 270,000 has already been paid on this loan.",
+            status_code=400,
+        )
+        self.loan.refresh_from_db()
+        self.assertEqual(self.loan.loan_amount, 2000000)
+
+    def test_can_lower_amount_to_exactly_total_paid(self):
+        response = self.client.post(
+            self.url, loan_post(self.member, self.staff, loan_amount=270000)
+        )
+        self.assertEqual(response.status_code, 204)
+        self.loan.refresh_from_db()
+        self.assertEqual(self.loan.loan_amount, 270000)
+
+
+class PaymentFormQueryTests(TestCase):
+    def setUp(self):
+        self.client.force_login(User.objects.create_user("clerk", password="s3cret-pass"))
+        self.member = make_member()
+        self.staff = make_staff()
+
+    def count_queries(self):
+        from django.db import connection
+        from django.test.utils import CaptureQueriesContext
+
+        with CaptureQueriesContext(connection) as ctx:
+            response = self.client.get(reverse("payment_add"))
+        self.assertEqual(response.status_code, 200)
+        return len(ctx)
+
+    def test_add_modal_query_count_does_not_grow_with_loans(self):
+        for _ in range(2):
+            make_loan(self.member, self.staff)
+        few = self.count_queries()
+        for _ in range(4):
+            make_loan(self.member, self.staff)
+        self.assertEqual(self.count_queries(), few)

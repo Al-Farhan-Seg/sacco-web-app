@@ -22,10 +22,12 @@ styling is one hand-written stylesheet.
    ```
    python manage.py migrate
    ```
-4. Fill the database with demo data and create the demo user (replaces any existing records):
+4. Fill the database with demo data and create the demo user (does nothing if members already exist):
    ```
-   python manage.py seed --reset
+   python manage.py seed
    ```
+
+   The committed `db.sqlite3` already holds the demo data, so steps 3 and 4 are only needed for a fresh database. `seed --reset` wipes everything and renumbers codes from MEM-061 onward, so do not use it on the committed database.
 5. Run the dev server and open `http://127.0.0.1:8000/`:
    ```
    python manage.py runserver
@@ -71,7 +73,7 @@ members/ staff/ accounts/ savings/ withdrawals/ loans/
                       (loans/ holds both Loan and LoanPayment)
 dashboard/            dashboard view, stats.py (the numbers), management/commands/seed.py
 templates/            base.html, registration/login.html, partials/ (modal, pagination, sidebar),
-                      and one <app>_list.html per data area
+                      and one list page per data area (loans/ has loan_list.html and payment_list.html)
 static/css/app.css    the only stylesheet
 static/js/            modal.js (modal forms) and lucide.min.js (icons)
 docs/                 design spec and build plan

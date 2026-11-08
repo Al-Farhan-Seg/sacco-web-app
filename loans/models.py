@@ -22,6 +22,19 @@ class Loan(CodedModel):
     def __str__(self):
         return f"{self.code} · {self.member.full_name}"
 
+    def clean(self):
+        if (
+            self.pk
+            and self.loan_amount is not None
+            and self.loan_amount < self.total_paid
+        ):
+            raise ValidationError(
+                {
+                    "loan_amount": f"UGX {self.total_paid:,} has already been "
+                    f"paid on this loan."
+                }
+            )
+
     @property
     def total_paid(self):
         return self.payments.aggregate(total=Sum("amount"))["total"] or 0

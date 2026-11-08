@@ -208,6 +208,8 @@ class Command(BaseCommand):
                     date=self.random_date(),
                 )
             )
+        # Oldest first, so ids (and codes) follow date order.
+        savings.sort(key=lambda row: row.date)
         Saving.objects.bulk_create(savings)
         self.savings = savings
 
@@ -241,6 +243,7 @@ class Command(BaseCommand):
             payments.append(
                 LoanPayment(loan=loan, amount=amount, date=self.random_date())
             )
+        payments.sort(key=lambda row: row.date)
         LoanPayment.objects.bulk_create(payments)
         self.payments = payments
 
@@ -253,6 +256,7 @@ class Command(BaseCommand):
             )
             for _ in range(WITHDRAWAL_COUNT)
         ]
+        withdrawals.sort(key=lambda row: row.date)
         Withdrawal.objects.bulk_create(withdrawals)
         self.withdrawals = withdrawals
 

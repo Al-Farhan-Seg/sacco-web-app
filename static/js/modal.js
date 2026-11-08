@@ -15,7 +15,7 @@
   function fill(html) {
     modal.innerHTML = html;
     lucide.createIcons();
-    const first = modal.querySelector("input:not([type=hidden]), select, textarea") || modal.querySelector(".btn[data-modal-close]");
+    const first = modal.querySelector("[aria-invalid=true], .has-error input, .has-error select, .has-error textarea") || modal.querySelector("input:not([type=hidden]), select, textarea") || modal.querySelector(".btn[data-modal-close]");
     if (first) first.focus();
   }
 

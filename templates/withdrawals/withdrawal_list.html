@@ -27,7 +27,7 @@
               <td class="code">{{ withdrawal.code }}</td>
               <td>{{ withdrawal.member }}</td>
               <td>{{ withdrawal.amount|ugx }}</td>
-              <td>{{ withdrawal.date }}</td>
+              <td>{{ withdrawal.date|date:"j M Y" }}</td>
               <td>{% url 'withdrawal_edit' withdrawal.pk as edit_url %}{% url 'withdrawal_delete' withdrawal.pk as delete_url %}{% include "partials/_row_actions.html" %}</td>
             </tr>
           {% empty %}

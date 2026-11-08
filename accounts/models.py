@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Sum
 
@@ -17,6 +18,27 @@ class Account(CodedModel):
 
     def __str__(self):
         return f"{self.code} · {self.account_number} ({self.account_type})"
+
+    def clean(self):
+        # A missing member is already reported as a field error.
+        if not self.pk or self.member_id is None:
+            return
+        stored = (
+            Account.objects.filter(pk=self.pk)
+            .values_list("member_id", flat=True)
+            .first()
+        )
+        if (
+            stored is not None
+            and stored != self.member_id
+            and self.savings.exists()
+        ):
+            raise ValidationError(
+                {
+                    "member": "This account already has savings; its member "
+                    "cannot be changed."
+                }
+            )
 
     @property
     def balance(self):

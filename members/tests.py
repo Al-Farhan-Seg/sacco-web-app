@@ -150,3 +150,24 @@ class MemberViewTests(TestCase):
             [str(m) for m in get_messages(response.wsgi_request)],
             ["MEM-001 saved"],
         )
+
+
+class DeleteModalWordingTests(TestCase):
+    def setUp(self):
+        self.client.force_login(User.objects.create_user("clerk", password="s3cret-pass"))
+
+    def test_member_delete_modal_lists_what_goes_with_it(self):
+        member = make_member()
+        response = self.client.get(reverse("member_delete", args=[member.pk]))
+        self.assertContains(response, "will be deleted, along with their accounts")
+        self.assertNotContains(response, "will be deleted.")
+
+    def test_modal_without_note_has_plain_sentence(self):
+        from withdrawals.models import Withdrawal
+
+        withdrawal = Withdrawal.objects.create(
+            member=make_member(), amount=1000, date="2026-01-15"
+        )
+        response = self.client.get(reverse("withdrawal_delete", args=[withdrawal.pk]))
+        self.assertContains(response, "will be deleted.")
+        self.assertNotContains(response, "along with")

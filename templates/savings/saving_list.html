@@ -32,7 +32,7 @@
               <td>{{ saving.account }}</td>
               <td>{{ saving.get_payment_method_display }}</td>
               <td>{{ saving.amount|ugx }}</td>
-              <td>{{ saving.date }}</td>
+              <td>{{ saving.date|date:"j M Y" }}</td>
               <td>{{ saving.staff }}</td>
               <td>{% url 'saving_edit' saving.pk as edit_url %}{% url 'saving_delete' saving.pk as delete_url %}{% include "partials/_row_actions.html" %}</td>
             </tr>

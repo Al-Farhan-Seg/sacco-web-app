@@ -938,7 +938,7 @@ textarea {
 /* Rust is decoration here, kept to two tiles; it still means delete elsewhere. */
 .stat-tile-truffle {
   background: var(--truffle);
-  color: #fff;
+  color: var(--card);
   box-shadow: 0 8px 18px -6px rgb(163 81 57 / 0.6), 0 3px 6px -3px rgb(27 38 50 / 0.25);
 }
 

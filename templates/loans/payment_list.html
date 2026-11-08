@@ -27,7 +27,7 @@
               <td class="code">{{ payment.code }}</td>
               <td>{{ payment.loan }}</td>
               <td>{{ payment.amount|ugx }}</td>
-              <td>{{ payment.date }}</td>
+              <td>{{ payment.date|date:"j M Y" }}</td>
               <td>{% url 'payment_edit' payment.pk as edit_url %}{% url 'payment_delete' payment.pk as delete_url %}{% include "partials/_row_actions.html" %}</td>
             </tr>
           {% empty %}

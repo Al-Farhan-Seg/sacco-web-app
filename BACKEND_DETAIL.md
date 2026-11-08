@@ -44,7 +44,9 @@ stored, and deleted numbers are not reused.
 - `account_number` must be unique.
 - A saving's account must belong to the saving's member (`Saving.clean`).
 - A loan payment cannot exceed what is still owed on the loan. When editing a payment, its own old amount is left out of the total (`LoanPayment.clean`).
-- Deleting a member removes their accounts, savings, loans and withdrawals. Deleting a loan removes its payments, an account its savings, a staff record the savings and loans it recorded. The delete modal names these through `delete_note`.
+- A loan's amount cannot be lowered below what has already been paid on it (`Loan.clean`).
+- An account's member cannot be changed once the account has savings (`Account.clean`).
+- Deleting a member removes their accounts, savings, loans (and those loans' payments) and withdrawals. Deleting a loan removes its payments, an account its savings, a staff record the savings and loans it recorded (and those loans' payments). The delete modal names these through `delete_note`.
 
 Validation lives in model `clean()` and field validators, so the forms, the modals
 and Django Admin all enforce it.
