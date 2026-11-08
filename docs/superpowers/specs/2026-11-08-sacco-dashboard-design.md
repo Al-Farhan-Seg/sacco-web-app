@@ -265,4 +265,6 @@ db.sqlite3                   committed by the owner
 
 ## 13. Status
 
-All decisions above are agreed. Nothing has been built. The only repository change so far is the `.gitignore` edit (uncommitted).
+Built on branch `feature/dashboard` (2026-11-08). All nine plan tasks were implemented and reviewed, followed by a whole-branch review, a design review of real screenshots, and a short design fix batch. 144 tests pass. `DESIGN.md` records the shipped look. The seeded `db.sqlite3` (60 members, 8 staff, 90 accounts, 300 savings, 25 loans, 70 payments, 6 withdrawals; demo login `admin`) is left uncommitted for the repository owner.
+
+Built plan: `docs/superpowers/plans/2026-11-08-sacco-dashboard.md`.

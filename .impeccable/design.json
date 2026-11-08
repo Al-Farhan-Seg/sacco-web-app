@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-08T12:00:00Z",
+  "title": "Design System: SACCO Management",
+  "extensions": {
+    "colorMeta": {
+      "palladian": { "role": "neutral", "displayName": "Palladian", "canonical": "#EEE9DF", "tonalRamp": ["#3E3B34", "#615D53", "#847E71", "#A8A294", "#C4BFB1", "#D9D4C7", "#EEE9DF", "#F8F5EF"] },
+      "card": { "role": "neutral", "displayName": "Card Paper", "canonical": "#FBF9F4", "tonalRamp": ["#403E39", "#66635B", "#8D8980", "#B2AEA3", "#D2CEC4", "#E6E3DA", "#F3F0E8", "#FBF9F4"] },
+      "oatmeal": { "role": "neutral", "displayName": "Oatmeal", "canonical": "#C9C1B1", "tonalRamp": ["#38342B", "#575145", "#766E5F", "#968D7C", "#B0A795", "#C9C1B1", "#DDD7CA", "#EEEBE3"] },
+      "abyssal": { "role": "neutral", "displayName": "Abyssal Navy", "canonical": "#1B2632", "tonalRamp": ["#0E141A", "#1B2632", "#2C3B4D", "#475A70", "#677C94", "#8C9DB0", "#B5C0CD", "#DCE2E9"] },
+      "blue-fantastic": { "role": "secondary", "displayName": "Blue Fantastic", "canonical": "#2C3B4D", "tonalRamp": ["#10161D", "#1B2632", "#2C3B4D", "#42566D", "#5E748D", "#8195AB", "#AFBCCB", "#D9E0E8"] },
+      "burning-flame": { "role": "primary", "displayName": "Burning Flame", "canonical": "#FFB162", "tonalRamp": ["#5C3200", "#8A4F0E", "#B86F23", "#E58F3F", "#FFB162", "#FFC285", "#FFD6AE", "#FFEBD7"] },
+      "truffle-trouble": { "role": "tertiary", "displayName": "Truffle Trouble", "canonical": "#A35139", "tonalRamp": ["#3A1D14", "#5E2F20", "#80402D", "#A35139", "#BC6F57", "#D09580", "#E3BDAE", "#F3E1D9"] },
+      "muted": { "role": "neutral", "displayName": "Muted Slate", "canonical": "#5B6773", "tonalRamp": ["#1F2429", "#333B43", "#47515B", "#5B6773", "#79858F", "#9AA3AB", "#BEC4CA", "#E0E3E6"] }
+    },
+    "typographyMeta": {
+      "page-title": { "displayName": "Page title", "purpose": "One per page in the title row." },
+      "stat-value": { "displayName": "Stat value", "purpose": "Right-aligned figure on number cards; fluid by card width." },
+      "modal-title": { "displayName": "Modal title", "purpose": "Dialog heading." },
+      "card-title": { "displayName": "Card title", "purpose": "Card header on dashboard tables." },
+      "body": { "displayName": "Body", "purpose": "Default text and form fields." },
+      "table": { "displayName": "Table", "purpose": "Cell text with tabular numerals." },
+      "label": { "displayName": "Label", "purpose": "Field labels, card links, pagination." },
+      "column-head": { "displayName": "Column head", "purpose": "Uppercase table column headings only." }
+    },
+    "shadows": [
+      { "name": "card", "value": "0 2px 4px -1px rgb(27 38 50 / 0.06), 0 10px 24px -8px rgb(27 38 50 / 0.14)", "purpose": "Every card." },
+      { "name": "raised", "value": "0 12px 28px -10px rgb(27 38 50 / 0.45), 0 4px 10px -4px rgb(27 38 50 / 0.3)", "purpose": "The floating rail." },
+      { "name": "modal", "value": "0 24px 48px -12px rgb(27 38 50 / 0.4), 0 8px 16px -8px rgb(27 38 50 / 0.25)", "purpose": "Dialogs." },
+      { "name": "tile-glow", "value": "0 8px 18px -6px rgb(255 177 98 / 0.7), 0 3px 6px -3px rgb(27 38 50 / 0.25)", "purpose": "Raised icon tiles, tinted with the tile colour." },
+      { "name": "button-glow", "value": "0 6px 14px -6px rgb(255 177 98 / 0.7), 0 2px 4px -2px rgb(27 38 50 / 0.15)", "purpose": "Primary button." },
+      { "name": "toast", "value": "0 14px 28px -10px rgb(27 38 50 / 0.55), 0 4px 8px -4px rgb(27 38 50 / 0.3)", "purpose": "Toasts." }
+    ],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Modal and toast entry." },
+      { "name": "control-transition", "value": "0.15s ease-out", "purpose": "Hover on buttons, nav links, fields." },
+      { "name": "modal-in", "value": "0.24s", "purpose": "Dialog rise and fade." }
+    ],
+    "breakpoints": [
+      { "name": "phone", "value": "560px" },
+      { "name": "compact-bar", "value": "860px" },
+      { "name": "small-laptop", "value": "1100px" },
+      { "name": "stats-4-up", "value": "1280px" },
+      { "name": "laptop-cells", "value": "1440px" },
+      { "name": "recent-side-by-side", "value": "1380px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Add Button",
+      "kind": "button",
+      "refersTo": "button-primary-large",
+      "description": "The one large primary action in each page's title row.",
+      "html": "<button class=\"ds-btn ds-btn-primary ds-btn-lg\">+ Add member</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;border-radius:9px;font:500 14px/1 Roboto,system-ui,sans-serif;cursor:pointer;transition:background-color .15s ease-out,transform .15s ease-out}.ds-btn-primary{background:#FFB162;color:#1B2632;box-shadow:0 6px 14px -6px rgb(255 177 98 / .7),0 2px 4px -2px rgb(27 38 50 / .15)}.ds-btn-lg{min-height:48px;padding:0 22px;font-size:15px}.ds-btn-primary:hover{background:color-mix(in srgb,#FFB162 88%,#1B2632)}.ds-btn:active{transform:translateY(1px)}.ds-btn:focus-visible{outline:2px solid #2C3B4D;outline-offset:2px}"
+    },
+    {
+      "name": "Danger Button",
+      "kind": "button",
+      "refersTo": "button-danger",
+      "description": "Confirm delete in the modal.",
+      "html": "<button class=\"ds-btn-danger\">Delete</button>",
+      "css": ".ds-btn-danger{min-height:40px;padding:0 16px;border:0;border-radius:9px;background:#A35139;color:#FBF9F4;font:500 14px/1 Roboto,system-ui,sans-serif;box-shadow:0 6px 14px -6px rgb(163 81 57 / .55);cursor:pointer;transition:background-color .15s ease-out}.ds-btn-danger:hover{background:color-mix(in srgb,#A35139 85%,#1B2632)}.ds-btn-danger:focus-visible{outline:2px solid #2C3B4D;outline-offset:2px}"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Cancel and quiet actions.",
+      "html": "<button class=\"ds-btn-ghost\">Cancel</button>",
+      "css": ".ds-btn-ghost{min-height:40px;padding:0 16px;border:1px solid color-mix(in srgb,#C9C1B1,#5B6773 55%);border-radius:9px;background:transparent;color:#1B2632;font:500 14px/1 Roboto,system-ui,sans-serif;cursor:pointer;transition:background-color .15s ease-out}.ds-btn-ghost:hover{background:#EEE9DF}.ds-btn-ghost:focus-visible{outline:2px solid #2C3B4D;outline-offset:2px}"
+    },
+    {
+      "name": "Rail Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link-current",
+      "description": "Floating dark rail link list with an orange current-page pill.",
+      "html": "<aside class=\"ds-rail\"><a class=\"ds-nav-link\" href=\"#\">Dashboard</a><a class=\"ds-nav-link\" href=\"#\" aria-current=\"page\">Members</a><a class=\"ds-nav-link\" href=\"#\">Staff</a></aside>",
+      "css": ".ds-rail{display:flex;flex-direction:column;gap:2px;width:250px;padding:18px 14px 16px;border-radius:14px;background:linear-gradient(195deg,#2C3B4D,#1B2632 70%);box-shadow:0 12px 28px -10px rgb(27 38 50 / .45),0 4px 10px -4px rgb(27 38 50 / .3);font-family:Roboto,system-ui,sans-serif}.ds-nav-link{display:flex;align-items:center;gap:12px;min-height:42px;padding:8px 12px;border-radius:9px;color:#C9C1B1;font-size:14px;text-decoration:none;transition:background-color .15s ease-out,color .15s ease-out}.ds-nav-link:hover{background:rgb(238 233 223 / .08);color:#EEE9DF}.ds-nav-link[aria-current=page]{background:#FFB162;color:#1B2632;font-weight:500;box-shadow:0 6px 16px -6px rgb(255 177 98 / .55)}.ds-nav-link:focus-visible{outline:2px solid #FFB162;outline-offset:2px}"
+    },
+    {
+      "name": "Number Card",
+      "kind": "card",
+      "refersTo": "stat-tile",
+      "description": "Dashboard figure card with a raised icon tile standing on the top edge.",
+      "html": "<div style=\"padding-top:22px;width:260px\"><article class=\"ds-stat\"><div class=\"ds-stat-top\"><span class=\"ds-tile\"></span><p class=\"ds-stat-label\">Total savings</p></div><p class=\"ds-stat-value\">UGX 12,450,000</p><p class=\"ds-stat-caption\">Opening balances plus all savings</p></article></div>",
+      "css": ".ds-stat{display:flex;flex-direction:column;padding:0 20px 16px;border:1px solid rgb(201 193 177 / .5);border-radius:14px;background:#FBF9F4;box-shadow:0 2px 4px -1px rgb(27 38 50 / .06),0 10px 24px -8px rgb(27 38 50 / .14);font-family:Roboto,system-ui,sans-serif;color:#1B2632}.ds-stat-top{display:flex;justify-content:space-between;gap:12px}.ds-tile{width:56px;height:56px;margin-top:-22px;border-radius:12px;background:#FFB162;box-shadow:0 8px 18px -6px rgb(255 177 98 / .7),0 3px 6px -3px rgb(27 38 50 / .25)}.ds-stat-label{margin:12px 0 0;color:#5B6773;font-size:14px;text-align:right}.ds-stat-value{margin:4px 0 14px;font-size:24px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.01em;text-align:right}.ds-stat-caption{margin:0;padding-top:12px;border-top:1px solid rgb(201 193 177 / .55);color:#5B6773;font-size:13px}"
+    },
+    {
+      "name": "Form Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Label above a 42px paper field with a navy focus border.",
+      "html": "<div class=\"ds-field\"><label for=\"n\">Full name</label><input id=\"n\" placeholder=\"Jane Nakato\"></div>",
+      "css": ".ds-field{display:flex;flex-direction:column;gap:6px;width:280px;font-family:Roboto,system-ui,sans-serif}.ds-field label{font-size:13px;font-weight:500;color:#1B2632}.ds-field input{min-height:42px;padding:9px 12px;border:1px solid color-mix(in srgb,#C9C1B1,#5B6773 55%);border-radius:9px;background:#FBF9F4;color:#1B2632;font:400 15px/1.4 Roboto,system-ui,sans-serif;transition:border-color .15s ease-out}.ds-field input::placeholder{color:#5B6773}.ds-field input:hover{border-color:#5B6773}.ds-field input:focus{border-color:#2C3B4D}.ds-field input:focus-visible{outline:2px solid #2C3B4D;outline-offset:1px}"
+    },
+    {
+      "name": "Data Table",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Tabular, right-aligned money, uppercase muted column heads, hairline rows.",
+      "html": "<div class=\"ds-card\"><table class=\"ds-table\"><thead><tr><th>Loan ID</th><th>Member</th><th class=\"ds-num\">Loan amount</th></tr></thead><tbody><tr><td><b>LN-001</b></td><td>Jane Nakato</td><td class=\"ds-num\">UGX 850,000</td></tr><tr><td><b>LN-002</b></td><td>Peter Okello</td><td class=\"ds-num\">UGX 1,200,000</td></tr></tbody></table></div>",
+      "css": ".ds-card{border:1px solid rgb(201 193 177 / .5);border-radius:14px;background:#FBF9F4;box-shadow:0 2px 4px -1px rgb(27 38 50 / .06),0 10px 24px -8px rgb(27 38 50 / .14);font-family:Roboto,system-ui,sans-serif;color:#1B2632}.ds-table{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}.ds-table th{padding:14px 16px 10px;border-bottom:1px solid #C9C1B1;color:#5B6773;font-size:11px;font-weight:500;letter-spacing:.07em;text-align:left;text-transform:uppercase}.ds-table td{padding:11px 16px;border-bottom:1px solid rgb(201 193 177 / .55)}.ds-table tbody tr:last-child td{border-bottom:0}.ds-table tbody tr:hover td{background:color-mix(in srgb,#EEE9DF 60%,#FBF9F4)}.ds-num{text-align:right!important}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Administrator's Desk in Daylight",
+    "overview": "A back-office tool for one person entering and checking records all day. The look borrows the Material Dashboard shell and redraws it in one stylesheet: a dark rail that floats off the page edge, a warm off-white work area, rounded paper cards, and coloured icon tiles standing on the top edge of each number card. It is calm, dense enough for tables, and uses colour only to mark meaning.\n\nDepth is soft and real: blurred, low-offset shadows tinted with the dark navy, never hard edges. Warm neutrals (paper and oatmeal) carry the page, cool navy carries structure and text, and a single orange speaks for action and location.",
+    "keyCharacteristics": [
+      "Floating dark rail (250px) with an orange current-page pill.",
+      "Warm paper page, slightly lighter cards, oatmeal hairlines.",
+      "Raised icon tiles on number cards are the recognisable signature.",
+      "One large orange Add button per data page; everything else is quieter.",
+      "Tabular figures everywhere money appears, right-aligned.",
+      "Roboto only, Lucide line icons at one stroke weight."
+    ],
+    "rules": [
+      { "name": "The Rust Means Harm Rule", "body": "Truffle Trouble marks delete and errors. Its two decorative tiles are a ruling already made; add no more, and never use it for anything that is not destructive or an error.", "section": "colors" },
+      { "name": "The One Voice Rule", "body": "Orange marks the action to take or the page you are on. A screen has one large orange button; do not tint other controls orange.", "section": "colors" },
+      { "name": "The Tabular Money Rule", "body": "Any figure that is money or a count sits in tabular numerals, and money columns are right-aligned, formatted as \"UGX 850,000\".", "section": "typography" },
+      { "name": "The Soft Lift Rule", "body": "Shadows are blurred and navy-tinted. Never a hard offset or a pure black edge (the login card is the one place where black-based shadow is used, over the dark backdrop).", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep the page on Palladian and raise content as Card Paper cards with 14px radius and the Card shadow.",
+      "Do use exactly one large (48px) primary Burning Flame button per page, top right of the title row.",
+      "Do use 9px radius for every control and keep Lucide icons at 18px (16px in links and compact nav, 24px in tiles), stroke 1.75.",
+      "Do right-align money, in tabular numerals, and pin row actions to the right edge of wide tables.",
+      "Do use Truffle Trouble only for delete and error states.",
+      "Do keep text at 4.5:1 or better: Abyssal on paper, Abyssal on Flame, Muted (not lighter) for secondary text."
+    ],
+    "donts": [
+      "Don't add a second accent, and do not introduce green for success or positive figures.",
+      "Don't use hard offset shadows or pure black edges; depth is blurred and navy-tinted.",
+      "Don't add a second typeface, and no glyph or emoji icons; Roboto and Lucide only.",
+      "Don't put the signed-in user chip in the top bar.",
+      "Don't introduce Bootstrap or Tailwind idioms; new styling goes into the one stylesheet using the existing custom properties."
+    ]
+  }
+}
