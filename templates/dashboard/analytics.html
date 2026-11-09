@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load sacco %}
+
+{% block title %}Analytics{% endblock %}
+{% block page_title %}Analytics{% endblock %}
+
+{% block content %}
+  <div class="analytics">
+    <section class="card" aria-labelledby="flow-title">
+      <header class="card-header">
+        <h2 class="card-title" id="flow-title">Are members saving steadily?</h2>
+      </header>
+      <div class="card-body">
+        {% include "partials/_month_chart.html" with chart=flows aria_label="Savings for each of the last 12 months" %}
+        <ul class="legend">
+          <li><span class="swatch swatch-in"></span>Savings {{ flows.totals.in|ugx }}</li>
+        </ul>
+        <p class="muted">Last 12 months.</p>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="exit-title">
+      <header class="card-header">
+        <h2 class="card-title" id="exit-title">Are members leaving, and how much is paid out?</h2>
+      </header>
+      <div class="card-body">
+        {% include "partials/_month_chart.html" with chart=exits aria_label="Final balances paid to members who left, for each of the last 12 months" %}
+        <ul class="legend">
+          <li><span class="swatch swatch-out"></span>Paid out to leaving members {{ exits.totals.out|ugx }}</li>
+        </ul>
+        <p class="muted">Last 12 months. Each withdrawal is a member leaving the SACCO.</p>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="book-title">
+      <header class="card-header">
+        <h2 class="card-title" id="book-title">How much of the loan book is repaid?</h2>
+      </header>
+      <div class="card-body">
+        {% include "partials/_loan_book.html" %}
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="repay-title">
+      <header class="card-header">
+        <h2 class="card-title" id="repay-title">Are repayments steady month to month?</h2>
+      </header>
+      <div class="card-body">
+        {% include "partials/_month_chart.html" with chart=repayments aria_label="Loan repayments for each of the last 12 months" %}
+        <ul class="legend">
+          <li><span class="swatch swatch-in"></span>Repayments {{ repayments.totals.in|ugx }}</li>
+        </ul>
+        <p class="muted">Last 12 months.</p>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="method-title">
+      <header class="card-header">
+        <h2 class="card-title" id="method-title">How do members pay in?</h2>
+      </header>
+      <div class="card-body">
+        {% if methods.rows %}
+          <div class="stack" role="img" aria-label="Share of savings by payment method">
+            {% for row in methods.rows %}<span class="stack-part stack-part-{{ forloop.counter }}" style="width: {{ row.pct }}%" title="{{ row.label }}: {{ row.pct }}%"></span>{% endfor %}
+          </div>
+          <ul class="legend">
+            {% for row in methods.rows %}
+              <li><span class="swatch swatch-{{ forloop.counter }}"></span>{{ row.label }} {{ row.total|ugx }} ({{ row.pct }}%)</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="muted">No savings yet.</p>
+        {% endif %}
+      </div>
+    </section>
+  </div>
+{% endblock %}

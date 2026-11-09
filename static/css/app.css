@@ -1229,3 +1229,140 @@ textarea {
     max-width: none;
   }
 }
+
+/* Analytics: plain HTML/CSS charts */
+
+.analytics {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.analytics > .card + .card,
+.brief + .recent {
+  margin-top: 0;
+}
+
+.brief {
+  margin-bottom: 24px;
+}
+
+.brief-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+}
+
+.cols {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.col-bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 2px;
+  height: 140px;
+  border-bottom: 1px solid var(--oatmeal);
+}
+
+.col-bar {
+  display: block;
+  flex: 1 1 0;
+  max-width: 14px;
+  border-radius: 3px 3px 0 0;
+}
+
+.col-bar-in {
+  background: var(--flame);
+}
+
+.col-bar-out {
+  background: var(--fantastic);
+}
+
+.col-label {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 11px;
+  text-align: center;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin: 14px 0 6px;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+}
+
+.swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+  border-radius: 2px;
+}
+
+.swatch-in,
+.swatch-1,
+.stack-part-1 {
+  background: var(--flame);
+}
+
+.swatch-out,
+.swatch-2,
+.stack-part-2 {
+  background: var(--fantastic);
+}
+
+.swatch-3,
+.stack-part-3 {
+  background: var(--muted);
+}
+
+.progress {
+  height: 12px;
+  margin: 8px 0 12px;
+  border-radius: 99px;
+  background: var(--oatmeal);
+  overflow: hidden;
+}
+
+.progress-fill {
+  display: block;
+  height: 100%;
+  background: var(--flame);
+}
+
+.book-percent {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.stack {
+  display: flex;
+  height: 24px;
+  border-radius: var(--radius-control);
+  background: var(--oatmeal);
+  overflow: hidden;
+}
+
+.stack-part {
+  display: block;
+  height: 100%;
+}
+
+@media (min-width: 900px) {
+  .analytics,
+  .brief-body {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

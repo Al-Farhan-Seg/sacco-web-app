@@ -8,6 +8,9 @@
     <a class="nav-link" href="/"{% if request.path == "/" %} aria-current="page"{% endif %}>
       <i data-lucide="layout-dashboard" aria-hidden="true"></i>Dashboard
     </a>
+    <a class="nav-link" href="/analytics/"{% if request.path == "/analytics/" %} aria-current="page"{% endif %}>
+      <i data-lucide="chart-column" aria-hidden="true"></i>Analytics
+    </a>
 
     <ul class="nav-list">
       <li><a class="nav-link" href="/members/"{% if "/members/" in request.path %} aria-current="page"{% endif %}><i data-lucide="users" aria-hidden="true"></i>Members</a></li>
