@@ -27,7 +27,7 @@ urlpatterns = [
     path('', dashboard_views.index, name='dashboard'),
     path('analytics/', dashboard_views.analytics, name='analytics'),
 
-    # Later tasks add their crud_urls(...) / include(...) entries below.
+    # Each app's urls.py lists its own list/add/edit/delete routes.
     path("", include("members.urls")),
     path("", include("staff.urls")),
     path("", include("accounts.urls")),

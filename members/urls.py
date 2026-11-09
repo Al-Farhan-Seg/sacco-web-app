@@ -1,7 +1,10 @@
-from core.crud import crud_urls
+from django.urls import path
 
-from .views import MemberCreate, MemberDelete, MemberList, MemberUpdate
+from . import views
 
-urlpatterns = crud_urls(
-    "members", "member", MemberList, MemberCreate, MemberUpdate, MemberDelete
-)
+urlpatterns = [
+    path("members/", views.member_list, name="member_list"),
+    path("members/add/", views.member_create, name="member_add"),
+    path("members/<int:pk>/edit/", views.member_update, name="member_edit"),
+    path("members/<int:pk>/delete/", views.member_delete, name="member_delete"),
+]
