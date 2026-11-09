@@ -7,7 +7,7 @@ colors:
   oatmeal: "#C9C1B1"
   abyssal: "#1B2632"
   blue-fantastic: "#2C3B4D"
-  burning-flame: "#FFB162"
+  burning-flame: "#F2A55C"
   truffle-trouble: "#A35139"
   muted: "#5B6773"
 typography:
@@ -154,7 +154,7 @@ Depth is soft and real: blurred, low-offset shadows tinted with the dark navy, n
 Warm paper and oatmeal neutrals, deep navy structure, one orange voice, one rust for destruction. No green anywhere; success is shown with a check icon, not a colour.
 
 ### Primary
-- **Burning Flame** (#FFB162): the action and location colour. Primary buttons, the current nav pill, the brand tile, the check in toasts, selection highlight, the focus ring inside the dark rail. Text on it is always Abyssal.
+- **Burning Flame** (#F2A55C): the action and location colour. Primary buttons, the current nav pill, the brand tile, the check in toasts, selection highlight, the focus ring inside the dark rail. Text on it is always Abyssal.
 
 ### Secondary
 - **Blue Fantastic** (#2C3B4D): secondary tiles, focus rings and caret on the page, links in card headers, the top of the rail gradient and the login backdrop.

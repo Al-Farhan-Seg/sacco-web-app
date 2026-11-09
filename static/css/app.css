@@ -6,7 +6,7 @@
   --oatmeal: #C9C1B1;        /* lines */
   --abyssal: #1B2632;        /* sidebar and text */
   --fantastic: #2C3B4D;      /* secondary tiles */
-  --flame: #FFB162;          /* primary buttons and current page */
+  --flame: #F2A55C;          /* primary buttons and current page */
   --truffle: #A35139;        /* delete and errors only */
   --muted: #5B6773;          /* secondary text */
 
@@ -173,19 +173,11 @@ textarea {
   text-decoration: none;
 }
 
-.brand-tile {
-  display: grid;
-  place-items: center;
-  width: 38px;
-  height: 38px;
+.brand-logo {
+  display: block;
+  width: 40px;
+  height: 40px;
   flex: none;
-  border-radius: var(--radius-control);
-  background: var(--flame);
-  color: var(--abyssal);
-  font-size: 19px;
-  font-weight: 700;
-  line-height: 1;
-  box-shadow: 0 6px 14px -6px rgb(255 177 98 / 0.6);
 }
 
 .brand-text {
@@ -242,7 +234,7 @@ textarea {
   background: var(--flame);
   color: var(--abyssal);
   font-weight: 500;
-  box-shadow: 0 6px 16px -6px rgb(255 177 98 / 0.55);
+  box-shadow: 0 6px 16px -6px rgb(242 165 92 / 0.55);
 }
 
 .nav-bottom {
@@ -444,7 +436,7 @@ textarea {
 }
 
 .tag-accent {
-  background: rgb(255 177 98 / 0.35);
+  background: rgb(242 165 92 / 0.35);
   color: var(--abyssal);
 }
 
@@ -478,7 +470,7 @@ textarea {
 .btn-primary {
   background: var(--flame);
   color: var(--abyssal);
-  box-shadow: 0 6px 14px -6px rgb(255 177 98 / 0.7), 0 2px 4px -2px rgb(27 38 50 / 0.15);
+  box-shadow: 0 6px 14px -6px rgb(242 165 92 / 0.7), 0 2px 4px -2px rgb(27 38 50 / 0.15);
 }
 
 .btn-primary:hover {
@@ -901,10 +893,9 @@ textarea {
     border-bottom: 0;
   }
 
-  .brand-tile {
+  .brand-logo {
     width: 34px;
     height: 34px;
-    font-size: 17px;
   }
 
   .user {
@@ -1070,7 +1061,7 @@ textarea {
 .stat-tile-flame {
   background: var(--flame);
   color: var(--abyssal);
-  box-shadow: 0 8px 18px -6px rgb(255 177 98 / 0.7), 0 3px 6px -3px rgb(27 38 50 / 0.25);
+  box-shadow: 0 8px 18px -6px rgb(242 165 92 / 0.7), 0 3px 6px -3px rgb(27 38 50 / 0.25);
 }
 
 .stat-tile-fantastic {
