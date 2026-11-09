@@ -75,8 +75,24 @@
         <p class="stat-label">Withdrawals</p>
       </div>
       <p class="stat-value">{{ withdrawals_count }}</p>
-      <p class="stat-caption">{{ withdrawals_total|ugx }} paid out</p>
+      <p class="stat-caption">{{ withdrawals_total|ugx }} paid to leaving members</p>
     </article>
+  </section>
+
+  <section class="card brief" aria-labelledby="brief-title">
+    <header class="card-header">
+      <h2 class="card-title" id="brief-title">Analytics brief</h2>
+      <a class="card-link" href="{% url 'analytics' %}">View analytics</a>
+    </header>
+    <div class="card-body brief-body">
+      <div>
+        {% include "partials/_month_chart.html" with chart=flows aria_label="Savings for each of the last 12 months" %}
+        <ul class="legend">
+          <li><span class="swatch swatch-in"></span>Savings per month</li>
+        </ul>
+      </div>
+      <div>{% include "partials/_loan_book.html" %}</div>
+    </div>
   </section>
 
   <div class="recent">

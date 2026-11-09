@@ -25,6 +25,7 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('', dashboard_views.index, name='dashboard'),
+    path('analytics/', dashboard_views.analytics, name='analytics'),
 
     # Later tasks add their crud_urls(...) / include(...) entries below.
     path("", include("members.urls")),

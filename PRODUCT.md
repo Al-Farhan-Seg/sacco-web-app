@@ -32,7 +32,7 @@ Desktop browser, one person, repeated data entry and look-up. Money is in Uganda
 - Dashboard: eight live number cards and two recent-activity tables.
 - Seven data pages (members, staff, accounts, savings, withdrawals, loans, loan payments), each a table with an Add button, and per-row edit and delete icons; all forms open in modals.
 - Account balance is opening balance plus savings. Loan still owed is loan amount minus payments. Deleting a member deletes what belongs to them.
-- Staff role (Admin or User) is a label only. A withdrawal is only a record and closes nothing.
+- Staff role (Admin or User) is a label only. A withdrawal records a member leaving the SACCO and the final balance paid out; it is only a record and closes nothing in the app.
 - Left sidebar is one flat list with a Django Admin link at the bottom.
 - db.sqlite3 is committed to GitHub by the repository owner.
 

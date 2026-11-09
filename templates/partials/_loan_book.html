@@ -1,0 +1,7 @@
+{# Needs `book` (from loan_book). #}
+{% load sacco %}
+<p class="book-percent">{{ book.percent }}% repaid</p>
+<div class="progress" role="img" aria-label="{{ book.percent }}% of the money lent has been repaid">
+  <span class="progress-fill" style="width: {{ book.percent }}%"></span>
+</div>
+<p class="muted">{{ book.repaid|ugx }} repaid of {{ book.lent|ugx }} lent. Still owed: {{ book.owed|ugx }}.</p>

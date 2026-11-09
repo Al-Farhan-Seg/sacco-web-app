@@ -1,0 +1,12 @@
+{# 12 monthly columns. Needs `chart` (from monthly_chart) and `aria_label`. #}
+{% load sacco %}
+<div class="cols" role="img" aria-label="{{ aria_label }}">
+  {% for row in chart.rows %}
+    <div class="col" title="{{ row.full }}{% for bar in row.bars %}: {{ bar.value|ugx }}{% endfor %}">
+      <div class="col-bars">
+        {% for bar in row.bars %}<span class="col-bar col-bar-{{ bar.css }}" style="height: {{ bar.pct }}%"></span>{% endfor %}
+      </div>
+      <span class="col-label">{{ row.label }}</span>
+    </div>
+  {% endfor %}
+</div>
