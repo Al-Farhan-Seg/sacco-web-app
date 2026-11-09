@@ -130,9 +130,6 @@ db.sqlite3            the database, with demo data
 
 | File | What it tells you |
 |---|---|
-| `BACKEND_DETAIL.md` | How the code works: models, the shared CRUD helpers, the modal flow, and how to add a new data page |
-| `docs/superpowers/specs/2026-11-08-sacco-dashboard-design.md` | The design: what we decided and why, the models, the rules, what was left out |
-| `docs/superpowers/plans/2026-11-08-sacco-dashboard.md` | The build plan, task by task |
 | `PRODUCT.md` | Who the app is for and what it must do |
 | `DESIGN.md` | The visual design system as built: palette, type, components |
 | `SACCO Script.sql` | The original database script from the first design stage (reference only; the Django models are the source of truth) |

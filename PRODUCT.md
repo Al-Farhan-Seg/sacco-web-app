@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-Django 6.1 with SQLite, server-rendered templates, plain CSS in one file, a few lines of vanilla JavaScript, Lucide icons. No Bootstrap, Tailwind, jQuery or any front-end framework. Decided by the user; see docs/superpowers/specs/2026-11-08-sacco-dashboard-design.md.
+Django 6.1 with SQLite, server-rendered templates, plain CSS in one file, a few lines of vanilla JavaScript, Lucide icons. No Bootstrap, Tailwind, jQuery or any front-end framework. Decided by the user.
 
 ## Users
 
