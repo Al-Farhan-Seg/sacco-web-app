@@ -18,9 +18,16 @@ What is in `main`:
 
 - Login and logout, with every page except the login page locked behind a login.
 - A dashboard with eight live number cards (members, staff, accounts, total savings,
-  loans issued, loan repayments, still owed, withdrawals) and two recent-activity tables.
-- Seven record pages, each with a table, a large **Add** button, and pencil and
-  trash icons on every row. Add, Edit and Delete all open in a modal.
+  loans issued, loan repayments, still owed, withdrawals), a small analytics brief and
+  two recent-activity tables.
+- An **Analytics** page (`/analytics/`) with simple charts drawn in plain HTML and CSS:
+  savings per month, member exits per month, how much of the loan book is repaid,
+  repayments per month, and savings by payment method.
+- Seven record pages, each with a table, a search box, a large **Add** button, and
+  pencil and trash icons on every row. Add, Edit and Delete all open in a modal.
+  The search matches names and other text, and also codes such as `MEM-007`.
+- The views are plain functions with the Create, Read, Update and Delete steps written
+  out in each one (no shared class-based views).
 - Automatic IDs shown as codes (`MEM-001`, `STF-001`, `ACC-001`, `SAV-001`, `LN-001`,
   `PAY-001`, `WDR-001`). Nobody types an ID.
 - Linked data with rules: an account's balance is its opening balance plus its
@@ -28,12 +35,16 @@ What is in `main`:
   exceed what is still owed; deleting a member also deletes their accounts, savings,
   loans and withdrawals.
 - A `db.sqlite3` that already contains demo data, so the app has something to show
-  the moment it starts.
-- 144 automated tests, all passing.
+  the moment it starts: 113 members, 12 staff, 173 accounts, 820 savings, 60 loans,
+  180 loan payments and 14 withdrawals. The 113 members carry the names from the class
+  list (the first name is the family name as listed); their phone numbers, addresses
+  and email addresses are made up (emails end in `@example.com`).
+- 191 automated tests, all passing.
 
 Deliberately left out, to keep it a simple class demo: member or staff logins (there is
 one administrator), roles with permissions (a staff "role" is just a label), loan
-approval, interest calculation, search and filters, charts, and any REST API.
+approval, interest calculation, filters beyond the search box, date-range pickers,
+exports, and any REST API.
 
 ## Run it and see what is there
 
@@ -86,8 +97,11 @@ git checkout -- db.sqlite3
 ```
 
 Only for a brand-new empty database: `python manage.py migrate` then
-`python manage.py seed`. Do not run `seed --reset` on the committed database; it wipes
-everything and renumbers the codes from MEM-061 onward.
+`python manage.py seed`. That command builds a different, smaller set of random demo
+data (60 members, 8 staff, 90 accounts, 300 savings, 25 loans, 70 loan payments and
+6 withdrawals) and does **not** recreate the committed 113-member database. Do not run
+`seed --reset` on the committed database; it wipes everything, including the class
+list, and renumbers the codes from MEM-114 onward.
 
 ## Pages and addresses
 
@@ -98,6 +112,7 @@ Every page except the login page requires a login.
 | Login | `/login/` |
 | Logout (POST, button in the sidebar) | `/logout/` |
 | Dashboard | `/` |
+| Analytics | `/analytics/` |
 | Members | `/members/` |
 | Staff | `/staff/` |
 | Accounts | `/accounts/` |
@@ -118,12 +133,15 @@ core/                 settings, root urls.py, CodedModel, search.py (the search 
 members/ staff/ accounts/ savings/ withdrawals/ loans/
                       one app per data area: models.py, forms.py, views.py, urls.py, admin.py, tests.py
                       (loans/ holds both Loan and LoanPayment)
-dashboard/            dashboard view, stats.py (the numbers), management/commands/seed.py
-templates/            base.html, registration/login.html, partials/ (modal, pagination, sidebar),
+dashboard/            dashboard and analytics views, stats.py (the dashboard numbers),
+                      analytics.py (the chart numbers), management/commands/seed.py
+templates/            base.html, registration/login.html, dashboard/ (index and analytics),
+                      partials/ (modal, pagination, search box, charts, sidebar),
                       and one list page per data area (loans/ has loan_list.html and payment_list.html)
 static/css/app.css    the only stylesheet
+static/img/           logo.png (sidebar logo and browser tab icon)
 static/js/            modal.js (modal forms) and lucide.min.js (icons)
-db.sqlite3            the database, with demo data
+db.sqlite3            the database, with demo data (113 members and linked records)
 ```
 
 ## Where to read more

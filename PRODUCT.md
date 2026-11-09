@@ -42,7 +42,7 @@ Palette is binding, from the user's chosen reference image: Palladian #EEE9DF, O
 
 ## Evidence on Hand
 
-Frontend pages in templates/ and sample rows in the original frontend show the real fields. SACCO Script.sql has sample members, staff and accounts. There are no logos, testimonials or real customer data; none may be invented beyond clearly marked sample data.
+Frontend pages in templates/ and sample rows in the original frontend show the real fields. SACCO Script.sql has sample members, staff and accounts. There are no testimonials or real customer data. The demo database holds 113 members named after the class list; their phone numbers, addresses and emails (all `@example.com`) are made up, and every other record is generated sample data.
 
 ## Product Principles
 

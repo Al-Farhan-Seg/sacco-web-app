@@ -154,7 +154,7 @@ Depth is soft and real: blurred, low-offset shadows tinted with the dark navy, n
 Warm paper and oatmeal neutrals, deep navy structure, one orange voice, one rust for destruction. No green anywhere; success is shown with a check icon, not a colour.
 
 ### Primary
-- **Burning Flame** (#F2A55C): the action and location colour. Primary buttons, the current nav pill, the brand tile, the check in toasts, selection highlight, the focus ring inside the dark rail. Text on it is always Abyssal.
+- **Burning Flame** (#F2A55C): the action and location colour. Primary buttons, the current nav pill, the S logo mark, the check in toasts, selection highlight, the focus ring inside the dark rail. Text on it is always Abyssal.
 
 ### Secondary
 - **Blue Fantastic** (#2C3B4D): secondary tiles, focus rings and caret on the page, links in card headers, the top of the rail gradient and the login backdrop.
@@ -243,7 +243,7 @@ Card with a 56px icon tile (Flame, Blue Fantastic or Truffle, a 24px Lucide icon
 - **Error:** border and message in Truffle Trouble; a form-level error block is a rust-tinted panel with a rust hairline.
 
 ### Navigation
-Dark floating rail with a brand tile (Flame, letter S) and the word mark, a Dashboard link, then the seven record pages as one flat icon list, Django Admin pinned at the bottom, then the signed-in user name and Log out. Links are 14px Oatmeal on dark, 42px tall, 12px icon gap; hover adds a faint Palladian wash; the current page is a Flame pill with Abyssal text, weight 500 and a glow. The user chip lives in the rail, not the top bar. On small screens see Layout.
+Dark floating rail with the logo mark (a Flame monogram S on a transparent background, no tile or border; `static/img/logo.png`, also the favicon) and the word mark, a Dashboard link, then the seven record pages as one flat icon list, Django Admin pinned at the bottom, then the signed-in user name and Log out. Links are 14px Oatmeal on dark, 42px tall, 12px icon gap; hover adds a faint Palladian wash; the current page is a Flame pill with Abyssal text, weight 500 and a glow. The user chip lives in the rail, not the top bar. On small screens see Layout.
 
 ### Tables
 14px with tabular numerals, uppercase 11px Muted column heads over an Oatmeal rule, no vertical rules, row hover tint, nowrap cells. Numeric columns carry right alignment. The last column holds the edit and delete icon buttons, pinned. Empty state is centred Muted text. Pagination sits under the table: summary left, 34px page links right, current page an Abyssal pill.
