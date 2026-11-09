@@ -114,7 +114,7 @@ Each data page also has `add/`, `<id>/edit/` and `<id>/delete/` addresses under 
 
 ```
 manage.py
-core/                 settings, root urls.py, CodedModel, crud.py (shared list/modal views), template filter ugx
+core/                 settings, root urls.py, CodedModel, search.py (the search helper), template filter ugx
 members/ staff/ accounts/ savings/ withdrawals/ loans/
                       one app per data area: models.py, forms.py, views.py, urls.py, admin.py, tests.py
                       (loans/ holds both Loan and LoanPayment)

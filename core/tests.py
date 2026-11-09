@@ -1,11 +1,9 @@
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.http import HttpResponse
-from django.test import RequestFactory, TestCase, override_settings
-from django.urls import path
+from django.test import TestCase
 
-from core.crud import ListPage, ModalDeleteMixin, ModalFormMixin
 from core.models import CodedModel
+from core.search import search
 from core.templatetags.sacco import ugx
 
 
@@ -52,29 +50,40 @@ class AuthTests(TestCase):
         self.assertTrue(response.context["form"].errors)
 
 
-class UserListPage(ListPage):
-    model = User
-    template_name = "registration/login.html"
-    page_title = "Users"
-    add_label = "Add user"
-    url_name = "user"
+class SearchHelperTests(TestCase):
+    """core.search.search, shown on Django's User model."""
 
+    def setUp(self):
+        self.ann = User.objects.create_user("ann", first_name="Ann", last_name="Lee")
+        self.bob = User.objects.create_user("bob", first_name="Bob", last_name="Ray")
 
-urlpatterns = [
-    path("users/add/", lambda request: HttpResponse(), name="user_add"),
-]
+    def find(self, term):
+        return list(search(
+            User.objects.order_by("pk"), term,
+            fields=["first_name", "last_name"], codes={"USR": "pk"},
+        ))
 
+    def test_partial_and_case_insensitive(self):
+        self.assertEqual(self.find("ANN"), [self.ann])
 
-@override_settings(ROOT_URLCONF=__name__)
-class ListPageTests(TestCase):
-    def test_out_of_range_page_shows_last_page(self):
-        for i in range(12):
-            User.objects.create_user(f"user{i}")
-        request = RequestFactory().get("/users/", {"page": 9})
-        request.user = User.objects.first()
-        response = UserListPage.as_view()(request)
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context_data["page_obj"].number, 2)
+    def test_every_word_must_match(self):
+        self.assertEqual(self.find("bob ray"), [self.bob])
+        self.assertEqual(self.find("bob lee"), [])
+
+    def test_codes_and_bare_numbers_match_the_id(self):
+        self.assertEqual(self.find(f"usr-{self.bob.pk}"), [self.bob])
+        self.assertEqual(self.find(f"USR{self.ann.pk}"), [self.ann])
+        self.assertEqual(self.find(str(self.bob.pk)), [self.bob])
+
+    def test_unknown_prefix_falls_back_to_text(self):
+        self.assertEqual(self.find("xyz-5"), [])
+
+    def test_blank_term_changes_nothing(self):
+        self.assertEqual(len(self.find("")), 2)
+
+    def test_special_characters_are_harmless(self):
+        for term in ["%", "_", "'", '"; DROP TABLE auth_user;--']:
+            self.assertEqual(self.find(term), [], term)
 
 
 STATIC_DIR = settings.BASE_DIR / "static"
@@ -123,8 +132,8 @@ class ShellTests(TestCase):
         for name in OLD_CSS:
             self.assertFalse((STATIC_DIR / "css" / name).exists(), name)
 
-    def test_modal_mixin_templates_exist(self):
+    def test_modal_templates_exist(self):
         from django.template.loader import get_template
 
-        for mixin in [ModalFormMixin, ModalDeleteMixin]:
-            get_template(mixin.template_name)
+        for name in ["partials/_modal_form.html", "partials/_modal_delete.html"]:
+            get_template(name)

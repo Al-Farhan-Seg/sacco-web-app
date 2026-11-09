@@ -1,17 +1,10 @@
-from core.crud import crud_urls
+from django.urls import path
 
-from .views import (
-    WithdrawalCreate,
-    WithdrawalDelete,
-    WithdrawalList,
-    WithdrawalUpdate,
-)
+from . import views
 
-urlpatterns = crud_urls(
-    "withdrawals",
-    "withdrawal",
-    WithdrawalList,
-    WithdrawalCreate,
-    WithdrawalUpdate,
-    WithdrawalDelete,
-)
+urlpatterns = [
+    path("withdrawals/", views.withdrawal_list, name="withdrawal_list"),
+    path("withdrawals/add/", views.withdrawal_create, name="withdrawal_add"),
+    path("withdrawals/<int:pk>/edit/", views.withdrawal_update, name="withdrawal_edit"),
+    path("withdrawals/<int:pk>/delete/", views.withdrawal_delete, name="withdrawal_delete"),
+]
