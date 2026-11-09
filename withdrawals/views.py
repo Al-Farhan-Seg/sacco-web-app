@@ -11,6 +11,12 @@ class WithdrawalList(ListPage):
     page_title = "Withdrawals"
     add_label = "Add withdrawal"
     url_name = "withdrawal"
+    search_fields = [
+        "member__first_name",
+        "member__last_name",
+    ]
+    search_codes = {"WDR": "pk", "MEM": "member_id"}
+    search_hint = "Search member or WDR-001"
 
     def get_queryset(self):
         return super().get_queryset().select_related("member")

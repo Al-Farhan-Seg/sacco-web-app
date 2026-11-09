@@ -11,6 +11,9 @@ class MemberList(ListPage):
     page_title = "Members"
     add_label = "Add member"
     url_name = "member"
+    search_fields = ["first_name", "last_name", "contact", "address", "email"]
+    search_codes = {"MEM": "pk"}
+    search_hint = "Search name, contact, email, address or MEM-001"
 
 
 class MemberCreate(ModalFormMixin, CreateView):

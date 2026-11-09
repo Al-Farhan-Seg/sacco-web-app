@@ -256,3 +256,36 @@ class SavingViewTests(TestCase):
                         fetch_redirect_response=False,
                     )
         self.assertTrue(Saving.objects.exists())
+
+
+class SavingSearchTests(TestCase):
+    def setUp(self):
+        self.client.force_login(User.objects.create_user("clerk", password="s3cret-pass"))
+        self.sarah = make_member()
+        self.john = make_member(first_name="John", last_name="Okello")
+        self.a1 = make_account(self.sarah, account_number="1001")
+        self.a2 = make_account(self.john, account_number="2002")
+        self.grace = make_staff()
+        self.peter = make_staff(first_name="Peter", last_name="Opio")
+        self.s1 = make_saving(self.a1, self.grace)
+        self.s2 = make_saving(self.a2, self.peter, payment_method="Mobile")
+
+    def search(self, q):
+        response = self.client.get(reverse("saving_list"), {"q": q})
+        return list(response.context["object_list"])
+
+    def test_text_search(self):
+        self.assertEqual(self.search("okello"), [self.s2])
+        self.assertEqual(self.search("2002"), [self.s2])
+        self.assertEqual(self.search("opio"), [self.s2])
+        self.assertEqual(self.search("mobile"), [self.s2])
+
+    def test_code_search_for_every_linked_record(self):
+        self.assertEqual(self.search("SAV-001"), [self.s1])
+        self.assertEqual(self.search("MEM-002"), [self.s2])
+        self.assertEqual(self.search("ACC-002"), [self.s2])
+        self.assertEqual(self.search("STF-002"), [self.s2])
+
+    def test_empty_message(self):
+        response = self.client.get(reverse("saving_list"), {"q": "zzz"})
+        self.assertContains(response, "No savings match")

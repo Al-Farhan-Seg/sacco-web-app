@@ -11,6 +11,16 @@ class SavingList(ListPage):
     page_title = "Savings"
     add_label = "Add saving"
     url_name = "saving"
+    search_fields = [
+        "member__first_name",
+        "member__last_name",
+        "account__account_number",
+        "staff__first_name",
+        "staff__last_name",
+        "payment_method",
+    ]
+    search_codes = {"SAV": "pk", "MEM": "member_id", "ACC": "account_id", "STF": "staff_id"}
+    search_hint = "Search member, account, staff or SAV-001"
 
     def get_queryset(self):
         return super().get_queryset().select_related("member", "account", "staff")

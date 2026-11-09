@@ -1,8 +1,15 @@
+import re
+from functools import reduce
+from operator import or_
+
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 from django.http import HttpResponse
 from django.urls import path, reverse
 from django.views.generic import ListView
+
+CODE_RE = re.compile(r"^([a-z]+)-?(\d+)$", re.IGNORECASE)
 
 
 class ListPage(LoginRequiredMixin, ListView):
@@ -13,6 +20,31 @@ class ListPage(LoginRequiredMixin, ListView):
     page_title = ""
     add_label = ""
     url_name = ""
+    search_fields = []  # text columns, e.g. ["first_name", "member__last_name"]
+    search_codes = {}  # code prefix -> column, e.g. {"MEM": "pk", "STF": "staff_id"}
+    search_hint = ""
+
+    def get_search_term(self):
+        return self.request.GET.get("q", "").strip()
+
+    def search(self, queryset, term):
+        """Every word must match some field or code; words are ANDed."""
+        for word in term.split():
+            clauses = [Q(**{f"{f}__icontains": word}) for f in self.search_fields]
+            match = CODE_RE.match(word)
+            column = match and self.search_codes.get(match[1].upper())
+            if column:
+                clauses.append(Q(**{column: int(match[2])}))
+            elif word.isdigit():
+                clauses.append(Q(pk=int(word)))
+            if clauses:
+                queryset = queryset.filter(reduce(or_, clauses))
+        return queryset
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        term = self.get_search_term()
+        return self.search(queryset, term) if term else queryset
 
     def paginate_queryset(self, queryset, page_size):
         paginator = self.get_paginator(
@@ -28,6 +60,8 @@ class ListPage(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context["page_title"] = self.page_title
         context["add_label"] = self.add_label
+        context["q"] = self.get_search_term()
+        context["search_hint"] = self.search_hint
         context["add_url"] = reverse(f"{self.url_name}_add")
         return context
 
