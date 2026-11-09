@@ -38,7 +38,7 @@ Desktop browser, one person, repeated data entry and look-up. Money is in Uganda
 
 ## Brand Commitments
 
-Palette is binding, from the user's chosen reference image: Palladian #EEE9DF, Oatmeal #C9C1B1, Blue Fantastic #2C3B4D, Burning Flame #FFB162, Truffle Trouble #A35139, Abyssal Anchorfish Blue #1B2632. Appearance borrows from the Material Dashboard template (floating dark sidebar, off-white page, rounded cards, icon tiles on stat cards) using our own CSS only.
+Palette is binding, from the user's chosen reference image: Palladian #EEE9DF, Oatmeal #C9C1B1, Blue Fantastic #2C3B4D, Burning Flame #F2A55C, Truffle Trouble #A35139, Abyssal Anchorfish Blue #1B2632. Appearance borrows from the Material Dashboard template (floating dark sidebar, off-white page, rounded cards, icon tiles on stat cards) using our own CSS only.
 
 ## Evidence on Hand
 

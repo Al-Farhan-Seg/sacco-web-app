@@ -81,7 +81,7 @@ STATIC_DIR = settings.BASE_DIR / "static"
 TEMPLATES_DIR = settings.BASE_DIR / "templates"
 PALETTE = [
     "#EEE9DF", "#FBF9F4", "#C9C1B1", "#1B2632",
-    "#2C3B4D", "#FFB162", "#A35139", "#5B6773",
+    "#2C3B4D", "#F2A55C", "#A35139", "#5B6773",
 ]
 OLD_CSS = [
     "account.css", "index.css", "loan-payment.css", "loan.css", "login.css",

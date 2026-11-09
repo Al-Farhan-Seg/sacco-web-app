@@ -9,7 +9,7 @@
       "oatmeal": { "role": "neutral", "displayName": "Oatmeal", "canonical": "#C9C1B1", "tonalRamp": ["#38342B", "#575145", "#766E5F", "#968D7C", "#B0A795", "#C9C1B1", "#DDD7CA", "#EEEBE3"] },
       "abyssal": { "role": "neutral", "displayName": "Abyssal Navy", "canonical": "#1B2632", "tonalRamp": ["#0E141A", "#1B2632", "#2C3B4D", "#475A70", "#677C94", "#8C9DB0", "#B5C0CD", "#DCE2E9"] },
       "blue-fantastic": { "role": "secondary", "displayName": "Blue Fantastic", "canonical": "#2C3B4D", "tonalRamp": ["#10161D", "#1B2632", "#2C3B4D", "#42566D", "#5E748D", "#8195AB", "#AFBCCB", "#D9E0E8"] },
-      "burning-flame": { "role": "primary", "displayName": "Burning Flame", "canonical": "#FFB162", "tonalRamp": ["#5C3200", "#8A4F0E", "#B86F23", "#E58F3F", "#FFB162", "#FFC285", "#FFD6AE", "#FFEBD7"] },
+      "burning-flame": { "role": "primary", "displayName": "Burning Flame", "canonical": "#F2A55C", "tonalRamp": ["#5C3200", "#8A4F0E", "#B86F23", "#E58F3F", "#F2A55C", "#FFC285", "#FFD6AE", "#FFEBD7"] },
       "truffle-trouble": { "role": "tertiary", "displayName": "Truffle Trouble", "canonical": "#A35139", "tonalRamp": ["#3A1D14", "#5E2F20", "#80402D", "#A35139", "#BC6F57", "#D09580", "#E3BDAE", "#F3E1D9"] },
       "muted": { "role": "neutral", "displayName": "Muted Slate", "canonical": "#5B6773", "tonalRamp": ["#1F2429", "#333B43", "#47515B", "#5B6773", "#79858F", "#9AA3AB", "#BEC4CA", "#E0E3E6"] }
     },
@@ -27,8 +27,8 @@
       { "name": "card", "value": "0 2px 4px -1px rgb(27 38 50 / 0.06), 0 10px 24px -8px rgb(27 38 50 / 0.14)", "purpose": "Every card." },
       { "name": "raised", "value": "0 12px 28px -10px rgb(27 38 50 / 0.45), 0 4px 10px -4px rgb(27 38 50 / 0.3)", "purpose": "The floating rail." },
       { "name": "modal", "value": "0 24px 48px -12px rgb(27 38 50 / 0.4), 0 8px 16px -8px rgb(27 38 50 / 0.25)", "purpose": "Dialogs." },
-      { "name": "tile-glow", "value": "0 8px 18px -6px rgb(255 177 98 / 0.7), 0 3px 6px -3px rgb(27 38 50 / 0.25)", "purpose": "Raised icon tiles, tinted with the tile colour." },
-      { "name": "button-glow", "value": "0 6px 14px -6px rgb(255 177 98 / 0.7), 0 2px 4px -2px rgb(27 38 50 / 0.15)", "purpose": "Primary button." },
+      { "name": "tile-glow", "value": "0 8px 18px -6px rgb(242 165 92 / 0.7), 0 3px 6px -3px rgb(27 38 50 / 0.25)", "purpose": "Raised icon tiles, tinted with the tile colour." },
+      { "name": "button-glow", "value": "0 6px 14px -6px rgb(242 165 92 / 0.7), 0 2px 4px -2px rgb(27 38 50 / 0.15)", "purpose": "Primary button." },
       { "name": "toast", "value": "0 14px 28px -10px rgb(27 38 50 / 0.55), 0 4px 8px -4px rgb(27 38 50 / 0.3)", "purpose": "Toasts." }
     ],
     "motion": [
@@ -52,7 +52,7 @@
       "refersTo": "button-primary-large",
       "description": "The one large primary action in each page's title row.",
       "html": "<button class=\"ds-btn ds-btn-primary ds-btn-lg\">+ Add member</button>",
-      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;border-radius:9px;font:500 14px/1 Roboto,system-ui,sans-serif;cursor:pointer;transition:background-color .15s ease-out,transform .15s ease-out}.ds-btn-primary{background:#FFB162;color:#1B2632;box-shadow:0 6px 14px -6px rgb(255 177 98 / .7),0 2px 4px -2px rgb(27 38 50 / .15)}.ds-btn-lg{min-height:48px;padding:0 22px;font-size:15px}.ds-btn-primary:hover{background:color-mix(in srgb,#FFB162 88%,#1B2632)}.ds-btn:active{transform:translateY(1px)}.ds-btn:focus-visible{outline:2px solid #2C3B4D;outline-offset:2px}"
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;border-radius:9px;font:500 14px/1 Roboto,system-ui,sans-serif;cursor:pointer;transition:background-color .15s ease-out,transform .15s ease-out}.ds-btn-primary{background:#F2A55C;color:#1B2632;box-shadow:0 6px 14px -6px rgb(242 165 92 / .7),0 2px 4px -2px rgb(27 38 50 / .15)}.ds-btn-lg{min-height:48px;padding:0 22px;font-size:15px}.ds-btn-primary:hover{background:color-mix(in srgb,#F2A55C 88%,#1B2632)}.ds-btn:active{transform:translateY(1px)}.ds-btn:focus-visible{outline:2px solid #2C3B4D;outline-offset:2px}"
     },
     {
       "name": "Danger Button",
@@ -76,7 +76,7 @@
       "refersTo": "nav-link-current",
       "description": "Floating dark rail link list with an orange current-page pill.",
       "html": "<aside class=\"ds-rail\"><a class=\"ds-nav-link\" href=\"#\">Dashboard</a><a class=\"ds-nav-link\" href=\"#\" aria-current=\"page\">Members</a><a class=\"ds-nav-link\" href=\"#\">Staff</a></aside>",
-      "css": ".ds-rail{display:flex;flex-direction:column;gap:2px;width:250px;padding:18px 14px 16px;border-radius:14px;background:linear-gradient(195deg,#2C3B4D,#1B2632 70%);box-shadow:0 12px 28px -10px rgb(27 38 50 / .45),0 4px 10px -4px rgb(27 38 50 / .3);font-family:Roboto,system-ui,sans-serif}.ds-nav-link{display:flex;align-items:center;gap:12px;min-height:42px;padding:8px 12px;border-radius:9px;color:#C9C1B1;font-size:14px;text-decoration:none;transition:background-color .15s ease-out,color .15s ease-out}.ds-nav-link:hover{background:rgb(238 233 223 / .08);color:#EEE9DF}.ds-nav-link[aria-current=page]{background:#FFB162;color:#1B2632;font-weight:500;box-shadow:0 6px 16px -6px rgb(255 177 98 / .55)}.ds-nav-link:focus-visible{outline:2px solid #FFB162;outline-offset:2px}"
+      "css": ".ds-rail{display:flex;flex-direction:column;gap:2px;width:250px;padding:18px 14px 16px;border-radius:14px;background:linear-gradient(195deg,#2C3B4D,#1B2632 70%);box-shadow:0 12px 28px -10px rgb(27 38 50 / .45),0 4px 10px -4px rgb(27 38 50 / .3);font-family:Roboto,system-ui,sans-serif}.ds-nav-link{display:flex;align-items:center;gap:12px;min-height:42px;padding:8px 12px;border-radius:9px;color:#C9C1B1;font-size:14px;text-decoration:none;transition:background-color .15s ease-out,color .15s ease-out}.ds-nav-link:hover{background:rgb(238 233 223 / .08);color:#EEE9DF}.ds-nav-link[aria-current=page]{background:#F2A55C;color:#1B2632;font-weight:500;box-shadow:0 6px 16px -6px rgb(242 165 92 / .55)}.ds-nav-link:focus-visible{outline:2px solid #F2A55C;outline-offset:2px}"
     },
     {
       "name": "Number Card",
@@ -84,7 +84,7 @@
       "refersTo": "stat-tile",
       "description": "Dashboard figure card with a raised icon tile standing on the top edge.",
       "html": "<div style=\"padding-top:22px;width:260px\"><article class=\"ds-stat\"><div class=\"ds-stat-top\"><span class=\"ds-tile\"></span><p class=\"ds-stat-label\">Total savings</p></div><p class=\"ds-stat-value\">UGX 12,450,000</p><p class=\"ds-stat-caption\">Opening balances plus all savings</p></article></div>",
-      "css": ".ds-stat{display:flex;flex-direction:column;padding:0 20px 16px;border:1px solid rgb(201 193 177 / .5);border-radius:14px;background:#FBF9F4;box-shadow:0 2px 4px -1px rgb(27 38 50 / .06),0 10px 24px -8px rgb(27 38 50 / .14);font-family:Roboto,system-ui,sans-serif;color:#1B2632}.ds-stat-top{display:flex;justify-content:space-between;gap:12px}.ds-tile{width:56px;height:56px;margin-top:-22px;border-radius:12px;background:#FFB162;box-shadow:0 8px 18px -6px rgb(255 177 98 / .7),0 3px 6px -3px rgb(27 38 50 / .25)}.ds-stat-label{margin:12px 0 0;color:#5B6773;font-size:14px;text-align:right}.ds-stat-value{margin:4px 0 14px;font-size:24px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.01em;text-align:right}.ds-stat-caption{margin:0;padding-top:12px;border-top:1px solid rgb(201 193 177 / .55);color:#5B6773;font-size:13px}"
+      "css": ".ds-stat{display:flex;flex-direction:column;padding:0 20px 16px;border:1px solid rgb(201 193 177 / .5);border-radius:14px;background:#FBF9F4;box-shadow:0 2px 4px -1px rgb(27 38 50 / .06),0 10px 24px -8px rgb(27 38 50 / .14);font-family:Roboto,system-ui,sans-serif;color:#1B2632}.ds-stat-top{display:flex;justify-content:space-between;gap:12px}.ds-tile{width:56px;height:56px;margin-top:-22px;border-radius:12px;background:#F2A55C;box-shadow:0 8px 18px -6px rgb(242 165 92 / .7),0 3px 6px -3px rgb(27 38 50 / .25)}.ds-stat-label{margin:12px 0 0;color:#5B6773;font-size:14px;text-align:right}.ds-stat-value{margin:4px 0 14px;font-size:24px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.01em;text-align:right}.ds-stat-caption{margin:0;padding-top:12px;border-top:1px solid rgb(201 193 177 / .55);color:#5B6773;font-size:13px}"
     },
     {
       "name": "Form Field",
