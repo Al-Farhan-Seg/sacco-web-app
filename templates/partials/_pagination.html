@@ -5,7 +5,7 @@
   {% if page_obj.has_other_pages %}
     <ul class="pager">
       {% for number in page_obj.paginator.page_range %}
-        <li><a class="page-link" href="?page={{ number }}"{% if number == page_obj.number %} aria-current="page"{% endif %}>{{ number }}</a></li>
+        <li><a class="page-link" href="{% querystring page=number %}"{% if number == page_obj.number %} aria-current="page"{% endif %}>{{ number }}</a></li>
       {% endfor %}
     </ul>
   {% endif %}

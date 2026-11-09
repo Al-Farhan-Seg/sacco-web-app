@@ -11,6 +11,16 @@ class StaffList(ListPage):
     page_title = "Staff"
     add_label = "Add staff"
     url_name = "staff"
+    search_fields = [
+        "first_name",
+        "last_name",
+        "position",
+        "contact",
+        "address",
+        "role",
+    ]
+    search_codes = {"STF": "pk"}
+    search_hint = "Search name, position, contact or STF-001"
 
 
 class StaffCreate(ModalFormMixin, CreateView):

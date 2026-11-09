@@ -307,3 +307,29 @@ class AccountMemberChangeTests(TestCase):
         self.assertEqual(response.status_code, 204)
         self.account.refresh_from_db()
         self.assertEqual(self.account.member_id, self.other.pk)
+
+
+class AccountSearchTests(TestCase):
+    def setUp(self):
+        self.client.force_login(User.objects.create_user("clerk", password="s3cret-pass"))
+        self.sarah = make_member()
+        self.john = make_member(first_name="John", last_name="Okello")
+        self.a1 = make_account(self.sarah, account_number="1001")
+        self.a2 = make_account(self.john, account_number="2002", account_type="Current")
+
+    def search(self, q):
+        response = self.client.get(reverse("account_list"), {"q": q})
+        return list(response.context["object_list"])
+
+    def test_number_member_name_and_type(self):
+        self.assertEqual(self.search("2002"), [self.a2])
+        self.assertEqual(self.search("okello"), [self.a2])
+        self.assertEqual(self.search("current"), [self.a2])
+
+    def test_codes_for_account_and_member(self):
+        self.assertEqual(self.search("ACC-001"), [self.a1])
+        self.assertEqual(self.search("MEM-002"), [self.a2])
+
+    def test_empty_message(self):
+        response = self.client.get(reverse("account_list"), {"q": "zzz"})
+        self.assertContains(response, "No accounts match")

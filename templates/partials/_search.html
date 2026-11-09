@@ -1,0 +1,9 @@
+<form class="search" method="get" role="search">
+  <label class="visually-hidden" for="search-q">Search</label>
+  <div class="search-box">
+    <i data-lucide="search" aria-hidden="true"></i>
+    <input id="search-q" type="search" name="q" value="{{ q }}" placeholder="{{ search_hint }}" autocomplete="off">
+  </div>
+  <button type="submit" class="btn btn-primary">Search</button>
+  {% if q %}<a class="btn btn-ghost" href="{{ request.path }}">Clear</a>{% endif %}
+</form>

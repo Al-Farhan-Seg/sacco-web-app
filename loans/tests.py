@@ -481,3 +481,38 @@ class PaymentFormQueryTests(TestCase):
         for _ in range(4):
             make_loan(self.member, self.staff)
         self.assertEqual(self.count_queries(), few)
+
+
+class LoanSearchTests(TestCase):
+    def setUp(self):
+        self.client.force_login(User.objects.create_user("clerk", password="s3cret-pass"))
+        self.sarah = make_member()
+        self.john = make_member(first_name="John", last_name="Okello")
+        self.staff = make_staff()
+        self.l1 = make_loan(self.sarah, self.staff, payment_period="6 months")
+        self.l2 = make_loan(self.john, self.staff, payment_period="24 months")
+        self.p1 = make_payment(self.l1)
+        self.p2 = make_payment(self.l2)
+
+    def loans(self, q):
+        return list(self.client.get(reverse("loan_list"), {"q": q}).context["object_list"])
+
+    def payments(self, q):
+        return list(self.client.get(reverse("payment_list"), {"q": q}).context["object_list"])
+
+    def test_loan_search(self):
+        self.assertEqual(self.loans("okello"), [self.l2])
+        self.assertEqual(self.loans("24 months"), [self.l2])
+        self.assertEqual(self.loans("LN-001"), [self.l1])
+        self.assertEqual(self.loans("MEM-002"), [self.l2])
+        self.assertEqual(len(self.loans("grace")), 2)
+        self.assertEqual(len(self.loans("STF-1")), 2)
+
+    def test_payment_search_by_member_and_loan_code(self):
+        self.assertEqual(self.payments("okello"), [self.p2])
+        self.assertEqual(self.payments("PAY-001"), [self.p1])
+        self.assertEqual(self.payments("LN-002"), [self.p2])
+
+    def test_empty_messages(self):
+        self.assertContains(self.client.get(reverse("loan_list"), {"q": "zzz"}), "No loans match")
+        self.assertContains(self.client.get(reverse("payment_list"), {"q": "zzz"}), "No loan payments match")

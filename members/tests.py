@@ -171,3 +171,72 @@ class DeleteModalWordingTests(TestCase):
         response = self.client.get(reverse("withdrawal_delete", args=[withdrawal.pk]))
         self.assertContains(response, "will be deleted.")
         self.assertNotContains(response, "along with")
+
+
+class MemberSearchTests(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user("clerk", password="s3cret-pass")
+        self.client.force_login(self.user)
+        self.john = make_member(first_name="John", last_name="Mukasa", contact="0701234567", email="john@example.com")
+        self.jane = make_member(first_name="Jane", last_name="Doe", contact="0779999999", email="jane@example.com", address="Gulu")
+
+    def search(self, q):
+        response = self.client.get(reverse("member_list"), {"q": q})
+        self.assertEqual(response.status_code, 200)
+        return list(response.context["object_list"])
+
+    def test_no_query_lists_everyone(self):
+        response = self.client.get(reverse("member_list"))
+        self.assertEqual(len(response.context["object_list"]), 2)
+
+    def test_blank_query_lists_everyone(self):
+        self.assertEqual(len(self.search("   ")), 2)
+
+    def test_partial_and_case_insensitive(self):
+        self.assertEqual(self.search("MUK"), [self.john])
+
+    def test_two_words_across_first_and_last_name(self):
+        self.assertEqual(self.search("john mukasa"), [self.john])
+        self.assertEqual(self.search("john doe"), [])
+
+    def test_searches_contact_email_and_address(self):
+        self.assertEqual(self.search("0779"), [self.jane])
+        self.assertEqual(self.search("john@"), [self.john])
+        self.assertEqual(self.search("gulu"), [self.jane])
+
+    def test_code_search_in_several_spellings(self):
+        for q in [self.john.code, "mem-1", "mem001", "MEM-001"]:
+            self.assertEqual(self.search(q), [self.john], q)
+
+    def test_bare_number_matches_id(self):
+        # "2" is Jane's id; it also appears in John's phone number.
+        self.assertIn(self.jane, self.search("2"))
+        self.assertEqual(self.search("002"), [self.jane])
+
+    def test_unknown_prefix_falls_back_to_text(self):
+        self.assertEqual(self.search("XYZ-5"), [])
+
+    def test_special_characters_do_not_break(self):
+        for q in ["%", "_", "'", '"; DROP TABLE members_member;--']:
+            self.assertEqual(self.search(q), [], q)
+
+    def test_box_keeps_the_query_and_offers_clear(self):
+        response = self.client.get(reverse("member_list"), {"q": "muk"})
+        self.assertContains(response, 'value="muk"')
+        self.assertContains(response, ">Clear<")
+        self.assertNotContains(self.client.get(reverse("member_list")), ">Clear<")
+
+    def test_empty_result_message(self):
+        response = self.client.get(reverse("member_list"), {"q": "zzz"})
+        self.assertContains(response, "No members match")
+
+    def test_pagination_links_keep_the_query(self):
+        for i in range(12):
+            make_member(first_name=f"Pat{i}")
+        response = self.client.get(reverse("member_list"), {"q": "pat"})
+        self.assertContains(response, "?q=pat&amp;page=2")
+
+    def test_login_still_required(self):
+        self.client.logout()
+        response = self.client.get(reverse("member_list"), {"q": "john"})
+        self.assertEqual(response.status_code, 302)

@@ -160,3 +160,24 @@ class StaffViewTests(TestCase):
             [str(m) for m in get_messages(response.wsgi_request)],
             ["STF-001 saved"],
         )
+
+
+class StaffSearchTests(TestCase):
+    def setUp(self):
+        self.client.force_login(User.objects.create_user("clerk", password="s3cret-pass"))
+        self.grace = make_staff()
+        self.peter = make_staff(first_name="Peter", last_name="Opio", position="Manager", contact="0701000000")
+
+    def search(self, q):
+        response = self.client.get(reverse("staff_list"), {"q": q})
+        return list(response.context["object_list"])
+
+    def test_text_and_code_search(self):
+        self.assertEqual(self.search("manager"), [self.peter])
+        self.assertEqual(self.search("peter opio"), [self.peter])
+        self.assertEqual(self.search("stf-1"), [self.grace])
+
+    def test_empty_message_and_clear(self):
+        response = self.client.get(reverse("staff_list"), {"q": "zzz"})
+        self.assertContains(response, "No staff match")
+        self.assertContains(response, ">Clear<")

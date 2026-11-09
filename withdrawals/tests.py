@@ -197,3 +197,25 @@ class WithdrawalViewTests(TestCase):
                         fetch_redirect_response=False,
                     )
         self.assertTrue(Withdrawal.objects.exists())
+
+
+class WithdrawalSearchTests(TestCase):
+    def setUp(self):
+        self.client.force_login(User.objects.create_user("clerk", password="s3cret-pass"))
+        self.sarah = make_member()
+        self.john = make_member(first_name="John", last_name="Okello")
+        self.w1 = make_withdrawal(self.sarah)
+        self.w2 = make_withdrawal(self.john)
+
+    def search(self, q):
+        response = self.client.get(reverse("withdrawal_list"), {"q": q})
+        return list(response.context["object_list"])
+
+    def test_member_name_and_codes(self):
+        self.assertEqual(self.search("okello"), [self.w2])
+        self.assertEqual(self.search("WDR-001"), [self.w1])
+        self.assertEqual(self.search("MEM-002"), [self.w2])
+
+    def test_empty_message(self):
+        response = self.client.get(reverse("withdrawal_list"), {"q": "zzz"})
+        self.assertContains(response, "No withdrawals match")

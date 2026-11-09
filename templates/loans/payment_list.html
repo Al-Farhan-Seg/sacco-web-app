@@ -10,6 +10,7 @@
 
 {% block content %}
   <section class="card">
+    {% include "partials/_search.html" %}
     <div class="table-wrap">
       <table class="table">
         <thead>
@@ -31,7 +32,7 @@
               <td class="col-actions">{% url 'payment_edit' payment.pk as edit_url %}{% url 'payment_delete' payment.pk as delete_url %}{% include "partials/_row_actions.html" %}</td>
             </tr>
           {% empty %}
-            <tr><td class="table-empty" colspan="5">No loan payments yet.</td></tr>
+            <tr><td class="table-empty" colspan="5">{% if q %}No loan payments match "{{ q }}".{% else %}No loan payments yet.{% endif %}</td></tr>
           {% endfor %}
         </tbody>
       </table>
