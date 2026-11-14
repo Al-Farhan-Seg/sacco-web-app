@@ -216,3 +216,31 @@ class AuthLayoutTests(TestCase):
         self.client.force_login(User.objects.create_user("clerk", password="s3cret-pass"))
         for url in ["/", "/members/", "/analytics/"]:
             self.assertNotContains(self.client.get(url), "sign-up")
+
+
+class AdminCustomisationTests(TestCase):
+    """Every data model has its own ModelAdmin and the admin pages load."""
+
+    def setUp(self):
+        self.client.force_login(
+            User.objects.create_superuser("boss", password="s3cret-pass")
+        )
+
+    def test_every_model_has_a_customised_admin(self):
+        from django.contrib import admin
+        from django.apps import apps
+
+        for label in ["members.Member", "staff.Staff", "accounts.Account",
+                      "savings.Saving", "withdrawals.Withdrawal",
+                      "loans.Loan", "loans.LoanPayment"]:
+            model = apps.get_model(label)
+            model_admin = admin.site._registry[model]
+            self.assertIn("code", model_admin.list_display, label)
+            self.assertTrue(model_admin.search_fields, label)
+
+    def test_changelists_load(self):
+        for path in ["members/member", "staff/staff", "accounts/account",
+                     "savings/saving", "withdrawals/withdrawal",
+                     "loans/loan", "loans/loanpayment"]:
+            response = self.client.get(f"/admin/{path}/?q=a")
+            self.assertEqual(response.status_code, 200, path)
