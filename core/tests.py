@@ -105,10 +105,26 @@ class ShellTests(TestCase):
         response = self.client.get("/")
         for href in [
             "/members/", "/staff/", "/accounts/", "/savings/",
-            "/withdrawals/", "/loans/", "/loan-payments/", "/admin/",
+            "/withdrawals/", "/loans/", "/loan-payments/",
         ]:
             self.assertContains(response, f'href="{href}"')
         self.assertContains(response, "Dashboard")
+
+    def test_django_admin_link_is_for_staff_only(self):
+        clerk = User.objects.create_user("clerk", password="s3cret-pass")
+        self.client.force_login(clerk)
+        self.assertNotContains(self.client.get("/"), 'href="/admin/"')
+
+        boss = User.objects.create_user("boss", password="s3cret-pass", is_staff=True)
+        self.client.force_login(boss)
+        self.assertContains(self.client.get("/"), 'href="/admin/"')
+
+    def test_signed_up_user_can_use_the_data_pages_but_not_the_admin(self):
+        self.client.force_login(User.objects.create_user("clerk", password="s3cret-pass"))
+        self.assertEqual(self.client.get("/members/").status_code, 200)
+        response = self.client.get("/admin/")
+        self.assertEqual(response.status_code, 302)
+        self.assertIn("/admin/login/", response["Location"])
 
     def test_login_page_has_password_input(self):
         response = self.client.get("/login/")
