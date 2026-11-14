@@ -1,0 +1,36 @@
+{% load static %}<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up · SACCO Management</title>
+    <link rel="icon" type="image/png" href="{% static 'img/logo.png' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+  </head>
+  <body class="auth">
+    <main class="auth-card">
+      <img class="brand-logo" src="{% static 'img/logo.png' %}" alt="" width="40" height="40">
+      <h1 class="auth-title">SACCO Management</h1>
+      <p class="auth-sub">Create your account</p>
+
+      <form method="post" action="{% url 'sign_up' %}" class="auth-form" novalidate>
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+          <div class="form-errors" role="alert">{{ form.non_field_errors }}</div>
+        {% endif %}
+        {% for field in form %}
+          <div class="field{% if field.errors %} has-error{% endif %}">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}<p class="field-error">{{ field.errors|join:" " }}</p>{% endif %}
+          </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary btn-block">Sign up</button>
+      </form>
+      <p class="auth-switch">Already have an account? <a href="{% url 'login' %}">Log in</a></p>
+    </main>
+  </body>
+</html>
