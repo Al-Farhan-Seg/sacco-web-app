@@ -1,0 +1,43 @@
+/* Colours for Django's admin, taken from the app palette. Solid colours only. */
+
+:root {
+  --primary: #2C3B4D;
+  --secondary: #1B2632;
+  --accent: #F2A55C;
+  --primary-fg: #FBF9F4;
+  --header-bg: #1B2632;
+  --header-color: #EEE9DF;
+  --header-branding-color: #F2A55C;
+  --header-link-color: #FBF9F4;
+  --breadcrumbs-bg: #2C3B4D;
+  --breadcrumbs-fg: #C9C1B1;
+  --breadcrumbs-link-fg: #FBF9F4;
+  --link-fg: #2C3B4D;
+  --link-hover-color: #A35139;
+  --link-selected-fg: #A35139;
+  --button-bg: #2C3B4D;
+  --button-hover-bg: #1B2632;
+  --default-button-bg: #F2A55C;
+  --default-button-hover-bg: #E39645;
+  --object-tools-bg: #5B6773;
+  --object-tools-hover-bg: #2C3B4D;
+  --font-family-primary: "Roboto", system-ui, "Segoe UI", sans-serif;
+}
+
+.default,
+.default:active,
+input[type="submit"].default {
+  color: #1B2632;
+}
+
+.sacco-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.sacco-back {
+  margin-right: 16px;
+  color: #F2A55C;
+}

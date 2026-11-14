@@ -244,3 +244,10 @@ class AdminCustomisationTests(TestCase):
                      "loans/loan", "loans/loanpayment"]:
             response = self.client.get(f"/admin/{path}/?q=a")
             self.assertEqual(response.status_code, 200, path)
+
+    def test_admin_is_branded_and_links_back_to_the_app(self):
+        response = self.client.get("/admin/")
+        self.assertContains(response, "SACCO Management")
+        self.assertContains(response, "css/admin.css")
+        self.assertContains(response, 'href="/"')
+        self.assertTrue((STATIC_DIR / "css/admin.css").is_file())
