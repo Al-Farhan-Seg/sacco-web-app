@@ -1,7 +1,8 @@
 # SACCO Management System
 
-A Django back-office app for one administrator of a SACCO (a savings and loans group).
-After logging in, the administrator sees a dashboard of live numbers and manages seven
+A Django back-office app for the people who run a SACCO (a savings and loans group).
+Anyone can sign up for an account (it is never staff or superuser) or log in. After
+logging in, they see a dashboard of live numbers and manages seven
 kinds of records (members, staff, accounts, savings, withdrawals, loans and loan
 payments) with Add, Edit and Delete buttons. Forms open in a modal on the same page.
 
@@ -16,7 +17,11 @@ read it, but changes are made by the owner only.
 
 What is in `main`:
 
-- Login and logout, with every page except the login page locked behind a login.
+- Sign-up, login and logout. Sign-up and login are for logged-out visitors only: a logged-in
+  user who opens them is sent to the dashboard, and no Sign up link appears inside the app.
+  Every other page is locked behind a login.
+- Django Admin (`/admin/`, with its sidebar link) is for staff only. A new account is not staff;
+  a superuser promotes it by ticking *Staff status*.
 - A dashboard with eight live number cards (members, staff, accounts, total savings,
   loans issued, loan repayments, still owed, withdrawals), a small analytics brief and
   two recent-activity tables.
@@ -39,10 +44,10 @@ What is in `main`:
   180 loan payments and 14 withdrawals. The 113 members carry the names from the class
   list (the first name is the family name as listed); their phone numbers, addresses
   and email addresses are made up (emails end in `@example.com`).
-- 191 automated tests, all passing.
+- 203 automated tests, all passing.
 
-Deliberately left out, to keep it a simple class demo: member or staff logins (there is
-one administrator), roles with permissions (a staff "role" is just a label), loan
+Deliberately left out, to keep it a simple class demo: member logins (members are records,
+only the people running the SACCO have accounts), password reset by email, roles with permissions (a staff "role" is just a label), loan
 approval, interest calculation, filters beyond the search box, date-range pickers,
 exports, and any REST API.
 
@@ -79,13 +84,14 @@ This password is for the class demo only. Do not reuse it anywhere.
 
 ### What to look at
 
-1. Log in, and look at the dashboard.
+1. Open `/sign-up/` logged out, create an account, and look at the dashboard (log out and
+   check the Sign up link is back on the login page).
 2. Open **Members** and click a pencil to edit, the trash to delete (it asks first),
    or **Add member** at the top right.
 3. Open **Savings**, **Loans** and **Loan payments** to see how the records link
    together, and compare the dashboard numbers afterwards.
-4. Open **Django Admin** (bottom of the sidebar) to see the same data in Django's own
-   screens.
+4. Log in as `admin` and open **Django Admin** (bottom of the sidebar, staff only) to see the
+   same data in Django's own screens, with custom columns, search and branding.
 
 ### If the data gets messy
 
@@ -105,11 +111,12 @@ list, and renumbers the codes from MEM-114 onward.
 
 ## Pages and addresses
 
-Every page except the login page requires a login.
+Every page except login and sign-up requires a login.
 
 | Page | Address |
 |---|---|
 | Login | `/login/` |
+| Sign up | `/sign-up/` |
 | Logout (POST, button in the sidebar) | `/logout/` |
 | Dashboard | `/` |
 | Analytics | `/analytics/` |
@@ -135,10 +142,10 @@ members/ staff/ accounts/ savings/ withdrawals/ loans/
                       (loans/ holds both Loan and LoanPayment)
 dashboard/            dashboard and analytics views, stats.py (the dashboard numbers),
                       analytics.py (the chart numbers), management/commands/seed.py
-templates/            base.html, registration/login.html, dashboard/ (index and analytics),
+templates/            base.html, auth_base.html, registration/ (login and sign-up), admin/base_site.html, dashboard/ (index and analytics),
                       partials/ (modal, pagination, search box, charts, sidebar),
                       and one list page per data area (loans/ has loan_list.html and payment_list.html)
-static/css/app.css    the only stylesheet
+static/css/app.css    the app stylesheet (admin.css colours Django Admin)
 static/img/           logo.png (sidebar logo and browser tab icon)
 static/js/            modal.js (modal forms) and lucide.min.js (icons)
 db.sqlite3            the database, with demo data (113 members and linked records)

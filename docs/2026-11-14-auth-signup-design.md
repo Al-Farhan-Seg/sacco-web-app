@@ -1,6 +1,6 @@
 # Sign-up and marking criteria plan
 
-Status: **draft for discussion, nothing built yet.**
+Status: **built** (steps 1 to 7) on branch `feature/signup`. Decisions 1 to 3 in section 10 were built as recommended.
 Date: 2026-11-14 (replaces the earlier member-portal draft)
 
 Items marked **(my call)** are decisions I made without asking. Please confirm or overturn them.
@@ -186,8 +186,8 @@ Not planned (keeps it simple): password reset by email, email verification, soci
 and per-model permissions.
 
 **Important side effect, in our favour:** the existing tests log in plain users made with
-`create_user("clerk")` (not staff). Because every logged-in user keeps access, **no existing test
-needs to change**, and `@login_required` stays as it is. This is a deliberate reason to avoid a
+`create_user("clerk")` (not staff). Because every logged-in user keeps access, **only one existing test needed a change**:
+`ShellTests.test_shell_has_all_nav_links`, which expected the Django Admin link for a non-staff user. `@login_required` stays as it is. This is a deliberate reason to avoid a
 staff-only gate on the data pages.
 
 ### 5.2 Models
@@ -335,7 +335,7 @@ Automated (Django `TestCase`), all in `core/tests.py`:
 | Signed-up user GET `/admin/` | Redirected to admin login |
 | Signed-up user dashboard HTML | Does not contain "Sign up" or "Django Admin" |
 | Staff dashboard HTML | Contains the Django Admin link |
-| Existing 30 views, existing tests | Unchanged, all still pass |
+| Existing 30 views, existing tests | All still pass (one nav-link test updated for the staff-only admin link) |
 
 Manual, in the browser: sign up, land on the dashboard, add a member, edit it, delete it, log
 out, check the sign-up page is visible again.
