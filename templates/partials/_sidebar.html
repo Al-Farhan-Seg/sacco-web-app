@@ -22,9 +22,11 @@
       <li><a class="nav-link" href="/loan-payments/"{% if "/loan-payments/" in request.path %} aria-current="page"{% endif %}><i data-lucide="credit-card" aria-hidden="true"></i>Loan payments</a></li>
     </ul>
 
+    {% if user.is_staff %}
     <div class="nav-bottom">
       <a class="nav-link" href="/admin/"><i data-lucide="shield" aria-hidden="true"></i>Django Admin</a>
     </div>
+    {% endif %}
   </nav>
 
   <div class="user">

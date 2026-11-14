@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% comment %}
+  The centred card shared by the login and sign-up pages. It replaces the sidebar shell
+  from base.html. Each page fills in `title`, `subtitle`, `auth_form` and `auth_foot`.
+{% endcomment %}
+
+{% block body_attrs %} class="auth"{% endblock %}
+
+{% block shell %}
+<main class="auth-card">
+  <img class="brand-logo" src="{% static 'img/logo.png' %}" alt="" width="40" height="40">
+  <h1 class="auth-title">SACCO Management</h1>
+  <p class="auth-sub">{% block subtitle %}{% endblock %}</p>
+
+  <div class="auth-switch" role="group" aria-label="Log in or sign up">
+    <a href="{% url 'login' %}"{% if request.path == "/login/" %} aria-current="page"{% endif %}>Log in</a>
+    <a href="{% url 'sign_up' %}"{% if request.path == "/sign-up/" %} aria-current="page"{% endif %}>Sign up</a>
+  </div>
+
+  {% block auth_form %}{% endblock %}
+  <p class="auth-foot">{% block auth_foot %}{% endblock %}</p>
+</main>
+{% endblock %}

@@ -12,7 +12,7 @@ Django 6.1 with SQLite, server-rendered templates, plain CSS in one file, a few 
 
 ## Users
 
-One administrator who runs a SACCO (a savings and loans group) in Uganda, working at a desk. They enter and check records for members, staff, accounts, savings, withdrawals, loans and loan payments. Members and staff never log in: members would have too little to do in the app, so the administrator does all the work on their behalf. A secondary audience is the lecturer who sees it in a university class demo.
+People who run a SACCO (a savings and loans group) in Uganda, working at a desk. They sign up or log in, then enter and check records for members, staff, accounts, savings, withdrawals, loans and loan payments. Members never log in: members would have too little to do in the app, so the people running the SACCO do all the work on their behalf. A signed-up account is never staff or superuser; only a superuser can grant Django Admin access. A secondary audience is the lecturer who sees it in a university class demo.
 
 ## Product Purpose
 
@@ -28,7 +28,7 @@ Desktop browser, one person, repeated data entry and look-up. Money is in Uganda
 
 ## Capabilities and Constraints
 
-- Login and logout with Django's built-in user; one administrator; every page except login requires it.
+- Sign-up, login and logout with Django's built-in user. Sign-up and login are for logged-out visitors only and never shown inside the app. Every other page requires a login; Django Admin needs staff status.
 - Dashboard: eight live number cards and two recent-activity tables.
 - Seven data pages (members, staff, accounts, savings, withdrawals, loans, loan payments), each a table with an Add button, and per-row edit and delete icons; all forms open in modals.
 - Account balance is opening balance plus savings. Loan still owed is loan amount minus payments. Deleting a member deletes what belongs to them.

@@ -1,0 +1,20 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block extrastyle %}{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/admin.css' %}">
+<link rel="icon" type="image/png" href="{% static 'img/logo.png' %}">
+{% endblock %}
+
+{% block branding %}
+<div id="site-name">
+  <a href="{% url 'admin:index' %}" class="sacco-brand">
+    <img src="{% static 'img/logo.png' %}" alt="" width="28" height="28">
+    <span>{{ site_header }}</span>
+  </a>
+</div>
+{% endblock %}
+
+{% block nav-global %}
+<a class="sacco-back" href="{% url 'dashboard' %}">Back to the app</a>
+{% endblock %}
