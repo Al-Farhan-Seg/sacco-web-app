@@ -182,3 +182,21 @@ class SignUpTests(TestCase):
         for url in ["/sign-up/", "/login/"]:
             response = self.client.get(url)
             self.assertRedirects(response, "/", fetch_redirect_response=False)
+
+
+class AuthLayoutTests(TestCase):
+    """Login and sign-up share one layout and link to each other while logged out."""
+
+    def test_login_and_sign_up_extend_the_shared_layout(self):
+        for url in ["/login/", "/sign-up/"]:
+            response = self.client.get(url)
+            self.assertTemplateUsed(response, "auth_base.html")
+            self.assertTemplateUsed(response, "base.html")
+            self.assertContains(response, 'class="auth"')
+            self.assertContains(response, 'href="/sign-up/"')
+            self.assertContains(response, 'href="/login/"')
+
+    def test_logged_in_pages_never_mention_sign_up(self):
+        self.client.force_login(User.objects.create_user("clerk", password="s3cret-pass"))
+        for url in ["/", "/members/", "/analytics/"]:
+            self.assertNotContains(self.client.get(url), "sign-up")

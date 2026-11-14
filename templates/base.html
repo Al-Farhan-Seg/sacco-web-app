@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="{% static 'css/app.css' %}">
   </head>
-  <body>
+  <body{% block body_attrs %}{% endblock %}>
+    {% block shell %}
     <div class="shell">
       {% include "partials/_sidebar.html" %}
 
@@ -23,6 +24,7 @@
         {% block content %}{% endblock %}
       </main>
     </div>
+    {% endblock %}
 
     {% if messages %}
       <div class="toasts" role="status" aria-live="polite">
