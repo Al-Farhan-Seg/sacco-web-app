@@ -352,3 +352,6 @@ artifacts/
 # Optional local notes / scratch work
 scratch/
 sandbox/
+
+# Personal deployment notes, never committed
+render-deployment.md

@@ -13,6 +13,17 @@ the SACCO are records in the database and never log in. See
 Django 6.1 and SQLite only. The styling is one hand-written stylesheet, with no
 Bootstrap or Tailwind. This is a university class project.
 
+## Group members
+
+| No. | Name | Registration number |
+|-----|------|---------------------|
+| 1 | Farhan Segujja | 224-063061-29800|
+| 2 | Lwanga Najib | 224-063061-30009|
+| 3 | Bugembe Mahad | 224-063061-28843|
+
+**Live site:** https://sacco-web-app.onrender.com
+**Admin login:** `admin` / `admin123`
+
 ## Where the project stands
 
 **The application is built and working.** This repository is now read-only for
